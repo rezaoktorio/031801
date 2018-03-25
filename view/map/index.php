@@ -35,7 +35,7 @@
         var infoWindow = new google.maps.InfoWindow;
 
           // Change this depending on the name of your PHP or XML file
-          downloadUrl('http://localhost/SIG_Dukcapil/controller/api/api_echo.php', function(data) {
+          downloadUrl('http://031801.webplussolution.com/controller/api/api_echo.php', function(data) {
             var xml = data.responseXML;
             var markers = xml.documentElement.getElementsByTagName('marker');
             Array.prototype.forEach.call(markers, function(markerElem) {
@@ -109,7 +109,8 @@
               var id = markerElem.getAttribute('id');
               marker.addListener('click', function() {
                 infoWindow.setContent(infowincontent);
-                infoWindow.open(window.open('http://localhost/SIG_Dukcapil/view/dashboard_1/index.php?id='+id));
+                //infoWindow.open(window.open('http://localhost/SIG_Dukcapil/view/dashboard_1/index.php?id='+id));
+                infoWindow.open(window.open('http://031801.webplussolution.com/view/dashboard_1/index.php?id='+id));
               });
             });
           });

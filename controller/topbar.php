@@ -20,7 +20,7 @@
                   </li>
                   <li class="has-submenu">
                       <a id="myModal" href="#custom-modal" data-animation="contentscale" data-plugin="custommodal"
-                        data-overlaySpeed="100" data-overlayColor="#36404a"><i class="md md-cloud-download"></i>Smart Kampung</a>
+                        data-overlaySpeed="100" data-overlayColor="#36404a"><i class="md md-cloud-download"></i>Manual Book</a>
                   </li>
                   <!-- <li class="has-submenu">
                       <a href="../../view/map"><i class="md md-public"></i>Smart Kampung</a>
