@@ -1,5 +1,5 @@
 <?php
-require_once('../../../controller/header.php');
+require_once('../../../controller/connection.php');
 
 
   $control=$_GET['control'];

@@ -3,7 +3,7 @@
 
 	$table=$_GET['table'];
 	if($table=='admin'){
-				require_once('../../../controller/header.php');
+				require_once('../../../controller/connection.php');
 				$query = "SELECT * FROM admin WHERE status='1' order by id_admin desc
 								 "; //the query for get all data in tb_student
 
