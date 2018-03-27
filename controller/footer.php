@@ -177,3 +177,5 @@
 <script>
 $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
 </script>
+
+<script src="../../assets/plugins/parsleyjs/parsley.min.js"></script>
