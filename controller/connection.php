@@ -1,4 +1,6 @@
 <?php
+	ob_start();
+
     $server = "mysql.hostinger.co.id";
     $username = "u573987905_sig";
     $password = "FZm4XZ7zcAos";
@@ -6,6 +8,6 @@
 
     error_reporting(E_ALL ^ E_DEPRECATED);
 
-    mysqli_connect($server,$username,$password) or die("Koneksi gagal");
+    mysql_connect($server,$username,$password) or die("Koneksi gagal");
     mysql_select_db($database) or die("Database tidak bisa dibuka");
 ?>
