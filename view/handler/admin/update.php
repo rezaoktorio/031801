@@ -26,7 +26,7 @@ if($control=='UpdateShow'){
 			          <input type="hidden" value="'.$id_admin.'" id="id_admin">
 			              <div class="form-group col-md-12">
 			                <label class="control-label" for="nik">NIK</label>
-			                <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK" value="'.$row['nik_admin'].'" data-parsley-type="number" data-parsley-maxlength="20" required  >
+			                <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK" value="'.$row['nik_admin'].'" data-parsley-type="number" data-parsley-maxlength="20" required readonly="">
 			              </div>
 			              <div class="form-group col-md-12">
 			                <label class="control-label" for="nama">Nama</label>
