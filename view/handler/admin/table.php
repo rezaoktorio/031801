@@ -33,7 +33,7 @@
 							<td>
 									'.$nomor++.'
 							</td>
-							<td><button class="btn btn-primary btn-custom waves-effect btn-mini btn-xs" onclick="DisplayExecutor(\''.$data['id_admin'].'\');">'.$data['nik_admin'].'</button></td>
+							<td><button class="btn btn-primary btn-custom waves-effect" onclick="DisplayExecutor(\''.$data['id_admin'].'\');">'.$data['nik_admin'].'</button></td>
 		                    <td>'.$data['nama_admin'].'</td>
 		                    <td>'.$data['email_admin'].'</td>
 		                    <td>'.$data['tgl_gabung'].'</td>
