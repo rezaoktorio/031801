@@ -9,8 +9,6 @@ require_once('../../../controller/connection.php');
     $query = mysql_query("SELECT count(id_admin) FROM admin WHERE  nik_admin='$nik' or email_admin='$email' and status='1'");
     $result=mysql_fetch_array($query);
 
-    echo $result['count(id_admin)'];
-
     if ($result['count(id_admin)']>0){
       echo '
           <div class="modal fade bs-example-modal-sm" id="myModalFilterShow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
