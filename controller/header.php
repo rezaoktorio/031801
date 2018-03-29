@@ -69,6 +69,7 @@
 </head>
 
 <?php
+    ob_start();
 
     $server = "mysql.hostinger.co.id";
     $username = "u573987905_sig";
