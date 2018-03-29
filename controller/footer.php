@@ -179,3 +179,6 @@ $('#mainTable').editableTableWidget().numericInputExample().find('td:first').foc
 </script>
 
 <script src="../../assets/plugins/parsleyjs/parsley.min.js"></script>
+
+<!-- select-live -->
+ <script src="../../assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>

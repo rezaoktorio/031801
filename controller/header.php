@@ -42,6 +42,9 @@
     <link href="../../assets/css/menu.css" rel="stylesheet" type="text/css" />
     <link href="../../assets/css/responsive.css" rel="stylesheet" type="text/css" />
 
+    <!-- select live -->
+    <link href="../../assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+
     <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
