@@ -1,4 +1,5 @@
 <!-- Page-Title -->
+
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
         <div class="btn-group pull-right m-t-15">
@@ -16,10 +17,11 @@
     </div>
 </div>
 
+<div id="modal_area"></div>
 <div class="row">
   <div class="col-sm-12">
-		<div class="panel panel-border panel-inverse">
-			<div class="panel-heading">
+    <div class="panel panel-border panel-inverse">
+      <div class="panel-heading">
         <ol class="breadcrumb">
             <li>
                 <a href="../../view/admin/"><i class="fa fa-home"></i> Menu Utama </a>
@@ -28,75 +30,17 @@
                 <i class="fa fa-arrow-circle-right"></i> Menu Kelurahan
             </li>
         </ol>
-			</div>
-			<div class="panel-body">
-        <div class="col-sm-4">
-          <div class="col-sm-12">
-              <div class="card-box table-responsive">
-                <h5 class="m-t-0 header-title"><b>Tambah Data Kelurahan.</b></h5>
-                <form role="form">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Kecamatan</label>
-                        <input type="text" class="form-control" id="" placeholder="Masukan Nama Kecamatan">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Kelurahan</label>
-                        <input type="text" class="form-control" id="" placeholder="Masukan Nama Kelurahan">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Alamat</label>
-                        <input type="text" class="form-control" id="" placeholder="Masukan Alamat Kelurahan">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Telepon</label>
-                        <input type="text" class="form-control" id="" placeholder="Masukan Telepon Kelurahan">
-                    </div>
-                    <button type="submit" class="btn btn-purple waves-effect waves-light">Tambah</button>
-                </form>
-              </div>
-          </div>
+      </div>
+      <div class="panel-body">
+        <div class="col-sm-3">
+          <div id="editing_area"></div>
         </div>
-        <div class="col-sm-8">
-          <div class="col-sm-12">
-              <div class="card-box table-responsive">
-                  <h5 class="m-t-0 header-title"><b>Daftar Data Kelurahan.</b></h5>
-                  <table id="datatable-buttons" class="table table-striped table-bordered">
-                      <thead>
-                      <tr>
-                          <th>No.</th>
-                          <th>Kelurahan</th>
-                          <th>Alamat</th>
-                          <th>Telepon</th>
-                          <th>Aksi</th>
-                      </tr>
-                      </thead>
-
-                      <tbody>
-                        <?php
-                        $query = mysql_query("SELECT * FROM `kelurahan`");
-                        $no = 1;
-                        while ($data = mysql_fetch_array($query)) {
-                        ?>
-                            <tr>
-                                <td><?php echo $no; ?></td>
-                                <td><?php echo $data['nama_kelurahan']; ?></td>
-                                <td><?php echo $data['alamat_kelurahan']; ?></td>
-                                <td><?php echo $data['telepon_kelurahan']; ?></td>
-                                <td>
-                                  <?php echo "<a class='btn btn-white btn-custom waves-effect' href='../../view/topup/index2.php?id=".$data['id_kelurahan']."'>Lihat</a>"; ?>
-                                </td>
-                            </tr>
-                        <?php
-                            $no++;
-                        }
-                        ?>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
+        <div class="col-sm-9">
+            <div id="action_result"></div>  
+            <div id="table_area"></div>
         </div>
-			</div>
-		</div>
-	</div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- end row -->

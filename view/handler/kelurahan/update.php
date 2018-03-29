@@ -5,9 +5,9 @@ require_once('../../../controller/connection.php');
 $control=$_GET['control'];
 if($control=='UpdateShow'){
 
-	$id=$_GET['id'];
+	$id_kelurahan=$_GET['id_kelurahan'];
 
-	$query="SELECT name, address, SUBSTRING(telepon_kecamatan, 7, 20) as telepon FROM markers WHERE id='$id'";
+	$query="SELECT id_kecamatan, nama_kelurahan, alamat_kelurahan, SUBSTRING(telepon_kelurahan, 7, 20) as telepon FROM kelurahan WHERE id_kelurahan='$id_kelurahan'";
 
 	$tampil=mysql_query($query);
 
@@ -23,14 +23,36 @@ if($control=='UpdateShow'){
 			        </div>
 			        <div class="modal-body">
 			          <form role="form" data-parsley-validate="">
-			          <input type="hidden" value="'.$id.'" id="id">
+			          <input type="hidden" value="'.$id_kelurahan.'" id="id_kelurahan">
 			              <div class="form-group col-md-12">
 			                <label class="control-label" for="nik">Kecamatan</label>
-			                <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Masukkan Nama Kecamatan" value="'.$row['name'].'" data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-maxlength="60" required>
+			                <select class="form-control selectpicker" data-live-search="true" data-style="btn-white" id="kecamatan" name="kecamatan" required="">
+			                	<option value="">Pilih Kecamatan</option>';
+
+			                	$queryselect="SELECT id, name FROM markers";
+                            	$resultselect = mysql_query($queryselect);
+
+                            	while ($dataselect = mysql_fetch_array($resultselect)){
+								echo'
+									<option value='.$dataselect['id'];
+
+										if($dataselect['id']==$row['id_kecamatan'])
+											{
+												echo ' selected ';
+											}
+									echo '> '.$dataselect['name'].'
+									</option>';
+								}
+
+			                echo '</select>
+			              </div>
+			              <div class="form-group col-md-12">
+			                <label class="control-label" for="nik">Kecamatan</label>
+			                <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Masukkan Nama Kelurahan" value="'.$row['nama_kelurahan'].'" data-parsley-pattern="^[a-zA-Z ]+$" data-parsley-maxlength="60" required>
 			              </div>
 			              <div class="form-group col-md-12">
 			                <label class="control-label" for="nama">Alamat</label>
-			                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat" value="'.$row['address'].'" data-parsley-pattern="^[a-zA-Z ,.]+$" data-parsley-maxlength="80" required >
+			                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat" value="'.$row['alamat_kelurahan'].'" data-parsley-pattern="^[a-zA-Z ,.]+$" data-parsley-maxlength="80" required >
 			              </div>
 			              <div class="form-group col-md-12">
 			                <label class="control-label" for="telepon">Telepon</label>
@@ -58,7 +80,8 @@ if($control=='UpdateShow'){
 <?php
 $control=$_GET['control'];
 if($control=='UpdateCommit'){
-	$id=$_GET['id'];
+	$id_kelurahan=$_GET['id_kelurahan'];
+	$kelurahan=$_GET['kelurahan'];
 	$kecamatan=$_GET['kecamatan'];
     $alamat=$_GET['alamat'];
     $telepon=$_GET['telepon'];
@@ -67,8 +90,8 @@ if($control=='UpdateCommit'){
 
 
 	// //query for update data in database
-	$query = "UPDATE markers SET name=UPPER('$kecamatan'), address=UPPER('$alamat'), telepon_kecamatan='(031) $telepon'
-			WHERE id = '$id'" ;
+	$query = "UPDATE kelurahan SET id_kecamatan='$kecamatan', nama_kelurahan=UPPER('$kelurahan'), alamat_kelurahan=UPPER('$alamat'), telepon_kelurahan='(031) $telepon'
+			WHERE id_kelurahan = '$id_kelurahan'" ;
 	 $hasil = mysql_query($query);
 	 
 	//  //see the result
@@ -77,7 +100,7 @@ if($control=='UpdateCommit'){
 	          <div class="alert alert-danger" id="danger-alert">
 	              <button type="button" class="close" data-dismiss="alert">x</button>
 	              <strong>Kesalahan! </strong>
-	              Data Kecamatan gagal diperbarui.
+	              Data Kelurahan gagal diperbarui.
 	          </div>
 
 	         <script language="javascript">
@@ -93,7 +116,7 @@ if($control=='UpdateCommit'){
 		          <div class="alert alert-success" id="success-alert">
 		              <button type="button" class="close" data-dismiss="alert">x</button>
 		              <strong>Sukses! </strong>
-		              Data Kecamatan berhasil diperbarui.
+		              Data Kelurahan berhasil diperbarui.
 		          </div>
 
 		         <script language="javascript">
@@ -131,3 +154,7 @@ if($control=='UpdateCommit'){
     });
 });
 </script>
+
+<script>
+    $('.selectpicker').selectpicker();
+ </script>
