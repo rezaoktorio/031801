@@ -36,7 +36,7 @@
       <div class="col-md-6">
       	<h4 class="m-t-0 header-title"><b>Atau masukan NIK dan Password</b></h4>
         <!-- <form role="form" action=""> -->
-        <form role="form" name="login" action="otentikasi.php" method="post">
+        <form role="form" name="login" action="../../otentikasi.php" method="post">
             <div class="form-group">
                 <label for="exampleInputEmail1">NIK</label>
                 <input type="email" class="form-control" name="username" id="username" placeholder="Masukan NIK">

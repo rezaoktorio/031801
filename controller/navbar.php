@@ -110,16 +110,12 @@
 
                               //jika session username belum dibuat, atau session username kosong
                               if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
-                              	//redirect ke halaman login
-                              	// header('location://localhost/SIG_Dispendukcapil/login.php');
                                 ?>
-                                <li><a id="myModal2" href="#custom-modal2" data-animation="contentscale" data-plugin="custommodal"
-                                  data-overlaySpeed="100" data-overlayColor="#36404a"><i class="ti-power-off text-danger m-r-10"></i> Masuk</a></li>
+                                <!-- <li><a id="myModal2" href="#custom-modal2" data-animation="contentscale" data-plugin="custommodal"
+                                  data-overlaySpeed="100" data-overlayColor="#36404a"><i class="ti-power-off text-danger m-r-10"></i> Masuk</a></li> -->
+                                  <li><a href="http://031801.webplussolution.com/login.php"><i class="ti-power-off text-danger m-r-10"></i> Masuk</a></li>
                                 <?php
                               } if (isset($_SESSION['username']) || !empty($_SESSION['username'])) {
-                                // $query = mysql_query("SELECT COUNT(no) as total FROM `transaksimember` where tanggal = '$tgl' and keterangan = 'Debet'");
-                                // while ($data = mysql_fetch_array($query)) {}
-
                                 $user = $_SESSION['username'];
                                 $query = mysql_query("SELECT nama_admin as nama FROM admin WHERE nik_admin='$user'");
                                 while ($data = mysql_fetch_array($query)) {

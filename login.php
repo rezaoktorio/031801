@@ -2,7 +2,7 @@
 session_start();
 
 if (!empty($_SESSION['username'])) {
-  header('location:view/dashboard_1/');
+  header('location:view/map/');
 }
 ?>
 <html>
@@ -64,7 +64,7 @@ if (!empty($_GET['error'])) {
   <div class="col-lg-6 col-md-6" style="padding-top:2%;border:solid black 0px;">
     <form class="form-inline" role="form" name="login" action="otentikasi.php" method="post">
       <div class="form-group has-success has-feedback" style="margin-bottom:4%">
-        <label class="control-label" for="inputSuccess4"><font style="color:#34495E">Username</font></label>
+        <label class="control-label" for="inputSuccess4"><font style="color:#34495E">NIK</font></label>
         <input type="text" class="form-control" name="username" id="inputSuccess4">
       </div>
       <div class="form-group has-success has-feedback">
