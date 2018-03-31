@@ -13,9 +13,15 @@
                           <li>
                             <a href="../../view/vektor">Vektor</a>
                           </li>
-                          <li>
-                              <a href="../../view/admin">Admin</a>
-                          </li>
+                          <?php
+                          if (isset($_SESSION['username']) || !empty($_SESSION['username'])) {
+                            ?>
+                              <li>
+                                  <a href="../../view/admin">Admin</a>
+                              </li>
+                            <?php
+                          }
+                          ?>
                       </ul>
                   </li>
                   <li class="has-submenu">

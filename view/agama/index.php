@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+//jika session username belum dibuat, atau session username kosong
+if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+	//redirect ke halaman login
+	header('location:http://031801.webplussolution.com/view/map/');
+}
+?>
 <!DOCTYPE html>
 <html>
 <?php require_once('../../controller/header.php'); ?>

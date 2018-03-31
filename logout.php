@@ -6,5 +6,5 @@ session_start();
 session_destroy();
 
 //redirect ke halaman login
-header('location://localhost/nikitalaundry_member/index.php');
+header('location:http://031801.webplussolution.com/view/map/');
 ?>

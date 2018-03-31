@@ -1,5 +1,6 @@
 <?php
-include('config.php');
+// include('config.php');
+require_once('controller/connection.php');
 
 session_start();
 
@@ -15,30 +16,30 @@ $password = mysql_real_escape_string($password);
 //cek data yang dikirim, apakah kosong atau tidak
 if (empty($username) && empty($password)) {
 	//kalau username dan password kosong
-	header('location://localhost/nikitalaundry_member/login.php?error=1');
+	header('location:http://031801.webplussolution.com/login.php?error=1');
 	break;
 } else if (empty($username)) {
 	//kalau username saja yang kosong
-	header('location://localhost/nikitalaundry_member/login.php?error=2');
+	header('location:http://031801.webplussolution.com/login.php?error=2');
 	break;
 } else if (empty($password)) {
 	//kalau password saja yang kosong
-	header('location://localhost/nikitalaundry_member/login.php?error=3');
+	header('location:http://031801.webplussolution.com/login.php?error=3');
 	break;
 }
 
-$q = mysql_query("select * from karyawan where username='$username' and password='$password'");
+$q = mysql_query("select * from admin where nik_admin='$username' and password='$password'");
 
 if (mysql_num_rows($q) == 1) {
 	//kalau username dan password sudah terdaftar di database
 	//buat session dengan nama username dengan isi nama user yang login
 	$_SESSION['username'] = $username;
-	
+
 	//redirect ke halaman index
-	header('location://localhost/nikitalaundry_member/view/dashboard/');
+	header('location:view/map/');
 }
 else {
 	//kalau username ataupun password tidak terdaftar di database
-	header('location://localhost/nikitalaundry_member/login.php?error=4');
+	header('location:http://031801.webplussolution.com/login.php?error=4');
 }
 ?>

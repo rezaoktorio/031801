@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+//jika session username belum dibuat, atau session username kosong
+if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+	//redirect ke halaman login
+	header('location:http://031801.webplussolution.com/view/map/');
+}
+?>
 <!DOCTYPE html>
 <html>
 <?php require_once('../../controller/header.php'); ?>
@@ -34,7 +43,7 @@
         nama=$("#nama").val();
         email=$("#email").val();
         password=$("#password").val();
-       
+
         url="../handler/admin/filter.php?nik="+nik+"&nama="+nama+"&email="+email+"&password="+password;
         url=url.replace(/ /g,"%20");
         $("#modal_area").load(url);
@@ -45,7 +54,7 @@
         nama=$("#nama").val();
         email=$("#email").val();
         password=$("#password").val();
-       
+
         url="../handler/admin/insert.php?control=CreateCommit&nik="+nik+"&nama="+nama+"&email="+email+"&password="+password;
         url=url.replace(/ /g,"%20");
         $("#action_result").load(url, function(){
@@ -62,7 +71,7 @@
 
       function DeleteExecutor(){
         id_admin=$("#id_admin").val();
-        
+
         url="../handler/admin/delete.php?control=DeleteCommit&id_admin="+id_admin;
 
         url=url.replace(/ /g,"%20");
@@ -84,7 +93,7 @@
         nama=$("#nama").val();
         email=$("#email").val();
         password=$("#password").val();
-        
+
         url="../handler/admin/update.php?control=UpdateCommit&id_admin="+id_admin+"&nik="+nik+"&nama="+nama+"&email="+email+"&password="+password;
 
         url=url.replace(/ /g,"%20");

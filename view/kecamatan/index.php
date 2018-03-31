@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+//jika session username belum dibuat, atau session username kosong
+if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+	//redirect ke halaman login
+	header('location:http://031801.webplussolution.com/view/map/');
+}
+?>
 <!DOCTYPE html>
 <html>
 <?php require_once('../../controller/header.php'); ?>
@@ -32,7 +41,7 @@
         kecamatan=$("#kecamatan").val();
         alamat=$("#alamat").val();
         telepon=$("#telepon").val();
-       
+
         url="../handler/kecamatan/filter.php?kecamatan="+kecamatan+"&alamat="+alamat+"&telepon="+telepon;
         url=url.replace(/ /g,"%20");
         $("#modal_area").load(url);
@@ -42,7 +51,7 @@
         kecamatan=$("#kecamatan").val();
         alamat=$("#alamat").val();
         telepon=$("#telepon").val();
-       
+
         url="../handler/kecamatan/insert.php?control=CreateCommit&kecamatan="+kecamatan+"&alamat="+alamat+"&telepon="+telepon;
         url=url.replace(/ /g,"%20");
         $("#action_result").load(url, function(){
@@ -59,7 +68,7 @@
 
       function DeleteExecutor(){
         id=$("#id").val();
-        
+
         url="../handler/kecamatan/delete.php?control=DeleteCommit&id="+id;
 
         url=url.replace(/ /g,"%20");
@@ -80,7 +89,7 @@
         kecamatan=$("#kecamatan").val();
         alamat=$("#alamat").val();
         telepon=$("#telepon").val();
-        
+
         url="../handler/kecamatan/update.php?control=UpdateCommit&id="+id+"&kecamatan="+kecamatan+"&alamat="+alamat+"&telepon="+telepon;
 
         url=url.replace(/ /g,"%20");
@@ -103,7 +112,7 @@
         kecamatan=$("#kecamatan").val();
         alamat=$("#alamat").val();
         telepon=$("#telepon").val();
-        
+
         url="../handler/kecamatan/koordinat.php?control=KoordinatCommit&id="+id+"&lat="+lat+"&lng="+lng+"&kecamatan="+kecamatan+"&alamat="+alamat+"&telepon="+telepon;
 
         url=url.replace(/ /g,"%20");
@@ -112,11 +121,6 @@
           url="../handler/kecamatan/table.php?table=kecamatan"
           $("#table_area").load(url);
         });
-      }
-
-      function DisplayExecutor(id){
-        url="../handler/kecamatan/display.php?control=DisplayShow&id="+id;
-        $("#modal_area").load(url);
       }
     </script>
 </html>

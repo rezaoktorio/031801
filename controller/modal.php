@@ -35,17 +35,18 @@
       </div>
       <div class="col-md-6">
       	<h4 class="m-t-0 header-title"><b>Atau masukan NIK dan Password</b></h4>
-        <form role="form" action="">
+        <!-- <form role="form" action=""> -->
+        <form role="form" name="login" action="otentikasi.php" method="post">
             <div class="form-group">
                 <label for="exampleInputEmail1">NIK</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Masukan NIK">
+                <input type="email" class="form-control" name="username" id="username" placeholder="Masukan NIK">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Masukan Password">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Masukan Password">
             </div>
-            <a href="../../view/map/index0.php" type="submit" class="btn btn-info waves-effect waves-light">Masuk</a>
-            <a href="../../view/temukan/" type="submit" class="btn btn-danger waves-effect waves-light">Lupa Sandi</a>
+            <a href="" type="submit" name="login" value="Login" class="btn btn-info waves-effect waves-light">Masuk</a>
+            <a href="" type="submit" name="lupa" value="Lupa" class="btn btn-danger waves-effect waves-light">Lupa Sandi</a>
         </form>
       </div>
       <br>&nbsp;
