@@ -156,5 +156,5 @@ if($control=='UpdateCommit'){
 </script>
 
 <script>
-    $('.selectpicker').selectpicker();
+    $('#kecamatan').selectpicker();
  </script>

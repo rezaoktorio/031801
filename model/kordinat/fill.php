@@ -16,6 +16,7 @@
     </div>
 </div>
 
+<div id="modal_area"></div>
 <div class="row">
   <div class="col-sm-12">
 		<div class="panel panel-border panel-inverse">
@@ -31,45 +32,10 @@
 			</div>
 			<div class="panel-body">
         <div class="col-sm-12">
-          <div class="col-sm-12">
-              <div class="card-box table-responsive">
-                <h5 class="m-t-0 header-title"><b>Daftar Data Kordinat Kecamatan.</b></h5>
-                  <table id="datatable-buttons" class="table table-striped table-bordered">
-                      <thead>
-                          <tr>
-                              <th>No.</th>
-                              <th>Kecamatan</th>
-                              <th>Latitude</th>
-                              <th>Longitude</th>
-                              <th>Kordinat</th>
-                              <th>Aksi</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-
-                            <?php
-                            $query = mysql_query("SELECT * FROM `markers`");
-                            $no = 1;
-                            while ($data = mysql_fetch_array($query)) {
-                            ?>
-                            <tr class="gradeX">
-                                <td><?php echo $no; ?></td>
-                                <td><?php echo $data['name']; ?></td>
-                                <td><?php echo $data['lat']; ?></td>
-                                <td><?php echo $data['lng']; ?></td>
-                                <td><?php echo substr($data['embed'], 0, 40); ?></td>
-                                <td>-</td>
-                              </tr>
-                            <?php
-                                $no++;
-                            }
-                            ?>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
+            <div id="action_result"></div>  
+            <div id="table_area"></div>
         </div>
-			</div>
+      </div>
 		</div>
 	</div>
 </div>
