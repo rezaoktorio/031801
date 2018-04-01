@@ -163,6 +163,167 @@
 
 </script>
 
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var data = {
+
+    labels: ['pns','dosen', 'guru', 'guru_dosen', 'tani', 'polri', 'b.harian', 'b.kebun', 'nelayan', 'b.ternak',  'buruh','pedagang1'],
+    series: [
+      [<?php
+
+      $id = $_GET['id'];
+      $query = mysql_query("SELECT *  FROM pekerjaan where id_kelurahan = '".$id."' and id_pekerjaan= '".$id."'");
+      $no = 1;
+      while($data = mysql_fetch_array($query))
+      {
+        echo '"'.$data['pns'].'",';
+        echo '"'.$data['dosen'].'",';
+        echo '"'.$data['guru'].'",';
+        echo '"'.$data['guru_dosen'].'",';
+        echo '"'.$data['tani'].'",';
+        echo '"'.$data['polri'].'",';
+        echo '"'.$data['buruh_harian_lepas'].'",';
+        echo '"'.$data['buruh_tani_perkebunan'].'",';
+        echo '"'.$data['buruh_nelayan_perikanan'].'",';
+        echo '"'.$data['buruh_peternakan'].'",';
+        echo '"'.$data['buruh'].'",';
+        echo '"'.$data['pedagang1'].'",';
+      };
+       ?>
+    ]
+      // [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6]
+      // [2, 3, 4, 5, 6, 7, 8, 9, 12,4]
+  ]
+
+  };
+
+  var options = {
+    seriesBarDistance:2
+  };
+
+  var responsiveOptions = [
+    ['screen and (max-width: 640px)', {
+      seriesBarDistance: 0,
+      axisX: {
+        labelInterpolationFnc: function (value) {
+          return value[0];
+        }
+      }
+    }]
+  ];
+
+  new Chartist.Bar('#overlapping-bars', data, options, responsiveOptions)
+
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+var data2 = {
+  labels: ['pedagang2','pedagang3', 'tni', 'mahasiswa', 'nelayan', 'swasta', 'pelajar', 'belum_kerja', 'pensiun', 'anggota_dprd', 'anggota_bpk','presiden'],
+  series: [
+    [<?php
+
+    $id = $_GET['id'];
+    $query = mysql_query("SELECT *  FROM pekerjaan where id_kelurahan = '".$id."' and id_pekerjaan= '".$id."'");
+    $no = 1;
+    while($data = mysql_fetch_array($query))
+    {
+      echo '"'.$data['pedagang2'].'",';
+      echo '"'.$data['pedagang3'].'",';
+      echo '"'.$data['tni'].'",';
+      echo '"'.$data['mahasiswa'].'",';
+      echo '"'.$data['nelayan'].'",';
+      echo '"'.$data['swasta'].'",';
+      echo '"'.$data['pelajar'].'",';
+      echo '"'.$data['belum_kerja'].'",';
+      echo '"'.$data['pensiun'].'",';
+      echo '"'.$data['anggota_dprd'].'",';
+      echo '"'.$data['anggota_bpk'].'",';
+      echo '"'.$data['presiden'].'",';
+    };
+     ?>
+  ]
+    // [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6]
+    // [2, 3, 4, 5, 6, 7, 8, 9, 12,4]
+  ]
+};
+
+var options2 = {
+  seriesBarDistance:10
+};
+
+var responsiveOptions2 = [
+  ['screen and (max-width: 640px)', {
+    seriesBarDistance: 0,
+    axisX: {
+      labelInterpolationFnc: function (value) {
+        return value[0];
+      }
+    }
+  }]
+];
+
+new Chartist.Bar('#overlapping-bars2', data2, options2, responsiveOptions2);
+});
+
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+var data = {
+  labels: ['Kristen', 'Islam', 'Katholik',  'Hindu', 'Budha', 'Konghucu'],
+  series: [20, 15, 10, 30]
+};
+
+var options = {
+  labelInterpolationFnc: function(value) {
+    return value[0]
+  }
+};
+
+var responsiveOptions = [
+  ['screen and (min-width: 640px)', {
+    chartPadding: 30,
+    labelOffset: 100,
+    labelDirection: 'explode',
+    labelInterpolationFnc: function(value) {
+      return value;
+    }
+  }],
+  ['screen and (min-width: 1024px)', {
+    labelOffset: 80,
+    chartPadding: 20
+  }]
+];
+
+new Chartist.Pie('#pie-chart', data, options, responsiveOptions);
+});
+
+</script>
+
+<?php
+
+$id = $_GET['id'];
+$query = mysql_query("SELECT SUM(kk) AS total FROM dokumen where id_kelurahan = '".$id."'");
+$no = 1;
+while($data = mysql_fetch_array($query))
+{
+echo '<script language="javascript">';
+echo 'alert("'.$data['total'].'")';
+echo '</script>';
+}
+// echo '<script language="javascript">';
+// echo 'alert("'.$id.'")';
+// echo '</script>';
+?>
+
 <!-- EditTable -->
 <!-- Examples -->
 <script src="../../assets/plugins/magnific-popup/js/jquery.magnific-popup.min.js"></script>
