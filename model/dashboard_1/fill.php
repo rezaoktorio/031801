@@ -163,7 +163,7 @@ $(document).ready(function(){
                 <?php
                 $id = $_GET['id'];
                 $query = mysql_query("SELECT distinct(lahir_l)  FROM dokumen where id_kelurahan = '".$id."'");
-                $no = 1;
+
                 while ($data = mysql_fetch_array($query)) {
                 ?>
                     <h4 class="m-b-0"><?php echo $data['lahir_l'];?></h4>
@@ -175,11 +175,31 @@ $(document).ready(function(){
               </li>
               <li>
                 <h5 class="text-muted m-t-20">Perempuan</h5>
-                <h4 class="m-b-0">$523</h4>
+                <?php
+                $id = $_GET['id'];
+                $query = mysql_query("SELECT distinct(lahir_p)  FROM dokumen where id_kelurahan = '".$id."'");
+
+                    while ($data = mysql_fetch_array($query)) {
+                ?>
+                <h4 class="m-b-0"><?php echo $data['lahir_p'];?></h4>
+                <?php
+              }
+              ?>
               </li>
               <li>
+                <?php
+                $id = $_GET['id'];
+                $query = mysql_query("SELECT distinct(lahir_p), (lahir_l)  FROM dokumen where id_kelurahan = '".$id."'");
+
+                while($data= mysql_fetch_array($query))
+                {
+                ?>
                 <h5 class="text-muted m-t-20">Total</h5>
-                <h4 class="m-b-0">$965</h4>
+                <h4 class="m-b-0"><?php echo $data['lahir_p']+$data['lahir_l'];?></h4>
+                <?php
+              }?>
+
+
               </li>
             </ul>
           </div>
@@ -195,16 +215,45 @@ $(document).ready(function(){
                 <div id="sparkline2"></div>
             <ul class="list-inline m-t-15">
               <li>
+                <?php
+                $id= $_GET['id'];
+                $query = mysql_query("SELECT distinct(mati_l) FROM dokumen where id_kelurahan = '".$id."'");
+
+                while($data = mysql_fetch_array($query))
+                {
+                ?>
                 <h5 class="text-muted m-t-20">Laki-laki</h5>
-                <h4 class="m-b-0">$1000</h4>
+                <h4 class="m-b-0"><?php echo $data['mati_l'];?></h4>
+                <?php
+              } ?>
               </li>
               <li>
+                <?php
+                $id= $_GET['id'];
+                $query = mysql_query("SELECT distinct(mati_p) FROM dokumen where id_kelurahan = '".$id."'");
+
+                while($data = mysql_fetch_array($query))
+                {
+                  ?>
+
                 <h5 class="text-muted m-t-20">Perempuan</h5>
-                <h4 class="m-b-0">$523</h4>
+                <h4 class="m-b-0"><?php echo $data['mati_p']; ?></h4>
+                <?php
+              }?>
               </li>
               <li>
+                <?php
+                $id= $_GET['id'];
+                $query = mysql_query("SELECT distinct(mati_p),(mati_l) FROM dokumen where id_kelurahan = '".$id."'");
+
+                while($data = mysql_fetch_array($query))
+                {
+                  ?>
                 <h5 class="text-muted m-t-20">Total</h5>
-                <h4 class="m-b-0">$965</h4>
+                <h4 class="m-b-0"><?php echo $data['mati_p']+$data['mati_l']; ?></h4>
+                <?php
+                }
+               ?>
               </li>
             </ul>
           </div>
@@ -220,16 +269,43 @@ $(document).ready(function(){
                   <div id="sparkline2"></div>
               <ul class="list-inline m-t-15">
                 <li>
+                  <?php
+                  $id= $_GET['id'];
+                  $query = mysql_query("SELECT distinct(nikah_l) FROM dokumen where id_kelurahan = '".$id."'");
+
+                  while($data  = mysql_fetch_array($query))
+                  {
+                   ?>
                   <h5 class="text-muted m-t-20">Laki-laki</h5>
-                  <h4 class="m-b-0">$1000</h4>
+                  <h4 class="m-b-0"><?php echo $data['nikah_l'];?></h4>
+                  <?php
+                } ?>
                 </li>
                 <li>
-                  <h5 class="text-muted m-t-20">Perempuan</h5>
-                  <h4 class="m-b-0">$523</h4>
+                  <?php
+                  $id = $_GET['id'];
+                  $query = mysql_query("SELECT distinct(nikah_p) from dokumen where id_kelurahan = '" .$id."'");
+                  while($data = mysql_fetch_array($query))
+                  {
+                    ?>
+                    <h5 class="text-muted m-t-20">Perempuan</h5>
+                    <h4 class="m-b-0"><?php echo $data['nikah_p']; ?></h4>
+                  <?php
+                  }
+                   ?>
                 </li>
                 <li>
-                  <h5 class="text-muted m-t-20">Total</h5>
-                  <h4 class="m-b-0">$965</h4>
+                  <?php
+                  $id= $_GET['id'];
+                  $query = mysql_query("SELECT distinct(nikah_p),(nikah_l) from dokumen where id_kelurahan= '".$id."'");
+                  while($data = mysql_fetch_array($query))
+                  {
+                    ?>
+                    <h5 class="text-muted m-t-20">Total</h5>
+                    <h4 class="m-b-0"><?php echo $data['nikah_p']+$data['nikah_l']; ?></h4>
+                    <?php
+                  }
+                  ?>
                 </li>
               </ul>
             </div>
@@ -238,22 +314,48 @@ $(document).ready(function(){
 
     <div class="col-md-3">
       <div class="card-box">
-        <h4 class="text-dark  header-title m-t-0 m-b-30">Akta Pernikahan</h4>
+        <h4 class="text-dark  header-title m-t-0 m-b-30">Akta Perceraian</h4>
 
         <div class="widget-chart text-center">
                   <div id="sparkline2"></div>
               <ul class="list-inline m-t-15">
                 <li>
+                  <?php
+                  $id= $_GET['id'];
+                  $query = mysql_query("SELECT distinct(cerai_l) FROM dokumen where id_kelurahan = '".$id."'");
+
+                  while($data  = mysql_fetch_array($query))
+                  {
+                   ?>
                   <h5 class="text-muted m-t-20">Laki-laki</h5>
-                  <h4 class="m-b-0">$1000</h4>
+                  <h4 class="m-b-0"><?php echo $data['cerai_l']; ?></h4>
+                  <?php
+                } ?>
                 </li>
                 <li>
-                  <h5 class="text-muted m-t-20">Perempuan</h5>
-                  <h4 class="m-b-0">$523</h4>
+                  <?php
+                  $id= $_GET['id'];
+                  $query = mysql_query("SELECT distinct(cerai_p) FROM dokumen where id_kelurahan = '".$id."'");
+                  while($data = mysql_fetch_array($query))
+                  {
+                    ?>
+                    <h5 class="text-muted m-t-20">Perempuan</h5>
+                    <h4 class="m-b-0"><?php echo $data['cerai_p']; ?></h4>
+                    <?php
+                  }?>
+
                 </li>
                 <li>
+                  <?php
+                  $id= $_GET['id'];
+                  $query = mysql_query("SELECT distinct(cerai_p),(cerai_l) FROM dokumen where id_kelurahan = '".$id."'");
+                  while($data = mysql_fetch_array($query))
+                  {
+                  ?>
                   <h5 class="text-muted m-t-20">Total</h5>
-                  <h4 class="m-b-0">$965</h4>
+                  <h4 class="m-b-0"><?php echo $data['cerai_p']+$data['cerai_l'];?></h4>
+                  <?php
+                }?>
                 </li>
               </ul>
             </div>
