@@ -1,4 +1,48 @@
 <!-- Page-Title -->
+
+
+<!-- <script language='javascript' type='text/text/javascript'>
+var data2 = {
+  labels: ['pns'],
+  series: [
+    ['5', 4, 3, 7, 5, 10, 3, 4, 8, 10, 6],
+
+  ]
+};
+
+var options2 = {
+  seriesBarDistance:10
+};
+
+var responsiveOptions2 = [
+  ['screen and (max-width: 640px)', {
+    seriesBarDistance: 0,
+    axisX: {
+      labelInterpolationFnc: function (value) {
+        return value[0];
+      }
+    }
+  }]
+];
+
+new Chartist.Bar('#overlapping-bars2', data2, options2, responsiveOptions);
+
+</script> -->
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  alert('test');
+
+});
+</script>
+
+
+
+
+
+
 <div class="row">
     <div class="col-sm-1 col-sm-offset-1">
       <img style="border:solid #797979 3px" class="img-rounded" src="../../assets/images/users/avatar-11.jpg" width="100%"/>
@@ -37,7 +81,21 @@
                 <i class="md md-attach-money text-info"></i>
             </div>
             <div class="text-right">
-                <h3 class="text-dark"><b class="counter">Gatau Rumusnya</b></h3>
+                <!-- <h3 class="text-dark"><b class="counter">Gatau Rumusnya</b></h3> -->
+                <?php
+                  $id = $_GET['id'];
+                  $query = mysql_query("SELECT SUM(usia_0_5_l+usia_18_25_l+usia_6_9_l+usia_26_40_l+usia_10_16_l+usia_41_59_l+usia_17_l+usia_60_l ) AS totalpria, SUM(usia_0_5_p+usia_18_25_p+usia_6_9_p+usia_26_40_p+usia_10_16_p+usia_41_59_p+usia_17_p+usia_60_P) as totalperempuan  FROM usia where id_kelurahan = '".$id."' AND id_usia='".$id."'");
+                  $no = 1;
+                  while ($data = mysql_fetch_array($query)) {
+                  ?>
+                      <h3 class="text-dark"><b class="counter"> <?php echo ($data['totalpria']/$data['totalperempuan'])*100;?></b>
+                      <span>%</span>
+
+                      </h3>
+                  <?php
+                      $no++;
+                  }
+                ?>
                 <p class="text-muted">Rasio Jenis Kelamin</p>
             </div>
             <div class="clearfix"></div>
@@ -52,11 +110,11 @@
             <div class="text-right">
               <?php
                 $id = $_GET['id'];
-                $query = mysql_query("SELECT SUM(kk) AS total FROM `dokumen` where id_kelurahan = ".$id." AND month(`update`) = '11'");
+                $query = mysql_query("SELECT SUM(ktp_l) AS total_l, SUM(ktp_p) AS total_p FROM `dokumen` where id_kelurahan = '".$id."' ");
                 $no = 1;
                 while ($data = mysql_fetch_array($query)) {
                 ?>
-                    <h3 class="text-dark"><b class="counter"> <?php echo $data['total'];?></b></h3>
+                    <h3 class="text-dark"><b class="counter"> <?php echo $data['total_l']+$data['total_p'];?></b></h3>
                 <?php
                     $no++;
                 }
@@ -75,11 +133,11 @@
             <div class="text-right">
               <?php
                 $id = $_GET['id'];
-                $query = mysql_query("SELECT SUM(ktp_l) AS total_l, SUM(ktp_p) AS total_p FROM `dokumen` where id_kelurahan = ".$id." AND month(`update`) = '11'");
+                $query = mysql_query("SELECT SUM(kk) AS total FROM `dokumen` where id_kelurahan = '".$id."'");
                 $no = 1;
                 while ($data = mysql_fetch_array($query)) {
                 ?>
-                    <h3 class="text-dark"><b class="counter"> <?php echo $data['total_l']+$data['total_p'];?></b></h3>
+                    <h3 class="text-dark"><b class="counter"> <?php echo $data['total'];?></b></h3>
                 <?php
                     $no++;
                 }
@@ -438,25 +496,26 @@
 
 
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <div class="card-box">
           <h4 class="m-t-0 header-title"><b>Jenis Pekerjaan</b></h4>
           <p class="text-muted m-b-30 font-13">
             Example of Horizontal bar chart.
           </p>
-
           <div id="overlapping-bars" class="ct-chart ct-golden-section"></div>
         </div>
       </div>
 
-      <div class="col-lg-6">
+
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
         <div class="card-box">
-          <h4 class="m-t-0 header-title"><b>Jumlah Pengangguran</b></h4>
+          <h4 class="m-t-0 header-title"><b>Jenis Pekerjaan</b></h4>
           <p class="text-muted m-b-30 font-13">
             Example of Horizontal bar chart.
           </p>
-
-          <div id="overlapping-bars" class="ct-chart ct-golden-section"></div>
+          <div id="overlapping-bars2" class="ct-chart ct-golden-section"></div>
         </div>
       </div>
     </div>
@@ -470,7 +529,6 @@
           <p class="text-muted m-b-30 font-13">
             Example of Horizontal bar chart.
           </p>
-
           <div id="pie-chart" class="ct-chart ct-golden-section"></div>
         </div>
       </div>
