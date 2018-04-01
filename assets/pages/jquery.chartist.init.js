@@ -391,33 +391,58 @@ new Chartist.Bar('#bi-polar-bar', data, options);
 
 //Overlapping bars on mobile
 
-var data = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  series: [
-    [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
-    [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
-  ]
-};
+// var data = {
+//   labels: ['pns','dosen', 'guru', 'dosen', 'tani', 'polri', 'b.harian', 'kebun', 'nelayan', 'b.ikan', 'buruh'],
+//   series: [
+//     [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6],
+//
+//   ]
+// };
+//
+// var options = {
+//   seriesBarDistance:10
+// };
+//
+// var responsiveOptions = [
+//   ['screen and (max-width: 640px)', {
+//     seriesBarDistance: 0,
+//     axisX: {
+//       labelInterpolationFnc: function (value) {
+//         return value[0];
+//       }
+//     }
+//   }]
+// ];
+//
+// new Chartist.Bar('#overlapping-bars', data, options, responsiveOptions);
 
-var options = {
-  seriesBarDistance: 10
-};
-
-var responsiveOptions = [
-  ['screen and (max-width: 640px)', {
-    seriesBarDistance: 5,
-    axisX: {
-      labelInterpolationFnc: function (value) {
-        return value[0];
-      }
-    }
-  }]
-];
-
-new Chartist.Bar('#overlapping-bars', data, options, responsiveOptions);
 
 
 
+//alert(data2.series);
+// var data = {
+//   labels: ['buruh tani','dosen', 'guru', 'dosen', 'tani', 'polri', 'b.harian', 'kebun', 'nelayan', 'b.ikan'],
+//   series: [
+//     [5, 4, 3, 7, 5, 10, 3, 4, 8, 10],
+//   ]
+// };
+//
+// var options = {
+//   seriesBarDistance: 5
+// };
+//
+// var responsiveOptions = [
+//   ['screen and (max-width: 640px)', {
+//     seriesBarDistance: 20,
+//     axisX: {
+//       labelInterpolationFnc: function (value) {
+//         return value[0];
+//       }
+//     }
+//   }]
+// ];
+//
+// new CharList.Bar('#overlapping-bars2', data2, options2, responsiveOptions2);
 
 
 //Multi-line labels
@@ -682,33 +707,33 @@ new Chartist.Pie('#simple-pie', data, {
 
 //Pie chart with custom labels
 
-var data = {
-  labels: ['Bananas', 'Apples', 'Grapes'],
-  series: [20, 15, 40]
-};
-
-var options = {
-  labelInterpolationFnc: function(value) {
-    return value[0]
-  }
-};
-
-var responsiveOptions = [
-  ['screen and (min-width: 640px)', {
-    chartPadding: 30,
-    labelOffset: 100,
-    labelDirection: 'explode',
-    labelInterpolationFnc: function(value) {
-      return value;
-    }
-  }],
-  ['screen and (min-width: 1024px)', {
-    labelOffset: 80,
-    chartPadding: 20
-  }]
-];
-
-new Chartist.Pie('#pie-chart', data, options, responsiveOptions);
+// var data = {
+//   labels: ['Bananas', 'Apples', 'Grapes'],
+//   series: [20, 15, 40]
+// };
+//
+// var options = {
+//   labelInterpolationFnc: function(value) {
+//     return value[0]
+//   }
+// };
+//
+// var responsiveOptions = [
+//   ['screen and (min-width: 640px)', {
+//     chartPadding: 30,
+//     labelOffset: 100,
+//     labelDirection: 'explode',
+//     labelInterpolationFnc: function(value) {
+//       return value;
+//     }
+//   }],
+//   ['screen and (min-width: 1024px)', {
+//     labelOffset: 80,
+//     chartPadding: 20
+//   }]
+// ];
+//
+// new Chartist.Pie('#pie-chart', data, options, responsiveOptions);
 
 
 
