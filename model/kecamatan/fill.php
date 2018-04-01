@@ -1,5 +1,4 @@
 <!-- Page-Title -->
-
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
         <div class="btn-group pull-right m-t-15">
@@ -20,8 +19,8 @@
 <div id="modal_area"></div>
 <div class="row">
   <div class="col-sm-12">
-		<div class="panel panel-border panel-inverse">
-			<div class="panel-heading">
+    <div class="panel panel-border panel-inverse">
+      <div class="panel-heading">
         <ol class="breadcrumb">
             <li>
                 <a href="../../view/admin/"><i class="fa fa-home"></i> Menu Utama </a>
