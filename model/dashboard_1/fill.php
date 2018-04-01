@@ -150,26 +150,124 @@ $(document).ready(function(){
 </div>
 
 <div class="row">
+
+    <div class="col-md-3">
+    <div class="card-box">
+      <h4 class="text-dark header-title m-t-0 m-b-30">Akta Kelahiran</h4>
+
+      <div class="widget-chart text-center">
+                <div id="sparkline3"></div>
+            <ul class="list-inline m-t-15">
+              <li>
+                <h5 class="text-muted m-t-20">Laki-laki</h5>
+                <h4 class="m-b-0">$1000</h4>
+              </li>
+              <li>
+                <h5 class="text-muted m-t-20">Perempuan</h5>
+                <h4 class="m-b-0">$523</h4>
+              </li>
+              <li>
+                <h5 class="text-muted m-t-20">Total</h5>
+                <h4 class="m-b-0">$965</h4>
+              </li>
+            </ul>
+          </div>
+    </div>
+
+    </div>
+
+    <div class="col-md-3">
+    <div class="card-box">
+      <h4 class="text-dark  header-title m-t-0 m-b-30">Akta Kematian</h4>
+
+      <div class="widget-chart text-center">
+                <div id="sparkline2"></div>
+            <ul class="list-inline m-t-15">
+              <li>
+                <h5 class="text-muted m-t-20">Laki-laki</h5>
+                <h4 class="m-b-0">$1000</h4>
+              </li>
+              <li>
+                <h5 class="text-muted m-t-20">Perempuan</h5>
+                <h4 class="m-b-0">$523</h4>
+              </li>
+              <li>
+                <h5 class="text-muted m-t-20">Total</h5>
+                <h4 class="m-b-0">$965</h4>
+              </li>
+            </ul>
+          </div>
+    </div>
+
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-box">
+        <h4 class="text-dark  header-title m-t-0 m-b-30">Akta Pernikahan</h4>
+
+        <div class="widget-chart text-center">
+                  <div id="sparkline2"></div>
+              <ul class="list-inline m-t-15">
+                <li>
+                  <h5 class="text-muted m-t-20">Laki-laki</h5>
+                  <h4 class="m-b-0">$1000</h4>
+                </li>
+                <li>
+                  <h5 class="text-muted m-t-20">Perempuan</h5>
+                  <h4 class="m-b-0">$523</h4>
+                </li>
+                <li>
+                  <h5 class="text-muted m-t-20">Total</h5>
+                  <h4 class="m-b-0">$965</h4>
+                </li>
+              </ul>
+            </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-box">
+        <h4 class="text-dark  header-title m-t-0 m-b-30">Akta Pernikahan</h4>
+
+        <div class="widget-chart text-center">
+                  <div id="sparkline2"></div>
+              <ul class="list-inline m-t-15">
+                <li>
+                  <h5 class="text-muted m-t-20">Laki-laki</h5>
+                  <h4 class="m-b-0">$1000</h4>
+                </li>
+                <li>
+                  <h5 class="text-muted m-t-20">Perempuan</h5>
+                  <h4 class="m-b-0">$523</h4>
+                </li>
+                <li>
+                  <h5 class="text-muted m-t-20">Total</h5>
+                  <h4 class="m-b-0">$965</h4>
+                </li>
+              </ul>
+            </div>
+      </div>
+    </div>
+</div>
+<!-- end row -->
+
+<div class="row">
     <div class="col-lg-3">
         <div class="card-box">
             <h4 class="text-dark header-title m-t-0 m-b-30">Total WNI</h4>
 
             <div class="widget-chart text-center">
                 <input class="knob" data-width="150" data-height="150" data-linecap=round data-fgColor="#fb6d9d" value="80" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".15"/>
-                <h5 class="text-muted m-t-20">Total sales made today</h5>
-                <h2 class="font-600">$75</h2>
+                <h5 class="text-muted m-t-20">Total WNI Perhari Ini</h5>
+                <h2 class="font-600">75323 Jiwa</h2>
                 <ul class="list-inline m-t-15">
                     <li>
-                        <h5 class="text-muted m-t-20">Target</h5>
-                        <h4 class="m-b-0">$1000</h4>
+                        <h5 class="text-muted m-t-20">Th Lalu</h5>
+                        <h4 class="m-b-0">13020</h4>
                     </li>
                     <li>
-                        <h5 class="text-muted m-t-20">Last week</h5>
-                        <h4 class="m-b-0">$523</h4>
-                    </li>
-                    <li>
-                        <h5 class="text-muted m-t-20">Last Month</h5>
-                        <h4 class="m-b-0">$965</h4>
+                        <h5 class="text-muted m-t-20">Naik</h5>
+                        <h4 class="m-b-0">6%</h4>
                     </li>
                 </ul>
             </div>
@@ -182,20 +280,16 @@ $(document).ready(function(){
 
             <div class="widget-chart text-center">
                 <input class="knob" data-width="150" data-height="150" data-linecap=round data-fgColor="#fb6d9d" value="80" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".15"/>
-                <h5 class="text-muted m-t-20">Total sales made today</h5>
-                <h2 class="font-600">$75</h2>
+                <h5 class="text-muted m-t-20">Total WNA Perhari Ini</h5>
+                <h2 class="font-600">75224 Jiwa</h2>
                 <ul class="list-inline m-t-15">
                     <li>
                         <h5 class="text-muted m-t-20">Target</h5>
-                        <h4 class="m-b-0">$1000</h4>
+                        <h4 class="m-b-0">72079</h4>
                     </li>
                     <li>
-                        <h5 class="text-muted m-t-20">Last week</h5>
-                        <h4 class="m-b-0">$523</h4>
-                    </li>
-                    <li>
-                        <h5 class="text-muted m-t-20">Last Month</h5>
-                        <h4 class="m-b-0">$965</h4>
+                        <h5 class="text-muted m-t-20">Naik</h5>
+                        <h4 class="m-b-0">5%</h4>
                     </li>
                 </ul>
             </div>
@@ -204,23 +298,48 @@ $(document).ready(function(){
 
     <div class="col-lg-6">
         <div class="card-box">
-            <h4 class="text-dark header-title m-t-0">Perkembangan Dari Tahun ke Tahun</h4>
+            <h4 class="text-dark header-title m-t-0">Perkembangan Penduduk Berdasarkan Usia</h4>
             <div class="text-center">
                 <ul class="list-inline chart-detail-list">
                     <li>
-                        <h5><i class="fa fa-circle m-r-5" style="color: #5fbeaa;"></i>Desktops</h5>
+                        <h5><i class="fa fa-circle m-r-5" style="color: #5fbeaa;"></i>Anak-anak</h5>
                     </li>
                     <li>
-                        <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Tablets</h5>
+                        <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Dewasa</h5>
                     </li>
                     <li>
-                        <h5><i class="fa fa-circle m-r-5" style="color: #dcdcdc;"></i>Mobiles</h5>
+                        <h5><i class="fa fa-circle m-r-5" style="color: #dcdcdc;"></i>Lansia</h5>
                     </li>
                 </ul>
             </div>
             <div id="morris-bar-stacked" style="height: 303px;"></div>
         </div>
     </div>
+</div>
+<!-- end row -->
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card-box">
+      <h4 class="m-t-0 header-title"><b>Jumlah Penduduk Berdasarkan Tahun</b></h4>
+      <p class="text-muted m-b-30 font-13">
+        Example of Horizontal bar chart.
+      </p>
+
+      <div id="line-chart-tooltips" class="ct-chart ct-golden-section"></div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card-box">
+      <h4 class="m-t-0 header-title"><b>Jumlah Penduduk Berdasarkan Bulan Tahun Ini</b></h4>
+      <p class="text-muted m-b-30 font-13">
+        Example of Horizontal bar chart.
+      </p>
+
+      <div id="svg-animation" class="ct-chart ct-golden-section"></div>
+    </div>
+  </div>
 </div>
 <!-- end row -->
 
@@ -242,28 +361,28 @@ $(document).ready(function(){
         <div class="widget-panel widget-style-2 bg-white">
             <i class="md md-attach-money text-primary"></i>
             <h2 class="m-0 text-dark counter font-600">50568</h2>
-            <div class="text-muted m-t-5">Total Revenue</div>
+            <div class="text-muted m-t-5">SD</div>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
         <div class="widget-panel widget-style-2 bg-white">
             <i class="md md-add-shopping-cart text-pink"></i>
             <h2 class="m-0 text-dark counter font-600">1256</h2>
-            <div class="text-muted m-t-5">Sales</div>
+            <div class="text-muted m-t-5">SMP</div>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
         <div class="widget-panel widget-style-2 bg-white">
             <i class="md md-store-mall-directory text-info"></i>
             <h2 class="m-0 text-dark counter font-600">18</h2>
-            <div class="text-muted m-t-5">Stores</div>
+            <div class="text-muted m-t-5">SMA</div>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
         <div class="widget-panel widget-style-2 bg-white">
             <i class="md md-account-child text-custom"></i>
             <h2 class="m-0 text-dark counter font-600">8564</h2>
-            <div class="text-muted m-t-5">Users</div>
+            <div class="text-muted m-t-5">PTN/PTS</div>
         </div>
     </div>
 </div>
@@ -351,148 +470,43 @@ $(document).ready(function(){
     </div>
 </div>
 
-            <div class="row">
-
-                <div class="col-lg-4">
-                <div class="card-box">
-                  <h4 class="text-dark header-title m-t-0 m-b-30">Daily Sales</h4>
-
-                  <div class="widget-chart text-center">
-                            <div id="sparkline3"></div>
-                        <ul class="list-inline m-t-15">
-                          <li>
-                            <h5 class="text-muted m-t-20">Target</h5>
-                            <h4 class="m-b-0">$1000</h4>
-                          </li>
-                          <li>
-                            <h5 class="text-muted m-t-20">Last week</h5>
-                            <h4 class="m-b-0">$523</h4>
-                          </li>
-                          <li>
-                            <h5 class="text-muted m-t-20">Last Month</h5>
-                            <h4 class="m-b-0">$965</h4>
-                          </li>
-                        </ul>
-                      </div>
-                </div>
-
-                </div>
-
-                <div class="col-lg-4">
-                <div class="card-box">
-                  <h4 class="text-dark  header-title m-t-0 m-b-30">Weekly Sales</h4>
-
-                  <div class="widget-chart text-center">
-                            <div id="sparkline2"></div>
-                        <ul class="list-inline m-t-15">
-                          <li>
-                            <h5 class="text-muted m-t-20">Target</h5>
-                            <h4 class="m-b-0">$1000</h4>
-                          </li>
-                          <li>
-                            <h5 class="text-muted m-t-20">Last week</h5>
-                            <h4 class="m-b-0">$523</h4>
-                          </li>
-                          <li>
-                            <h5 class="text-muted m-t-20">Last Month</h5>
-                            <h4 class="m-b-0">$965</h4>
-                          </li>
-                        </ul>
-                      </div>
-                </div>
-
-                </div>
-
-                <div class="col-lg-4">
-                  <div class="card-box">
-                    <h4 class="text-dark  header-title m-t-0 m-b-30">Monthly Sales</h4>
-
-                    <div class="widget-chart text-center">
-                        <div id="sparkline1"></div>
-                        <ul class="list-inline m-t-15">
-                          <li>
-                            <h5 class="text-muted m-t-20">Target</h5>
-                            <h4 class="m-b-0">$1000</h4>
-                          </li>
-                          <li>
-                            <h5 class="text-muted m-t-20">Last week</h5>
-                            <h4 class="m-b-0">$523</h4>
-                          </li>
-                          <li>
-                            <h5 class="text-muted m-t-20">Last Month</h5>
-                            <h4 class="m-b-0">$965</h4>
-                          </li>
-                        </ul>
-                      </div>
-                  </div>
-                </div>
-            </div>
-            <!-- end row -->
-
-
     <div class="row">
         <div class="col-md-6 col-sm-6 col-lg-3">
             <div class="card-box widget-box-1 bg-white">
                 <i class="fa fa-info-circle text-muted pull-right inform" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Last 24 Hours"></i>
-                <h4 class="text-dark">Income status</h4>
+                <h4 class="text-dark">Pegawai Negeri Sipil</h4>
                 <h2 class="text-primary text-center">$<span data-plugin="counterup">5623</span></h2>
-                <p class="text-muted">Total income: $22506 <span class="pull-right"><i class="fa fa-caret-up text-primary m-r-5"></i>10.25%</span></p>
+                <p class="text-muted"> Dari Tahun Lalu: <span class="pull-right"><i class="fa fa-caret-up text-primary m-r-5"></i>10.25%</span></p>
             </div>
         </div>
 
         <div class="col-md-6 col-sm-6 col-lg-3">
             <div class="card-box widget-box-1 bg-white">
                 <i class="fa fa-info-circle text-muted pull-right inform" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Last 24 Hours"></i>
-                <h4 class="text-dark">Sales status</h4>
+                <h4 class="text-dark">Swasta</h4>
                 <h2 class="text-pink text-center"><span data-plugin="counterup">185</span></h2>
-                <p class="text-muted">Total sales: 2398 <span class="pull-right"><i class="fa fa-caret-down text-danger m-r-5"></i>7.85%</span></p>
+                <p class="text-muted"> Dari Tahun Lalu: <span class="pull-right"><i class="fa fa-caret-down text-danger m-r-5"></i>7.85%</span></p>
             </div>
         </div>
 
         <div class="col-md-6 col-sm-6 col-lg-3">
             <div class="card-box widget-box-1 bg-white">
                 <i class="fa fa-info-circle text-muted pull-right inform" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Last 24 Hours"></i>
-                <h4 class="text-dark">Income status</h4>
+                <h4 class="text-dark">Lain-lain</h4>
                 <h2 class="text-success text-center">$<span data-plugin="counterup">9562</span></h2>
-                <p class="text-muted">Total income: $22506 <span class="pull-right"><i class="fa fa-caret-up text-primary m-r-5"></i>10.25%</span></p>
+                <p class="text-muted"> Dari Tahun Lalu: <span class="pull-right"><i class="fa fa-caret-up text-primary m-r-5"></i>10.25%</span></p>
             </div>
         </div>
 
         <div class="col-md-6 col-sm-6 col-lg-3">
             <div class="card-box widget-box-1 bg-white">
                 <i class="fa fa-info-circle text-muted pull-right inform" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Last 24 Hours"></i>
-                <h4 class="text-dark">Sales status</h4>
+                <h4 class="text-dark">Tidak Bekerja</h4>
                 <h2 class="text-warning text-center"><span data-plugin="counterup">874</span></h2>
-                <p class="text-muted">Total sales: 2398 <span class="pull-right"><i class="fa fa-caret-down text-danger m-r-5"></i>7.85%</span></p>
+                <p class="text-muted"> Dari Tahun Lalu: <span class="pull-right"><i class="fa fa-caret-down text-danger m-r-5"></i>7.85%</span></p>
             </div>
         </div>
     </div>
-
-
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="card-box">
-          <h4 class="m-t-0 header-title"><b>Line chart with tooltips</b></h4>
-          <p class="text-muted m-b-30 font-13">
-            Example of Horizontal bar chart.
-          </p>
-
-          <div id="line-chart-tooltips" class="ct-chart ct-golden-section"></div>
-        </div>
-      </div>
-
-      <div class="col-lg-6">
-        <div class="card-box">
-          <h4 class="m-t-0 header-title"><b>SVG Path animation</b></h4>
-          <p class="text-muted m-b-30 font-13">
-            Example of Horizontal bar chart.
-          </p>
-
-          <div id="svg-animation" class="ct-chart ct-golden-section"></div>
-        </div>
-      </div>
-    </div>
-    <!-- end row -->
 
 
     <div class="row">
