@@ -2,11 +2,12 @@
 session_start();
 
 //jika session username belum dibuat, atau session username kosong
-if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
-	//redirect ke halaman login
-	header('location:http://031801.webplussolution.com/view/map/');
-}
+  if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+    //redirect ke halaman login
+    header('location:http://031801.webplussolution.com/view/map/');
+  }
 ?>
+
 <!DOCTYPE html>
 <html>
 <?php require_once('../../controller/header.php'); ?>
@@ -41,7 +42,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
         kecamatan=$("#kecamatan").val();
         alamat=$("#alamat").val();
         telepon=$("#telepon").val();
-
+       
         url="../handler/kelurahan/filter.php?kelurahan="+kelurahan+"&kecamatan="+kecamatan+"&alamat="+alamat+"&telepon="+telepon;
         url=url.replace(/ /g,"%20");
         $("#modal_area").load(url);
@@ -52,7 +53,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
         kecamatan=$("#kecamatan").val();
         alamat=$("#alamat").val();
         telepon=$("#telepon").val();
-
+       
         url="../handler/kelurahan/insert.php?control=CreateCommit&kelurahan="+kelurahan+"&kecamatan="+kecamatan+"&alamat="+alamat+"&telepon="+telepon;
         url=url.replace(/ /g,"%20");
         $("#action_result").load(url, function(){
@@ -69,7 +70,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 
       function DeleteExecutor(){
         id_kelurahan=$("#id_kelurahan").val();
-
+        
         url="../handler/kelurahan/delete.php?control=DeleteCommit&id_kelurahan="+id_kelurahan;
 
         url=url.replace(/ /g,"%20");
@@ -91,36 +92,13 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
         kecamatan=$("#kecamatan").val();
         alamat=$("#alamat").val();
         telepon=$("#telepon").val();
-
-        url="../handler/kecamatan/update.php?control=UpdateCommit&id="+id+"&kecamatan="+kecamatan+"&alamat="+alamat+"&telepon="+telepon;
-
-        url=url.replace(/ /g,"%20");
-
-        $("#action_result").load(url, function(){
-          url="../handler/kecamatan/table.php?table=kecamatan"
-          $("#table_area").load(url);
-        });
-      }
-
-      function KoordinatShow(id){
-        url="../handler/kecamatan/koordinat.php?control=KoordinatShow&id="+id;
-        $("#modal_area").load(url);
-      }
-
-      function KoordinatExecutor(){
-        id=$("#id").val();
-        lat=$("#lat").val();
-        lng=$("#lng").val();
-        kecamatan=$("#kecamatan").val();
-        alamat=$("#alamat").val();
-        telepon=$("#telepon").val();
-
-        url="../handler/kecamatan/koordinat.php?control=KoordinatCommit&id="+id+"&lat="+lat+"&lng="+lng+"&kecamatan="+kecamatan+"&alamat="+alamat+"&telepon="+telepon;
+        
+        url="../handler/kelurahan/update.php?control=UpdateCommit&id_kelurahan="+id_kelurahan+"&kelurahan="+kelurahan+"&kecamatan="+kecamatan+"&alamat="+alamat+"&telepon="+telepon;
 
         url=url.replace(/ /g,"%20");
 
         $("#action_result").load(url, function(){
-          url="../handler/kecamatan/table.php?table=kecamatan"
+          url="../handler/kelurahan/table.php?table=kelurahan"
           $("#table_area").load(url);
         });
       }
