@@ -9,7 +9,7 @@
 				$tableStructure='
         <div class="col-sm-12">
             <div class="card-box table-responsive">
-                <h5 class="m-t-0 header-title"><b>Daftar Data Kecamatan</b></h5><hr>
+                <h5 class="m-t-0 header-title"><b>Daftar Data Kecamatan Surabaya</b></h5><hr>
 				<table id="datatable-buttons" class="table table-striped table-bordered">
 					<thead>
 						<tr>
