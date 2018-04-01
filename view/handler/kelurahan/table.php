@@ -1,4 +1,3 @@
-
 <?php
 
 	$table=$_GET['table'];

@@ -1,7 +1,6 @@
 <?php
 require_once('../../../controller/connection.php');
 
-
   $control=$_GET['control'];
   if($control=='CreateCommit'){
     $kelurahan=$_GET['kelurahan'];
