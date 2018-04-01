@@ -160,7 +160,18 @@ $(document).ready(function(){
             <ul class="list-inline m-t-15">
               <li>
                 <h5 class="text-muted m-t-20">Laki-laki</h5>
-                <h4 class="m-b-0">$1000</h4>
+                <?php
+                $id = $_GET['id'];
+                $query = mysql_query("SELECT distinct(lahir_l)  FROM dokumen where id_kelurahan = '".$id."'");
+                $no = 1;
+                while ($data = mysql_fetch_array($query)) {
+                ?>
+                    <h4 class="m-b-0"><?php echo $data['lahir_l'];?></h4>
+
+                <?php
+               }
+              ?>
+
               </li>
               <li>
                 <h5 class="text-muted m-t-20">Perempuan</h5>
