@@ -54,7 +54,6 @@ if($control=='UpdateShow'){
 }
 ?>
 
-
 <?php
 $control=$_GET['control'];
 if($control=='UpdateCommit'){

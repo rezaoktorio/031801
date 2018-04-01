@@ -32,5 +32,4 @@ require_once('../../../controller/connection.php');
           createExecutor();
         </script>';
     }
-  
 ?>

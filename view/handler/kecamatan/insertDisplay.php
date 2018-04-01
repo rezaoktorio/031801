@@ -1,4 +1,3 @@
-
 <?php
 
 	$display=$_GET['display'];

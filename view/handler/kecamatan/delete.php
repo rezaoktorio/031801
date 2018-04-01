@@ -1,5 +1,4 @@
 <?php
-
 require_once('../../../controller/connection.php');
 
 $control=$_GET['control'];

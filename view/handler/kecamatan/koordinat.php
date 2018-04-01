@@ -54,7 +54,6 @@ if($control=='KoordinatShow'){
 }
 ?>
 
-
 <?php
 $control=$_GET['control'];
 if($control=='KoordinatCommit'){
