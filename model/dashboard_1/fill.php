@@ -480,8 +480,17 @@ $(document).ready(function(){
     <div class="col-lg-3 col-sm-6">
         <div class="widget-panel widget-style-2 bg-white">
             <i class="md md-add-shopping-cart text-pink"></i>
-            <h2 class="m-0 text-dark counter font-600">1256</h2>
+            <?php
+            $id= $_GET['id'];
+            $query = mysql_query("SELECT smp_lk, smp_pr FROM pendidikan where id_kelurahan = '".$id."' and id_pendidikan = '".$id."'");
+            while($data = mysql_fetch_array($query))
+            {
+            ?>
+            <h2 class="m-0 text-dark counter font-600"><?php echo $data['smp_lk']+$data['smp_pr']; ?></h2>
             <div class="text-muted m-t-5">SMP</div>
+            <?php
+            }
+            ?>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
