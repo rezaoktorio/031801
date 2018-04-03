@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                         <label for="pass">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukan Password" data-parsley-length="[6,10]" data-parsley-type="alphanum" required>
+                        <input type="password" class="form-control" id="pass" name="pass" placeholder="Masukan Password" data-parsley-length="[6,10]" required>
                     </div>
                 <button type="button" class="btn btn-danger waves-effect" onclick="insert_display();">Reset</button>
                 <button type="submit" class="btn btn-success btn-custom waves-effect">Tambah</button>

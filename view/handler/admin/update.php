@@ -37,8 +37,8 @@ if($control=='UpdateShow'){
 			                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="'.$row['email_admin'].'" parsley-type="email" required>
 			              </div>
 			              <div class="form-group col-md-12">
-			                <label class="control-label" for="password">Password</label>
-			                <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="'.$row['password'].'" data-parsley-length="[6,10]" data-parsley-type="alphanum" required>
+			                <label class="control-label" for="pass">Password</label>
+			                <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" value="'.$row['password'].'" data-parsley-length="[6,10]" required>
 			              </div>
 
 			              <div align="center">
