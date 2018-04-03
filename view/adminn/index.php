@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+//jika session username belum dibuat, atau session username kosong
+  if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+    //redirect ke halaman login
+    header('location:http://031801.webplussolution.com/view/map/');
+  }
+?>
 <!DOCTYPE html>
 <html>
 <?php require_once('../../controller/header.php'); ?>
@@ -33,7 +42,7 @@
         nik=$("#nik").val();
         nama=$("#nama").val();
         email=$("#email").val();
-        password=$("#password").val();
+        password=$("#pass").val();
        
         url="../handler/admin/filter.php?nik="+nik+"&nama="+nama+"&email="+email+"&password="+password;
         url=url.replace(/ /g,"%20");
@@ -44,7 +53,7 @@
         nik=$("#nik").val();
         nama=$("#nama").val();
         email=$("#email").val();
-        password=$("#password").val();
+        password=$("#pass").val();
        
         url="../handler/admin/insert.php?control=CreateCommit&nik="+nik+"&nama="+nama+"&email="+email+"&password="+password;
         url=url.replace(/ /g,"%20");
@@ -83,7 +92,7 @@
         nik=$("#nik").val();
         nama=$("#nama").val();
         email=$("#email").val();
-        password=$("#password").val();
+        password=$("#pass").val();
         
         url="../handler/admin/update.php?control=UpdateCommit&id_admin="+id_admin+"&nik="+nik+"&nama="+nama+"&email="+email+"&password="+password;
 
