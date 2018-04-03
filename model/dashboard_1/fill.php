@@ -489,6 +489,7 @@ $(document).ready(function(){
             <h2 class="m-0 text-dark counter font-600"><?php echo $data['smp_lk']+$data['smp_pr']; ?></h2>
             <div class="text-muted m-t-5">SMP</div>
             <?php
+            
             }
             ?>
         </div>
