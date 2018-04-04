@@ -6,7 +6,7 @@ require_once('../../../controller/connection.php');
     $email=$_GET['email'];
     $pass=$_GET['password'];
 
-    $query = mysql_query("SELECT count(id_admin) FROM admin WHERE  nik_admin='$nik' or email_admin='$email' and status='1'");
+    $query = mysql_query("SELECT count(id_admin) FROM admin WHERE (nik_admin='$nik' or email_admin='$email') and status='1'");
     $result=mysql_fetch_array($query);
 
     if ($result['count(id_admin)']>0){
