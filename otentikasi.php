@@ -28,7 +28,7 @@ if (empty($username) && empty($password)) {
 	break;
 }
 
-$q = mysql_query("select * from admin where nik_admin='$username' and password='$password'");
+$q = mysql_query("select * from admin where nik_admin='$username' and password='$password' and (status='1' or status='2' or status='3')");
 
 if (mysql_num_rows($q) == 1) {
 	//kalau username dan password sudah terdaftar di database
