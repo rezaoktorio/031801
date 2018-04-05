@@ -8,9 +8,10 @@ require_once('../../../controller/connection.php');
     $nama=$_GET['nama'];
     $email=$_GET['email'];
     $pass=$_GET['password'];
+    $status=$_GET['status'];
 
     $query="INSERT INTO admin(nik_admin, nama_admin, email_admin, password, status, tgl_gabung)
-        VALUES('".$nik."', '".$nama."','".$email."','".$pass."','1', CURDATE())";
+        VALUES('".$nik."', '".$nama."','".$email."','".$pass."','".$status."', CURDATE())";
   }
 
   $result=mysql_query($query);

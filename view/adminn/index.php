@@ -6,7 +6,17 @@ session_start();
     //redirect ke halaman login
     header('location:http://031801.webplussolution.com/view/map/');
   }
+
+  //membuat session untuk role/status admin
+  require_once('../../controller/connection.php');
+  $nik = $_SESSION['username'];
+  $executerole = mysql_query("SELECT status FROM admin WHERE nik_admin='$nik'");
+  while($rowrole = mysql_fetch_array($executerole)) {
+      $_SESSION['statusrole'] = $rowrole['status'];
+  }
+  
 ?>
+
 <!DOCTYPE html>
 <html>
 <?php require_once('../../controller/header.php'); ?>
@@ -43,8 +53,9 @@ session_start();
         nama=$("#nama").val();
         email=$("#email").val();
         password=$("#pass").val();
+        status=$("#status").val();
        
-        url="../handler/admin/filter.php?nik="+nik+"&nama="+nama+"&email="+email+"&password="+password;
+        url="../handler/admin/filter.php?nik="+nik+"&nama="+nama+"&email="+email+"&password="+password+"&status="+status;
         url=url.replace(/ /g,"%20");
         $("#modal_area").load(url);
       }
@@ -54,8 +65,9 @@ session_start();
         nama=$("#nama").val();
         email=$("#email").val();
         password=$("#pass").val();
+        status=$("#status").val();
        
-        url="../handler/admin/insert.php?control=CreateCommit&nik="+nik+"&nama="+nama+"&email="+email+"&password="+password;
+        url="../handler/admin/insert.php?control=CreateCommit&nik="+nik+"&nama="+nama+"&email="+email+"&password="+password+"&status="+status;
         url=url.replace(/ /g,"%20");
         $("#action_result").load(url, function(){
           url="../handler/admin/table.php?table=admin"
@@ -93,8 +105,9 @@ session_start();
         nama=$("#nama").val();
         email=$("#email").val();
         password=$("#pass").val();
+        status=$("#status").val();
         
-        url="../handler/admin/update.php?control=UpdateCommit&id_admin="+id_admin+"&nik="+nik+"&nama="+nama+"&email="+email+"&password="+password;
+        url="../handler/admin/update.php?control=UpdateCommit&id_admin="+id_admin+"&nik="+nik+"&nama="+nama+"&email="+email+"&password="+password+"&status="+status;
 
         url=url.replace(/ /g,"%20");
 
