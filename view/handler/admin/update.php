@@ -89,6 +89,7 @@ if($statusrole=='1'){
 				          <form role="form" data-parsley-validate="">
 				          <input type="hidden" value="'.$id_admin.'" id="id_admin">
 				          <input type="hidden" value="'.$row['status'].'" id="status">
+				          <input type="hidden" value="'.$row['password'].'" id="pass">
 				              <div class="form-group col-md-12">
 				                <label class="control-label" for="nik">NIK</label>
 				                <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK" value="'.$row['nik_admin'].'" data-parsley-type="number" data-parsley-maxlength="20" required readonly="">
@@ -101,11 +102,6 @@ if($statusrole=='1'){
 				                <label class="control-label" for="email">Email address</label>
 				                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="'.$row['email_admin'].'" parsley-type="email" required>
 				              </div>
-				              <div class="form-group col-md-12">
-				                <label class="control-label" for="pass">Password</label>
-				                <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" value="'.$row['password'].'" data-parsley-length="[6,10]" required>
-				              </div>
-
 				              <div align="center">
 						          <button type="button" class="btn btn-default btn-custom" data-dismiss="modal">Batal</button>
 						          <button type="submit" class="btn btn-warning btn-custom waves-effect"  ><strong>Perbarui!</strong></button>
