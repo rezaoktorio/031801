@@ -106,6 +106,11 @@ session_start();
         $("#modal_area").load(url);
       }
 
+      function FotoShow(id){
+        url="../handler/kecamatan/foto.php?control=FotoShow&id="+id;
+        $("#modal_area").load(url);
+      }
+
       function KoordinatExecutor(){
         id=$("#id").val();
         lat=$("#lat").val();

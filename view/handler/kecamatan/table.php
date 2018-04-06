@@ -17,7 +17,7 @@
                             <th>Kecamatan</th>
                             <th>Alamat</th>
                             <th>Telepon</th>
-                            <th width="150">Aksi</th>
+                            <th width="280">Aksi</th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -37,6 +37,9 @@
 							<td align="center">
                                 <button type="button" class="btn btn-default btn-custom btn-mini btn-xs waves-effect" onclick="KoordinatShow(\''.$data['id'].'\');">
                                   Koordinat
+                                </button>
+                                <button type="button" class="btn btn-info btn-custom btn-mini btn-xs waves-effect" onclick="FotoShow(\''.$data['id'].'\');">
+                                  Foto
                                 </button>
                                 <button type="button" class="btn btn-warning btn-custom btn-mini btn-xs waves-effect" onclick="UpdateShow(\''.$data['id'].'\');">
                                   Edit

@@ -343,3 +343,4 @@ $('#mainTable').editableTableWidget().numericInputExample().find('td:first').foc
 
 <!-- select-live -->
  <script src="../../assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+ <script src="../../assets/plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js" type="text/javascript"></script>

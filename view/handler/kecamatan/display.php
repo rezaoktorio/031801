@@ -20,7 +20,37 @@ if($control=='DisplayShow'){
 			          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			          <h4 class="modal-title" id="myModalLabel">Daftar Kelurahan Pada Kecamatan <strong>'.$rowtitle['name'].'</strong></h4>
 			        </div>
-			        <div class="modal-body" align="center">';
+			        <div class="modal-body" align="center">
+			        	<div class="col-sm-3">
+			        	<strong><u>CAMAT '.$rowtitle['name'].'</u></strong><br><br>
+				        	<div>';
+
+				        	$namafile = ''.$rowtitle['name'].'';
+				        	$pathjpg = "../../../assets/images/camat/".$namafile.".jpg";
+				        	$pathjpeg = "../../../assets/images/camat/".$namafile.".jpeg";
+				        	$pathpng = "../../../assets/images/camat/".$namafile.".png";
+				        	if (file_exists($pathjpg)) {
+				        		echo '<img src="../../assets/images/camat/'.$namafile.'.jpg" alt="image" class="img-responsive img-rounded" width="200"/>';
+				        	} elseif (file_exists($pathjpeg)) {
+				        		echo '<img src="../../assets/images/camat/'.$namafile.'.jpeg" alt="image" class="img-responsive img-rounded" width="200"/>';
+				        	} elseif (file_exists($pathpng)) {
+				        		echo '<img src="../../assets/images/camat/'.$namafile.'.png" alt="image" class="img-responsive img-rounded" width="200"/>';
+				        	} else {
+				        		echo '<img src="../../assets/images/camat/profile.png" alt="image" class="img-responsive img-rounded" width="200"/>';
+				        	}
+
+							$executenama = mysql_query("SELECT nama_camat FROM camat WHERE id='$id'");
+							while($rownama = mysql_fetch_array($executenama)) {
+								$namacamat = $rownama['nama_camat'];
+							}
+
+				        	echo '
+				        	 <strong>'.$namacamat.'</strong>
+				        	</div>
+				        </div>
+				        <div class="col-sm-9">
+
+			        ';
 		
 			        // isi
 			        $query = "SELECT kelurahan.id_kelurahan as id, kelurahan.nama_kelurahan as nama, kelurahan.alamat_kelurahan as alamat, kelurahan.telepon_kelurahan as telepon FROM `markers` JOIN kelurahan ON markers.id = kelurahan.id_kecamatan WHERE kelurahan.id_kecamatan = ".$id."
@@ -61,6 +91,7 @@ if($control=='DisplayShow'){
 
 
 		echo '
+			        	</div>
 			        </div>
 			        <div align="center">
 			          <button type="button" class="btn btn-danger btn-custom" data-dismiss="modal">Tutup</button>
