@@ -44,6 +44,7 @@ if($control=='DisplayShow'){
 								$namacamat = $rownama['nama_camat'];
 							}
 
+
 				        	echo '
 				        	 <strong>'.$namacamat.'</strong>
 				        	</div>
