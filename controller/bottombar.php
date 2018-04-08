@@ -7,7 +7,7 @@
             </div>
             <div class="col-xs-6">
                 <ul class="pull-right list-inline m-b-0">
-                    <li>
+                    <!-- <li>
                         <a href="#">About</a>
                     </li>
                     <li>
@@ -15,7 +15,7 @@
                     </li>
                     <li>
                         <a href="#">Contact</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
