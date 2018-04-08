@@ -44,8 +44,18 @@ $(document).ready(function(){
 
 
 <div class="row">
-    <div class="col-sm-1 col-sm-offset-1">
-      <img style="border:solid #797979 3px" class="img-rounded" src="../../assets/images/users/avatar-11.jpg" width="100%"/>
+    <div class="col-sm-1 col-sm-offset-1" style="margin-bottom:2%;">
+      <?php
+        $id = $_GET['id'];
+        $query = mysql_query("SELECT * FROM `markers` where id = ".$id."");
+        $no = 1;
+        while ($data = mysql_fetch_array($query)) {
+        ?>
+            <img style="border:solid #797979 2px;" class="img-rounded" src="../../assets/images/camat/<?php echo $data['name'];?>.jpg" width="100%"/>
+        <?php
+            $no++;
+        }
+      ?>
     </div>
     <div class="col-sm-9">
         <div class="btn-group pull-right m-t-15">
@@ -72,7 +82,30 @@ $(document).ready(function(){
         ?>
     </div>
 </div>
-
+<div class="row">
+  <div class = "col-md-12">
+    <div class="card-box">
+      <h4 class="text-dark header-title m-t-0">Daftar Kecamatan</h4>
+      <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+        <thead>
+          <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 157px;">No.</th>
+            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 259px;">Kelurahan</th>
+            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 117px;">Alamat</th>
+            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 60px;">Telepon</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr role="row" class="odd">
+            <td class="sorting_1">1</td>
+            <td>Nama Kelurahan</td>
+            <td>Alamat Kelurahan</td>
+            <td>031-12345 678</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 <div class="row">
     <div class="col-md-6 col-lg-4">
@@ -368,7 +401,6 @@ $(document).ready(function(){
     <div class="col-lg-3">
         <div class="card-box">
             <h4 class="text-dark header-title m-t-0 m-b-30">Total WNI</h4>
-
             <div class="widget-chart text-center">
                 <input class="knob" data-width="150" data-height="150" data-linecap=round data-fgColor="#fb6d9d" value="80" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".15"/>
                 <h5 class="text-muted m-t-20">Total WNI Perhari Ini</h5>
@@ -473,8 +505,17 @@ $(document).ready(function(){
     <div class="col-lg-3 col-sm-6">
         <div class="widget-panel widget-style-2 bg-white">
             <i class="md md-attach-money text-primary"></i>
-            <h2 class="m-0 text-dark counter font-600">50568</h2>
+            <?php
+            $id=$_GET['id'];
+            $query= mysql_query("SELECT sd_lk, sd_pr from pendidikan where id_kelurahan = '".$id."' and id_pendidikan = '".$id."'");
+            while($data = mysql_fetch_array($query))
+            {
+            ?>
+            <h2 class="m-0 text-dark counter font-600"><?php echo $data['sd_lk']+$data['sd_pr']; ?></h2>
             <div class="text-muted m-t-5">SD</div>
+            <?php
+            }
+             ?>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
@@ -489,7 +530,6 @@ $(document).ready(function(){
             <h2 class="m-0 text-dark counter font-600"><?php echo $data['smp_lk']+$data['smp_pr']; ?></h2>
             <div class="text-muted m-t-5">SMP</div>
             <?php
-            
             }
             ?>
         </div>
@@ -497,14 +537,32 @@ $(document).ready(function(){
     <div class="col-lg-3 col-sm-6">
         <div class="widget-panel widget-style-2 bg-white">
             <i class="md md-store-mall-directory text-info"></i>
-            <h2 class="m-0 text-dark counter font-600">18</h2>
+            <?php
+            $id=$_GET['id'];
+            $query = mysql_query("SELECT sma_lk, sma_pr FROM pendidikan where id_kelurahan= '".$id."' and id_pendidikan = '".$id."'");
+            while($data  = mysql_fetch_array($query))
+            {
+              ?>
+                <h2 class="m-0 text-dark counter font-600"><?php echo $data['sma_lk']+$data['sma_pr']; ?></h2>
+              <?php
+            }
+            ?>
             <div class="text-muted m-t-5">SMA</div>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
         <div class="widget-panel widget-style-2 bg-white">
             <i class="md md-account-child text-custom"></i>
-            <h2 class="m-0 text-dark counter font-600">8564</h2>
+            <?php
+            $id=$_GET['id'];
+            $query = mysql_query("SELECT * FROM pendidikan where id_kelurahan= '".$id."' and id_pendidikan = '".$id."'");
+            while($data = mysql_fetch_array($query))
+            {
+              ?>
+              <h2 class="m-0 text-dark counter font-600"><?php echo $data['s1_lk' ]+$data['s2_lk']+$data['s3_lk']+$data['s1_pr']+$data['s2_pr']+$data['s3_pr']+$data['d1_d2_lk']+$data['d1_d2_pr'] ?></h2>
+              <?php
+            }
+            ?>
             <div class="text-muted m-t-5">PTN/PTS</div>
         </div>
     </div>
