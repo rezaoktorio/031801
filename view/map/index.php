@@ -6,6 +6,7 @@
 
     <div class="wrapper">
         <div class="container">
+          
             <div class="row">
               <div class="col-md-12 card-box" id="map" style="min-height:480px"></div>
             </div>
