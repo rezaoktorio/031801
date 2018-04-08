@@ -20,14 +20,14 @@
                              <a href=""><i class="fa fa-search"></i></a>
                         </form>
                     </li>
-                    <li class="dropdown navbar-c-items">
+                    <!-- <li class="dropdown navbar-c-items">
                         <a href="#" data-target="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
                             <i class="icon-bell"></i> <span class="badge badge-xs badge-danger">3</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg">
                             <li class="notifi-title"><span class="label label-default pull-right">3 Baru</span>Notifikasi</li>
                             <li class="list-group slimscroll-noti notification-list">
-                               <!-- list item-->
+
                                <a href="javascript:void(0);" class="list-group-item">
                                   <div class="media">
                                      <div class="pull-left p-r-10">
@@ -42,7 +42,6 @@
                                   </div>
                                </a>
 
-                               <!-- list item-->
                                <a href="javascript:void(0);" class="list-group-item">
                                   <div class="media">
                                      <div class="pull-left p-r-10">
@@ -57,7 +56,6 @@
                                   </div>
                                </a>
 
-                               <!-- list item-->
                                <a href="javascript:void(0);" class="list-group-item">
                                   <div class="media">
                                      <div class="pull-left p-r-10">
@@ -72,7 +70,6 @@
                                   </div>
                                </a>
 
-                                <!-- list item-->
                                <a href="javascript:void(0);" class="list-group-item">
                                   <div class="media">
                                      <div class="pull-left p-r-10">
@@ -94,7 +91,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
 
                     <li class="dropdown navbar-c-items">
                         <a href="" class="dropdown-toggle waves-effect waves-light profile" data-toggle="dropdown" aria-expanded="true"><i class="ti-user text-white m-r-10"></i> </a>
