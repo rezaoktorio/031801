@@ -9,7 +9,7 @@ if($statusrole=='1'){
     $table=$_GET['table'];
     if($table=='admin'){
                 
-    $query = "SELECT id_admin, nik_admin, nama_admin, email_admin, tgl_gabung, password, if(role=1,'Advance',if(role=2,'Medium','Low')) as role, if(status=1,'Actived','Deactived') as keaktifan FROM admin order by id_admin desc
+    $query = "SELECT id_admin, nik_admin, nama_admin, email_admin, tgl_gabung, password, if(role=1,'Advance',if(role=2,'Medium','Low')) as role, if(status=1,'Activated','Deactived') as keaktifan FROM admin order by id_admin desc
                      "; //the query for get all data in tb_student
 
     $tableStructure='
