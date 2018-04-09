@@ -129,13 +129,13 @@ if($control=='UpdateCommit'){
     $nama=$_GET['nama'];
     $email=$_GET['email'];
     $pass=$_GET['password'];
-    $status=$_GET['status'];
+    $roles=$_GET['status'];
 
 // echo $id_admin.'-'.$nik.'-'.$nama.'-'.$email.'-'.$pass  ;
 
 
 	// //query for update data in database
-	$query = "UPDATE admin SET nik_admin='$nik', nama_admin='$nama', email_admin='$email', password='$pass', status='$status'
+	$query = "UPDATE admin SET nik_admin='$nik', nama_admin='$nama', email_admin='$email', password='$pass', role='$roles'
 			WHERE id_admin = '$id_admin'" ;
 	 $hasil = mysql_query($query);
 	 

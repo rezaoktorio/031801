@@ -9,7 +9,7 @@ if($statusrole=='1'){
     $table=$_GET['table'];
     if($table=='admin'){
                 
-    $query = "SELECT id_admin, nik_admin, nama_admin, email_admin, tgl_gabung, password, if(status=1,'Advance',if(status=2,'Medium','Low')) as role FROM admin WHERE status='1' or status='2' or status='3' order by id_admin desc
+    $query = "SELECT id_admin, nik_admin, nama_admin, email_admin, tgl_gabung, password, if(role=1,'Advance',if(role=2,'Medium','Low')) as role, if(status=1,'Actived','Deactived') as keaktifan FROM admin order by id_admin desc
                      "; //the query for get all data in tb_student
 
     $tableStructure='
@@ -24,8 +24,9 @@ if($statusrole=='1'){
                             <th>Nama</th>
                             <th width="52">Email</th>
                             <th>Bergabung</th>
-                            <th>Status</th>
+                            <th>Role</th>
                             <th>Password</th>
+                            <th>Status</th>
                             <th width="72">Aksi</th>
                         </tr>
                     </thead>
@@ -46,6 +47,7 @@ if($statusrole=='1'){
                             <td>'.$data['tgl_gabung'].'</td>
                             <td>'.$data['role'].'</td>
                             <td>'.$data['password'].'</td>
+                            <td>'.$data['keaktifan'].'</td>
                             <td align="center">
                                 <button type="button" class="btn btn-warning btn-custom btn-mini btn-xs waves-effect" onclick="UpdateShow(\''.$data['id_admin'].'\');">
                                   Edit
