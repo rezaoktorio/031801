@@ -6,7 +6,40 @@
 
     <div class="wrapper">
         <div class="container">
-          
+
+            <div class="row">
+							<div class="col-md-12 card-box">
+
+								<h4 class=" m-t-0 header-title"><b>Iklan Layanan Masyarakat</b></h4>
+								<p class="text-muted m-b-30 font-13">Berikut iklan layanan masyarakat dari Dinas Kependudukan dan Pencatatan Sipil Pemkot Surabaya.</p>
+
+								<div class="owl-carousel owl-theme" id="owl-multi">
+								    <div class="item">
+								    	<iframe width="100%" src="https://www.youtube.com/embed/jnXeOJydJH4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+								    </div>
+								    <div class="item">
+								    	<iframe width="100%" height="" src="https://www.youtube.com/embed/fXBNhQyj_ss" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+								    </div>
+								    <div class="item">
+								    	<iframe width="100%" height="" src="https://www.youtube.com/embed/VVBN4RsIM0k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+								    </div>
+								    <div class="item">
+								    	<iframe width="100%" height="" src="https://www.youtube.com/embed/kcX_57ZjIPg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+								    </div>
+								    <div class="item">
+								    	<iframe width="100%" height="" src="https://www.youtube.com/embed/FDnkiyvsUHA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+								    </div>
+								    <div class="item">
+								    	<iframe width="100%" height="" src="https://www.youtube.com/embed/JrazX0KGxZM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+								    </div>
+								    <div class="item">
+								    	<iframe width="100%" height="" src="https://www.youtube.com/embed/C7WxnZk59jw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+								    </div>
+
+								</div>
+							</div>
+						</div>
+
             <div class="row">
               <div class="col-md-12 card-box" id="map" style="min-height:480px"></div>
             </div>

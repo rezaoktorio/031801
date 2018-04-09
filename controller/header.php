@@ -18,6 +18,10 @@
     <link href="../../assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="../../assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
 
+    <!-- Carousel -->
+    <link href="../../assets/plugins/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/plugins/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css" />
+
     <!-- EditTable -->
     <link rel="stylesheet" href="../../assets/plugins/magnific-popup/css/magnific-popup.css" />
     <link rel="stylesheet" href="../../assets/plugins/jquery-datatables-editable/datatables.css" />

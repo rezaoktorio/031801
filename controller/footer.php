@@ -307,18 +307,53 @@ new Chartist.Pie('#pie-chart', data, options, responsiveOptions);
 });
 
 </script>
+<script type="text/javascript">
+var chart = new Chartist.Line('#svg-animation', {
+  labels: ['Usia 0-5', 'Usia 6-9', 'Usia 10-16', 'Usia 17', 'Usia 18-25', 'Usia 26-40', 'Usia 41-59', 'Usia 60'],
+  series: [
+    [1, 5, 2, 5, 4, 3],
+    [2, 3, 4, 8, 1, 2],
+    [5, 4, 3, 2, 1, 0.5]
+  ]
+}, {
+  low: 0,
+  showArea: true,
+  showPoint: false,
+  fullWidth: true
+});
+
+chart.on('draw', function(data) {
+  if(data.type === 'line' || data.type === 'area') {
+    data.element.animate({
+      d: {
+        begin: 2000 * data.index,
+        dur: 2000,
+        from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+        to: data.path.clone().stringify(),
+        easing: Chartist.Svg.Easing.easeOutQuint
+      }
+    });
+  }
+});
+</script>
+
+
+
+
+
+
 
 <?php
 
-$id = $_GET['id'];
-$query = mysql_query("SELECT SUM(kk) AS total FROM dokumen where id_kelurahan = '".$id."'");
-$no = 1;
-while($data = mysql_fetch_array($query))
-{
-echo '<script language="javascript">';
-echo 'alert("'.$data['total'].'")';
-echo '</script>';
-}
+// $id = $_GET['id'];
+// $query = mysql_query("SELECT SUM(kk) AS total FROM dokumen where id_kelurahan = '".$id."'");
+// $no = 1;
+// while($data = mysql_fetch_array($query))
+// {
+// echo '<script language="javascript">';
+// echo 'alert("'.$data['total'].'")';
+// echo '</script>';
+// }
 // echo '<script language="javascript">';
 // echo 'alert("'.$id.'")';
 // echo '</script>';
@@ -343,4 +378,76 @@ $('#mainTable').editableTableWidget().numericInputExample().find('td:first').foc
 
 <!-- select-live -->
  <script src="../../assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
- <script src="../../assets/plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js" type="text/javascript"></script>
+
+ <!-- Carousel -->
+ <script src="../../assets/plugins/owl.carousel/dist/owl.carousel.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        //owl carousel
+        $("#owl-slider").owlCarousel({
+            loop:true,
+            nav:false,
+            autoplay:true,
+            autoplayTimeout:4000,
+            autoplayHoverPause:true,
+            animateOut: 'fadeOut',
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:1
+                },
+                1000:{
+                    items:1
+                }
+            }
+        });
+
+        $("#owl-slider-2").owlCarousel({
+            loop:false,
+            nav:false,
+            autoplay:true,
+            autoplayTimeout:4000,
+            autoplayHoverPause:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:1
+                },
+                1000:{
+                    items:1
+                }
+            }
+        });
+
+        //Owl-Multi
+        $('#owl-multi').owlCarousel({
+            loop:true,
+            margin:20,
+            nav:false,
+            autoplay:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                480:{
+                    items:2
+                },
+                700:{
+                    items:4
+                },
+                1000:{
+                    items:3
+                },
+                1100:{
+                    items:5
+                }
+            }
+        })
+    });
+
+</script>
