@@ -64,15 +64,17 @@ if (!empty($_GET['error'])) {
   <div class="col-lg-6 col-md-6" style="padding-top:2%;border:solid black 0px;">
     <form class="form-inline" role="form" name="login" action="otentikasi.php" method="post">
       <div class="form-group has-success has-feedback" style="margin-bottom:4%">
-        <label class="control-label" for="inputSuccess4"><font style="color:#34495E">NIK</font></label>
+        <label class="control-label" for="inputSuccess4"><font style="color:#34495E">NIK</font></label><br>
         <input type="text" class="form-control" name="username" id="inputSuccess4">
       </div>
       <div class="form-group has-success has-feedback">
-        <label class="control-label" for="inputSuccess4"><font style="color:#34495E">Password</font></label>
+        <label class="control-label" for="inputSuccess4"><font style="color:#34495E">Password</font></label><br>
         <input type="password" class="form-control" name="password" id="inputSuccess4"><br>
         <input class="btn btn-default" style="margin-top:4%;background:#34495E;color:#4ECDC4" type="submit" name="login" value="Login" />
-        <a href="http://031801.webplussolution.com/view/lupa/" class="btn btn-danger" style="margin-top:4%;background:#34495E;color:#4ECDC4" type="button">Lupa</a>
-        <a href="http://031801.webplussolution.com/view/map/" class="btn btn-info" style="margin-top:4%;background:#34495E;color:#4ECDC4" type="button">Lanjutkan</a>
+        <!-- <a href="http://031801.webplussolution.com/view/lupa/" class="btn btn-danger" style="margin-top:4%;background:#34495E;color:#4ECDC4" type="button">Lupa</a> -->
+        <!-- <a href="#custom-modal-lupa" data-animation="flash" data-plugin="custommodal"
+          data-overlaySpeed="100" data-overlayColor="#36404a" class="btn btn-danger waves-effect waves-light" style="margin-top:4%;background:#34495E;color:#4ECDC4" type="button">Lupa</a> -->
+        <a href="http://031801.webplussolution.com/view/map/" class="btn btn-info" style="margin-top:4%;background:#34495E;color:#4ECDC4" type="button">Batal</a>
       </div>
     </form>
   </div>
@@ -86,6 +88,6 @@ if (!empty($_GET['error'])) {
 <div class="col-lg-3 col-md-3" style="padding-top:12%;border:solid black 0px;">
 
 </div>
-
+<?php require_once('controller/footer.php'); ?>
 </body>
 </html>

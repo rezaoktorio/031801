@@ -65,17 +65,16 @@
                 <div class="form-group">
                     <label for="inputText" class="col-sm-3 control-label">Role</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="inputText" value="
                       <?php
                         if ($data['role'] == 1) {
-                          echo 'Super Admin';
+                          echo "<input type='text' class='form-control' id='inputText' value='Super Admin' readonly>";
                         } if ($data['role'] == 2) {
-                          echo 'Admin';
+                          echo "<input type='text' class='form-control' id='inputText' value='Admin' readonly>";
                         } else {
-                          echo 'Operator';
+                          echo "<input type='text' class='form-control' id='inputText' value='Operator' readonly>";
                         }
                       ?>
-                      " readonly>
+
                     </div>
                 </div>
                 <!-- <div class="form-group m-b-0">
