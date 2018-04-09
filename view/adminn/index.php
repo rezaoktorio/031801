@@ -10,9 +10,9 @@ session_start();
   //membuat session untuk role/status admin
   require_once('../../controller/connection.php');
   $nik = $_SESSION['username'];
-  $executerole = mysql_query("SELECT status FROM admin WHERE nik_admin='$nik'");
+  $executerole = mysql_query("SELECT role FROM admin WHERE nik_admin='$nik'");
   while($rowrole = mysql_fetch_array($executerole)) {
-      $_SESSION['statusrole'] = $rowrole['status'];
+      $_SESSION['statusrole'] = $rowrole['role'];
   }
   
 ?>
