@@ -42,9 +42,9 @@ if($statusrole=='1'){
 				              <div class="form-group col-md-12">
 				                <label class="control-label" for="status">User Level Access</label>
 				                <select class="form-control selectpicker" data-style="btn-white" id="status" name="status" required="">
-				                	<option value="1" '; if($row['status'] == "1"){echo "selected";} echo'>Advance</option>
-			                        <option value="2" '; if($row['status'] == "2"){echo "selected";} echo'>Medium</option>
-			                        <option value="3" '; if($row['status'] == "3"){echo "selected";} echo'>Low</option>
+				                	<option value="1" '; if($row['role'] == "1"){echo "selected";} echo'>Advance</option>
+			                        <option value="2" '; if($row['role'] == "2"){echo "selected";} echo'>Medium</option>
+			                        <option value="3" '; if($row['role'] == "3"){echo "selected";} echo'>Low</option>
 				                </select>
 				              </div>
 				              <div class="form-group col-md-12">
@@ -88,7 +88,7 @@ if($statusrole=='1'){
 				        <div class="modal-body">
 				          <form role="form" data-parsley-validate="">
 				          <input type="hidden" value="'.$id_admin.'" id="id_admin">
-				          <input type="hidden" value="'.$row['status'].'" id="status">
+				          <input type="hidden" value="'.$row['role'].'" id="status">
 				          <input type="hidden" value="'.$row['password'].'" id="pass">
 				              <div class="form-group col-md-12">
 				                <label class="control-label" for="nik">NIK</label>

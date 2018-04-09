@@ -39,8 +39,6 @@ if($statusrole=='1'){
                         <input type="password" class="form-control" id="pass" name="pass" placeholder="Masukan Password" data-parsley-length="[6,10]" required>
                     </div>
                 <button type="button" class="btn btn-danger waves-effect" onclick="insert_display();">Reset</button>
-                <a id="popover" tabindex="0" class="btn btn-info" role="button" data-toggle="popover" data-trigger="focus" title="User Access Level" data-placement="top" data-content="[Advance] Create, Update, Delete, Display, Melihat Password. [Medium] Create, Update, Delete, Display.
-[Low] Create, Display."><i class="glyphicon glyphicon-question-sign"></i></a>
                 <button type="submit" class="btn btn-success btn-custom waves-effect">Tambah</button>
                 </form>
                 
@@ -104,6 +102,5 @@ if($statusrole=='1'){
 <script>
     $('.selectpicker').selectpicker();
 
-    $('#popover').popover(options)
 </script>
 
