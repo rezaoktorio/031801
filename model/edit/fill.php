@@ -70,7 +70,7 @@
                           echo "<input type='text' class='form-control' id='inputText' value='Super Admin' readonly>";
                         } if ($data['role'] == 2) {
                           echo "<input type='text' class='form-control' id='inputText' value='Admin' readonly>";
-                        } else {
+                        } if ($data['role'] == 3) {
                           echo "<input type='text' class='form-control' id='inputText' value='Operator' readonly>";
                         }
                       ?>

@@ -13,20 +13,19 @@
                           <li>
                             <a href="../../view/vektor">Vektor</a>
                           </li>
-                          <?php
-                          if (isset($_SESSION['username']) || !empty($_SESSION['username'])) {
-                            ?>
-                              <li>
-                                  <a href="../../view/admin">Admin</a>
-                              </li>
-                            <?php
-                          }
-                          ?>
                       </ul>
                   </li>
                   <li class="has-submenu">
-                      <a id="myModal" href="#custom-modal" data-animation="contentscale" data-plugin="custommodal"
-                        data-overlaySpeed="100" data-overlayColor="#36404a"><i class="md md-cloud-download"></i>Manual Book</a>
+                    <a href="#"><i class="md md-photo-album"></i>Lainnya</a>
+                    <ul class="submenu">
+                        <li>
+                            <a href="../../view/kritik">Kritik & Saran</a>
+                        </li>
+                        <li>
+                          <a id="myModal" href="#custom-modal" data-animation="contentscale" data-plugin="custommodal"
+                            data-overlaySpeed="100" data-overlayColor="#36404a">Manual Book</a>
+                        </li>
+                    </ul>
                   </li>
                   <!-- <li class="has-submenu">
                       <a href="../../view/map"><i class="md md-public"></i>Smart Kampung</a>
