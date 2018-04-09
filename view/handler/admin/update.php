@@ -40,7 +40,7 @@ if($statusrole=='1'){
 				                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="'.$row['email_admin'].'" parsley-type="email" required>
 				              </div>
 				              <div class="form-group col-md-12">
-				                <label class="control-label" for="status">User Level Access</label>
+				                <label class="control-label" for="role">User Level Access</label>
 				                <select class="form-control selectpicker" data-style="btn-white" id="status" name="status" required="">
 				                	<option value="1" '; if($row['role'] == "1"){echo "selected";} echo'>Advance</option>
 			                        <option value="2" '; if($row['role'] == "2"){echo "selected";} echo'>Medium</option>
@@ -51,7 +51,13 @@ if($statusrole=='1'){
 				                <label class="control-label" for="pass">Password</label>
 				                <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" value="'.$row['password'].'" data-parsley-length="[6,10]" required>
 				              </div>
-
+				              <div class="form-group col-md-12">
+				                <label class="control-label" for="status">Status</label>
+				                <select class="form-control selectpicker" data-style="btn-white" id="aktif" name="aktif" required="">
+				                	<option value="1" '; if($row['status'] == "1"){echo "selected";} echo'>Activated</option>
+			                        <option value="0" '; if($row['status'] == "0"){echo "selected";} echo'>Deactivated</option>
+				                </select>
+				              </div>
 				              <div align="center">
 						          <button type="button" class="btn btn-default btn-custom" data-dismiss="modal">Batal</button>
 						          <button type="submit" class="btn btn-warning btn-custom waves-effect"  ><strong>Perbarui!</strong></button>
@@ -89,6 +95,7 @@ if($statusrole=='1'){
 				          <form role="form" data-parsley-validate="">
 				          <input type="hidden" value="'.$id_admin.'" id="id_admin">
 				          <input type="hidden" value="'.$row['role'].'" id="status">
+				          <input type="hidden" value="'.$row['status'].'" id="aktif">
 				          <input type="hidden" value="'.$row['password'].'" id="pass">
 				              <div class="form-group col-md-12">
 				                <label class="control-label" for="nik">NIK</label>
@@ -130,12 +137,13 @@ if($control=='UpdateCommit'){
     $email=$_GET['email'];
     $pass=$_GET['password'];
     $roles=$_GET['status'];
+    $aktif=$_GET['aktif'];
 
 // echo $id_admin.'-'.$nik.'-'.$nama.'-'.$email.'-'.$pass  ;
 
 
 	// //query for update data in database
-	$query = "UPDATE admin SET nik_admin='$nik', nama_admin='$nama', email_admin='$email', password='$pass', role='$roles'
+	$query = "UPDATE admin SET nik_admin='$nik', nama_admin='$nama', email_admin='$email', password='$pass', role='$roles', status='$aktif'
 			WHERE id_admin = '$id_admin'" ;
 	 $hasil = mysql_query($query);
 	 

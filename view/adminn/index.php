@@ -106,8 +106,9 @@ session_start();
         email=$("#email").val();
         password=$("#pass").val();
         status=$("#status").val();
+        aktif=$("#aktif").val();
         
-        url="../handler/admin/update.php?control=UpdateCommit&id_admin="+id_admin+"&nik="+nik+"&nama="+nama+"&email="+email+"&password="+password+"&status="+status;
+        url="../handler/admin/update.php?control=UpdateCommit&id_admin="+id_admin+"&nik="+nik+"&nama="+nama+"&email="+email+"&password="+password+"&status="+status+"&aktif="+aktif;
 
         url=url.replace(/ /g,"%20");
 
