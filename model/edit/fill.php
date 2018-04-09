@@ -11,72 +11,83 @@
                 <li><a href="#">Separated link</a></li>
             </ul>
         </div>
-        <h4 class='page-title' style="margin-top: 0px">Pengaturan</h4>
+        <h4 class='page-title' style="margin-top: 0px">Profil</h4>
         <p class="text-muted page-title-alt">Pilih beberapa menu dibawah ini</p>
     </div>
 </div>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-12">
 		<div class="panel panel-border panel-inverse">
 			<div class="panel-heading">
 				<h3 class="panel-title">Profil</h3>
 			</div>
 			<div class="panel-body">
-        <div class="col-sm-12">
-          <form class="form-horizontal" role="form">
-              <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-3 control-label">Password</label>
-                  <div class="col-sm-9">
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="inputPassword4" class="col-sm-3 control-label">Re Password</label>
-                  <div class="col-sm-9">
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="Retype Password">
-                  </div>
-              </div>
-              <div class="form-group">
-                  <div class="col-sm-offset-3 col-sm-9">
-                      <div class="checkbox checkbox-primary">
-                          <input id="checkbox2" type="checkbox">
-                          <label for="checkbox2">
-                              Check me out !
-                          </label>
-                      </div>
-                  </div>
-              </div>
-              <div class="form-group m-b-0">
-                  <div class="col-sm-offset-3 col-sm-9">
-                    <button type="submit" class="btn btn-info waves-effect waves-light">Sign in</button>
-                  </div>
-              </div>
-          </form>
-        </div>
-			</div>
-		</div>
-	</div>
-
-  <div class="col-sm-6">
-		<div class="panel panel-border panel-inverse">
-			<div class="panel-heading">
-				<h3 class="panel-title">Profil</h3>
-			</div>
-			<div class="panel-body">
-        <div class="col-sm-12">
-          <center>
-            <h4 class="panel-title">Pimpinan</h4><br>
-            <img style="border:solid #797979 3px" class="img-rounded" src="../../assets/images/users/avatar-11.jpg" width="50%"/><br><br>
-            <h4 class="panel-title"><u>Bpk. Budi Sudarsono, S.pd.</u><br>NIP: 12345 6789 10</h4>
-          </center>
-        </div>
+        <form class="form-horizontal" role="form">
+          <?php
+          $nik = $_SESSION['username'];
+          $query = mysql_query("SELECT * FROM admin WHERE nik_admin = $nik");
+          while ($data = mysql_fetch_array($query)) {
+            ?>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputText" class="col-sm-3 control-label">NIK</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="inputText" value="<?php echo $data['nik_admin']?>" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputText" class="col-sm-3 control-label">Nama</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="inputText" value="<?php echo $data['nama_admin']?>" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputText" class="col-sm-3 control-label">Password</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="inputText" value="<?php echo $data['password']?>" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="inputText" class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="inputText" value="<?php echo $data['email_admin']?>" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputText" class="col-sm-3 control-label">Tanggal Gabung</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="inputText" value="<?php echo $data['tgl_gabung']?>" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputText" class="col-sm-3 control-label">Role</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="inputText" value="
+                      <?php
+                        if ($data['role'] == 1) {
+                          echo 'Super Admin';
+                        } if ($data['role'] == 2) {
+                          echo 'Admin';
+                        } else {
+                          echo 'Operator';
+                        }
+                      ?>
+                      " readonly>
+                    </div>
+                </div>
+                <!-- <div class="form-group m-b-0">
+                    <div class="col-sm-offset-3 col-sm-9">
+                      <button type="submit" class="btn btn-info waves-effect waves-light">Sign in</button>
+                    </div>
+                </div> -->
+            </div>
+            <?php
+          }
+          ?>
+        </form>
 			</div>
 		</div>
 	</div>

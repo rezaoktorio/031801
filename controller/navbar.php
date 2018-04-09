@@ -92,7 +92,22 @@
                             </li>
                         </ul>
                     </li> -->
+                    <?php
+                      session_start();
 
+                      //jika session username belum dibuat, atau session username kosong
+                      if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+                        // echo "";
+                      } if (isset($_SESSION['username']) || !empty($_SESSION['username'])) {
+                        $user = $_SESSION['username'];
+                        $query = mysql_query("SELECT nama_admin as nama FROM admin WHERE nik_admin='$user'");
+                        while ($data = mysql_fetch_array($query)) {
+                          echo "<li class='dropdown navbar-c-items'>";
+                            echo "<a href='' class='dropdown-toggle waves-effect waves-light profile' data-toggle='dropdown' aria-expanded='true'>".$data['nama']."</a>";
+                          echo "</li>";
+                        }
+                      }
+                    ?>
                     <li class="dropdown navbar-c-items">
                         <a href="" class="dropdown-toggle waves-effect waves-light profile" data-toggle="dropdown" aria-expanded="true"><i class="ti-user text-white m-r-10"></i> </a>
                         <ul class="dropdown-menu">
@@ -100,8 +115,7 @@
                             <li><a href="javascript:void(0)"><i class="ti-user text-custom m-r-10"></i> Profile</a></li>
                               <li><a href="javascript:void(0)"><i class="ti-lock text-custom m-r-10"></i> Lock screen</a></li>
                           -->
-                            <li><a href="../../view/edit/"><i class="ti-settings text-custom m-r-10"></i> Pengaturan</a></li>
-                            <li class="divider"></li>
+
                             <?php
                               session_start();
 
@@ -116,10 +130,13 @@
                                 $user = $_SESSION['username'];
                                 $query = mysql_query("SELECT nama_admin as nama FROM admin WHERE nik_admin='$user'");
                                 while ($data = mysql_fetch_array($query)) {
-                                  echo "<center><p>".$data['nama']."</p></center>";
+                                  // echo "<center><p>".$data['nama']."</p></center>";
                                 }
 
                                 ?>
+                                <li><a href="../../view/edit/"><i class="ti-user text-custom m-r-10"></i> Profil</a></li>
+                                <li><a href="../../view/admin/"><i class="ti-settings text-custom m-r-10"></i> Pengaturan</a></li>
+                                <li class="divider"></li>
                                 <li><a href="http://031801.webplussolution.com/logout.php/"><i class="ti-power-off text-danger m-r-10"></i> Keluar</a></li>
                                 <?php
                               }
