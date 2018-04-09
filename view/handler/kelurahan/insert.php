@@ -8,8 +8,8 @@ require_once('../../../controller/connection.php');
     $alamat=$_GET['alamat'];
     $telepon=$_GET['telepon'];
 
-    $query="INSERT INTO kelurahan(id_kecamatan, nama_kelurahan, alamat_kelurahan, telepon_kelurahan)
-        VALUES('".$kecamatan."', UPPER('".$kelurahan."'), UPPER('".$alamat."'), '(031) ".$telepon."')";
+    $query="INSERT INTO kelurahan(id_kecamatan, nama_kelurahan, alamat_kelurahan, telepon_kelurahan, ditambahkan_kelurahan)
+        VALUES('".$kecamatan."', UPPER('".$kelurahan."'), UPPER('".$alamat."'), '(031) ".$telepon."', CURDATE())";
   }
 
   $result=mysql_query($query);

@@ -7,8 +7,8 @@ require_once('../../../controller/connection.php');
     $alamat=$_GET['alamat'];
     $telepon=$_GET['telepon'];
 
-    $query="INSERT INTO markers(name, address, telepon_kecamatan)
-        VALUES(UPPER('".$kecamatan."'), UPPER('".$alamat."'), '(031) ".$telepon."')";
+    $query="INSERT INTO markers(name, address, telepon_kecamatan, ditambahkan_markers)
+        VALUES(UPPER('".$kecamatan."'), UPPER('".$alamat."'), '(031) ".$telepon."', CURDATE())";
   }
 
   $result=mysql_query($query);
