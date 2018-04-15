@@ -21,8 +21,8 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <div class="panel panel-border panel-inverse">
-      <div class="panel-heading">
+		<div class="panel panel-border panel-inverse">
+			<div class="panel-heading">
         <ol class="breadcrumb">
             <li>
                 <a href="../../view/admin/"><i class="fa fa-home"></i> Menu Utama </a>
@@ -31,8 +31,8 @@
                 <i class="fa fa-arrow-circle-right"></i> Menu Upload Data Dokumen
             </li>
         </ol>
-      </div>
-      <div class="panel-body">
+			</div>
+			<div class="panel-body">
         <div class="col-sm-12">
           <div class="col-sm-12">
             <div class="m-b-30">
@@ -52,9 +52,9 @@
             <div id="table_area"></div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- end row -->
 
@@ -146,7 +146,7 @@
                         <div class="form-group clearfix col-md-7 col-md-offset-2">
                           <label class="col-lg-4 control-label " for="periode">Pilih File</label>
                           <div class="col-lg-8">
-                            <input type="file" class="filestyle" data-input="false" name="fileexcelupload" required>
+                            <input type="file" class="filestyle" data-input="false" name="fileexcelupload" accept=".xls" required>
                           </div>
                         </div>
                       </div>
