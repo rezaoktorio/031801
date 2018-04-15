@@ -40,6 +40,7 @@
           <div class="col-sm-2 thumbnail" style="margin: 4px 4px 4px 4px"><center><a href="../../view/kecamatan"><i class="fa fa-street-view fa-5x"></i></a>Kecamatan</center></div>
           <div class="col-sm-2 thumbnail" style="margin: 4px 4px 4px 4px"><center><a href="../../view/kelurahan"><i class="fa fa-street-view fa-5x"></i></a>Kelurahan</center></div>
           <div class="col-sm-2 thumbnail" style="margin: 4px 4px 4px 4px"><center><a href="../../view/kordinat"><i class="fa fa-globe fa-5x"></i></a>Kordinat</center></div>
+          <div class="col-sm-2 thumbnail" style="margin: 4px 4px 4px 4px"><center><a href="../../view/iklan"><i class="fa fa-youtube-square fa-5x"></i></a>Iklan</center></div>
           <!-- <div class="col-sm-2 thumbnail" style="margin: 4px 4px 4px 4px"><center><a href="../../view/smartcard"><i class="fa fa-credit-card-alt fa-4x" style="padding-top:3px;padding-bottom:10px"></i></a>SmartCard</center></div> -->
         </div>
 			</div>
