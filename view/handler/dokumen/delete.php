@@ -17,7 +17,7 @@ if($control=='DeleteModal'){
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="myModalLabel">Hapus Data Dokumen</h4>
 		      </div>
-		      <form role="form" data-parsley-validate="">
+		      <form role="form" id="formModalHapus" data-parsley-validate="">
 		      <div class="modal-body">
 		        
 		          <div class="form-group">
@@ -142,9 +142,9 @@ if($control=='DeleteCommit'){
 
 <script type="text/javascript">
     $(document).ready(function() {
-    $("form").parsley();
+    $("#formModalHapus").parsley();
 
-    $("form").on('submit', function(e) {
+    $("#formModalHapus").on('submit', function(e) {
         var f = $(this);
         f.parsley().validate();
 

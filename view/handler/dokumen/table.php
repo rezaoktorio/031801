@@ -33,7 +33,7 @@
                                 <th>Mati</th>
                                 <th>Nikah</th>
                                 <th>Cerai</th>
-                                <th>Periode Upload</th>
+                                <th>Periode Data</th>
                             </tr>
                         </thead>';
 					$nomor=1;
