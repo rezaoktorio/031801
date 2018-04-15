@@ -284,10 +284,10 @@ var data = {
 
 var options = {
   labelInterpolationFnc: function(value) {
-    return value[0]
+    return Math.round(value / data.series * 100) +'%';
   }
 };
-
+var sum = function(a, b) { return a + b };
 var responsiveOptions = [
   ['screen and (min-width: 640px)', {
     chartPadding: 30,
@@ -303,13 +303,14 @@ var responsiveOptions = [
   }]
 ];
 
+//alert(data.series)
 new Chartist.Pie('#pie-chart', data, options, responsiveOptions);
 });
 
 </script>
 <script type="text/javascript">
 var chart = new Chartist.Line('#svg-animation', {
-  labels: ['Usia 0-5', 'Usia 6-9', 'Usia 10-16', 'Usia 17', 'Usia 18-25', 'Usia 26-40', 'Usia 41-59', 'Usia 60'],
+  labels: ['Jan 2018', 'Feb 2018', 'Mar 2018', 'Apr 2018', 'Mei 2018', 'Jun 2018', 'Jul 2018', 'Agust 2018', 'Sep 2018', 'Nop 2018', 'Des 2018'],
   series: [
     [1, 5, 2, 5, 4, 3],
     [2, 3, 4, 8, 1, 2],
@@ -378,6 +379,18 @@ $('#mainTable').editableTableWidget().numericInputExample().find('td:first').foc
 
 <!-- select-live -->
  <script src="../../assets/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+
+<!--Form Wizard-->
+<script src="../../assets/plugins/jquery.steps/js/jquery.steps.min.js" type="text/javascript"></script>
+
+<!--wizard initialization-->
+<script src="../../assets/pages/jquery.wizard-init.js" type="text/javascript"></script>
+
+<!-- filestyle -->
+<script src="../../assets/plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js" type="text/javascript"></script>
+
+<!-- datepickers -->
+<script src="../../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
  <!-- Carousel -->
  <script src="../../assets/plugins/owl.carousel/dist/owl.carousel.min.js"></script>

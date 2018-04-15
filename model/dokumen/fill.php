@@ -16,10 +16,13 @@
     </div>
 </div>
 
+<div id="modal_area"></div>
+<div id="area_delete"></div>
+
 <div class="row">
   <div class="col-sm-12">
-		<div class="panel panel-border panel-inverse">
-			<div class="panel-heading">
+    <div class="panel panel-border panel-inverse">
+      <div class="panel-heading">
         <ol class="breadcrumb">
             <li>
                 <a href="../../view/admin/"><i class="fa fa-home"></i> Menu Utama </a>
@@ -28,68 +31,136 @@
                 <i class="fa fa-arrow-circle-right"></i> Menu Upload Data Dokumen
             </li>
         </ol>
-			</div>
-			<div class="panel-body">
+      </div>
+      <div class="panel-body">
         <div class="col-sm-12">
           <div class="col-sm-12">
             <div class="m-b-30">
-                <a href="#custom-modal-dokumen" data-animation="flash" data-plugin="custommodal"
-                  data-overlaySpeed="100" data-overlayColor="#36404a" class="btn btn-default waves-effect waves-light">Upload Data &nbsp;&nbsp;<i class="fa fa-upload"></i></a>
-            </div>
-              <div class="card-box table-responsive">
-                  <h5 class="m-t-0 header-title"><b>Daftar Data Dokumen.</b></h5>
-                  <table id="datatable-buttons" class="table table-striped table-bordered">
-                      <thead>
-                      <tr>
-                          <th>No.</th>
-                          <th>Kecamatan</th>
-                          <th>KK</th>
-                          <th>KTP</th>
-                          <th>Lahir</th>
-                          <th>Mati</th>
-                          <th>Nikah</th>
-                          <th>Cerai</th>
-                      </tr>
-                      </thead>
-
-                      <tbody>
-                        <?php
-                        $query = mysql_query("SELECT dokumen.id_dokumen AS id,
-                                              markers.name AS kecamatan,
-                                              dokumen.cerai_p+dokumen.cerai_l AS CERAI,
-                                              dokumen.kk AS KK,
-                                              dokumen.ktp_l+dokumen.ktp_p AS KTP,
-                                              dokumen.lahir_p+dokumen.lahir_l AS LAHIR,
-                                              dokumen.mati_l+dokumen.mati_p AS MATI,
-                                              dokumen.nikah_l+dokumen.nikah_p AS NIKAH
-                                              FROM dokumen
-                                              JOIN kelurahan ON dokumen.id_kelurahan = kelurahan.id_kelurahan
-                                              JOIN markers ON dokumen.id_kelurahan = markers.id
-                                              GROUP BY kecamatan");
-                        $no = 1;
-                        while ($data = mysql_fetch_array($query)) {
-                        ?>
-                            <tr>
-                                <td><?php echo $no; ?></td>
-                                <td><?php echo $data['kecamatan']; ?></td>
-                                <td><?php echo $data['KK']; ?></td>
-                                <td><?php echo $data['KTP']; ?></td>
-                                <td><?php echo $data['LAHIR']; ?></td>
-                                <td><?php echo $data['MATI']; ?></td>
-                                <td><?php echo $data['NIKAH']; ?></td>
-                                <td><?php echo $data['CERAI']; ?></td>
-                            </tr>
-                        <?php
-                            $no++;
-                        }
-                        ?>
-                      </tbody>
-                  </table>
+              <div class="row" align="right">
+                <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" onclick="DeleteModal()">Hapus Data Per Periode
+                   <span class="btn-label btn-label-right"><i class="fa fa-times"></i>
+                   </span>
+                </button>
+                |
+                <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#myModalUpload">
+                <span class="btn-label"><i class="fa fa-upload"></i></span>
+                Upload Data Excel .xls
+                </button>
               </div>
+            </div>
+            <div id="action_result"></div>  
+            <div id="table_area"></div>
           </div>
         </div>
-			</div>
-		</div>
-	</div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- end row -->
+
+<!-- Modal -->
+<div id="myModalUpload" class=" modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Petunjuk Upload Data Excel</h4>
+      </div>
+      <div class="modal-body">
+        <form id="basic-form" action="../handler/dokumen/uploadExcel.php" method="post" enctype="multipart/form-data">
+          <div>
+              <h3><strong>Susunan Tabel</strong></h3>
+              <section>
+                <div align="center">
+                  <img src="../../assets/excel/template/dokumen/susunan-dokumen.png" class="img-responsive" alt="Responsive image" width="75%">
+                </div>
+              <br>
+                <div class="col-lg-12">
+                  <div class="panel panel-info panel-border">
+                    <div class="panel-heading"></div>
+                    <div class="panel-body">
+                      <p>
+                        Pastikan data tabel dimulai dari kolom <strong>"A3"</strong> dan urutan harus sesuai dengan gambar.<br>
+                        Anda dapat mengunduh template excel berikut untuk melihat/menerapkan susunan tabel yang sesuai 
+                        agar data dapat disimpan pada database.
+                        <a href="../../assets/excel/template/dokumen/download.php?files=template-dokumen.xls"><strong>Unduh Template Disini</strong></a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <h3><strong>Data Tabel</strong></h3>
+              <section>
+                <div align="center">
+                  <img src="../../assets/excel/template/dokumen/data-dokumen.png" class="img-responsive" alt="Responsive image" width="95%">
+                </div>
+              <br>
+                <div class="col-lg-12">
+                  <div class="panel panel-info panel-border">
+                    <div class="panel-heading"></div>
+                    <div class="panel-body">
+                      <p>
+                        Pastikan data tabel sesuai dan tepat dengan judul kepala tabel.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <h3><strong>Format File</strong></h3>
+              <section>
+                <div align="center">
+                  <img src="../../assets/excel/template/dokumen/format-dokumen.png" class="img-responsive" alt="Responsive image" width="76%">
+                </div>
+              <br>
+                <div class="col-lg-12">
+                  <div class="panel panel-info panel-border">
+                    <div class="panel-heading"></div>
+                    <div class="panel-body">
+                      <p>
+                        Pastikan format/ekstensi file <strong>".xls"</strong> atau <strong>"Excel 97-2003 Workbook"</strong> agar isi tabel dapat tersimpan pada database. Kemudian tentukan periode data yang akan diupload pada halaman setelah ini.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <h3><strong>Upload File</strong></h3>
+              <section>
+                <div align="center">
+                  <img src="../../assets/excel/template/dokumen/cloud.png" class="img-responsive" alt="Responsive image" width="30%">
+                  <br>
+                </div>
+                <div class="col-lg-12">
+                  <div class="panel panel-info panel-border">
+                    <div class="panel-heading"></div>
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="form-group clearfix col-md-7 col-md-offset-2">
+                          <label class="col-lg-4 control-label " for="periode">Periode Data</label>
+                          <div class="col-lg-8">
+                            <div class="input-group">
+                              <input type="text" class="form-control datepicker" id="datepicker" name="datepicker" required>
+                              <span class="input-group-addon bg-custom b-0 text-white"><i class="icon-calender"></i></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group clearfix col-md-7 col-md-offset-2">
+                          <label class="col-lg-4 control-label " for="periode">Pilih File</label>
+                          <div class="col-lg-8">
+                            <input type="file" class="filestyle" data-input="false" name="fileexcelupload" required>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(":file").filestyle();
+</script>
