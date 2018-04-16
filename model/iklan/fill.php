@@ -16,10 +16,12 @@
     </div>
 </div>
 
+<div id="modal_area"></div>
+<div id="modal_info"></div>
 <div class="row">
   <div class="col-sm-12">
-		<div class="panel panel-border panel-inverse">
-			<div class="panel-heading">
+    <div class="panel panel-border panel-inverse">
+      <div class="panel-heading">
         <ol class="breadcrumb">
             <li>
                 <a href="../../view/admin/"><i class="fa fa-home"></i> Menu Utama </a>
@@ -28,26 +30,21 @@
                 <i class="fa fa-arrow-circle-right"></i> Menu Pengaturan Iklan Layanan Masyarakat
             </li>
         </ol>
-			</div>
-			<div class="panel-body">
-        <div class="col-sm-4">
-          <div class="col-sm-12">
-              <div class="card-box table-responsive">
-                <h5 class="m-t-0 header-title"><b>Tambah Data Iklan Layanan Masyarakat.</b></h5>
-                <!-- isi disini -->
-              </div>
-          </div>
+      </div>
+      <div class="panel-body">
+        <div class="col-sm-3">
+          <div id="editing_area"></div>
         </div>
-        <div class="col-sm-8">
-          <div class="col-sm-12">
-              <div class="card-box table-responsive">
-                  <h5 class="m-t-0 header-title"><b>Daftar Data Iklan Layanan Masyarakat.</b></h5>
-                  <!-- isi disini -->
-              </div>
-          </div>
+        <div class="col-sm-9">
+            <div id="action_result"></div>
+            <div id="table_area"></div>
         </div>
-			</div>
-		</div>
-	</div>
+      </div>
+    </div>
+  </div>
 </div>
-<!-- end row -->
+
+<!-- 
+                <h5 class="m-t-0 header-title"><b>Tambah Data Iklan Layanan Masyarakat.</b></h5>
+                <h5 class="m-t-0 header-title"><b>Daftar Data Iklan Layanan Masyarakat.</b></h5>
+   -->
