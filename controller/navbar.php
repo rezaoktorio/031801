@@ -28,48 +28,52 @@
                         if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
                           // echo "";
                         } if (isset($_SESSION['username']) || !empty($_SESSION['username'])) {
-                          $query = mysql_query("SELECT COUNT(id_kritik) as total, subjek_kritik as subjek, isi_kritik as kritik FROM kritik WHERE tgl_kritik = CURDATE() LIMIT 0,5");
-                          $no = 1;
+                          $query = mysql_query("SELECT COUNT(id_kritik) as total FROM kritik WHERE tgl_kritik = CURDATE() LIMIT 0,5");
                           while ($data = mysql_fetch_array($query)) {
                             ?>
                             <a href="#" data-target="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
                                 <i class="icon-bell"></i> <span class="badge badge-xs badge-danger"><?php echo $data['total'];?></span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-lg">
-                                <li class="notifi-title">Notifikasi Kritik & Saran</li>
-                                <li class="list-group slimscroll-noti notification-list">
-                                   <!-- list item-->
+                            <?php
+                          }
+                          ?>
+                          <ul class="dropdown-menu dropdown-menu-lg">
+                              <li class="notifi-title">Notifikasi Kritik & Saran</li>
+                              <li class="list-group slimscroll-noti notification-list">
+                                 <!-- list item-->
+                                 <?php
+                                 $query2 = mysql_query("SELECT * FROM kritik WHERE tgl_kritik = CURDATE() LIMIT 0,5");
+                                 $no = 1;
+                                 while ($row = mysql_fetch_array($query2)) {
+                                   ?>
                                    <a class="list-group-item">
                                       <div class="media">
                                          <div class="pull-left p-r-10">
                                            <?php
-                                           if ($data['total'] < 1) {
-
-                                           } if ($data['total'] > 0) {
-                                             echo "<em class='fa noti-primary'>".$no."</em>";
-                                           }
-
+                                           echo "<em class='fa noti-primary'>".$no."</em>";
                                            ?>
                                          </div>
                                          <div class="media-body">
-                                            <h5 class="media-heading"><?php echo $data['subjek'];?></h5>
+                                            <h5 class="media-heading"><?php echo $row['subjek_kritik'];?></h5>
                                             <p class="m-0">
-                                                <small><?php echo $data['kritik'];?></small>
+                                                <small><?php echo $row['isi_kritik'];?></small>
                                             </p>
                                          </div>
                                       </div>
                                    </a>
+                                   <?php
+                                   $no++;
+                                 }
+                                 ?>
 
-                                </li>
-                                <li>
-                                    <a href="http://031801.webplussolution.com/view/kritik" class="list-group-item text-right">
-                                        <small class="font-600">Lihat Semua</small>
-                                    </a>
-                                </li>
-                            </ul>
-                            <?php
-                          }
-                          $no++;
+                              </li>
+                              <li>
+                                  <a href="http://031801.webplussolution.com/view/kritik" class="list-group-item text-right">
+                                      <small class="font-600">Lihat Semua</small>
+                                  </a>
+                              </li>
+                          </ul>
+                          <?php
                         }
                       ?>
                     </li>
