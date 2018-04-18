@@ -7,11 +7,12 @@ if($control=='UpdateShow'){
 
 	$id_iklan=$_GET['id_iklan'];
 
-	$query="SELECT id_iklan, nama_iklan, embed_iklan, status_iklan FROM iklan WHERE id_iklan='$id_iklan'";
+	$query="SELECT id_iklan, nama_iklan, embed_iklan, status_iklan, tipe_iklan FROM iklan WHERE id_iklan='$id_iklan'";
 
 	$tampil=mysql_query($query);
 
 	while($row=mysql_fetch_array($tampil)) {
+
 		echo '
 
 		<div class="modal fade" id="myModalUpdateShow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -34,13 +35,27 @@ if($control=='UpdateShow'){
 			                	<option value="1" '; if($row['status_iklan'] == "1"){echo "selected";} echo'>Activated</option>
 		                        <option value="0" '; if($row['status_iklan'] == "0"){echo "selected";} echo'>Deactivated</option>
 			                </select>
-			              </div>
-			              <div class="form-group col-md-12">
-			                <label class="control-label" for="embed">URL Youtube</label>
-			                <textarea class="form-control" id="embed" name="embed" placeholder="Masukkan URL Youtube Video" data-parsley-pattern="/https://youtu.be//" required>'.$row['embed_iklan'].'</textarea>
-			                <h6>Tips :</h6>
-			                <h6>Klik tombol "Petunjuk Pengisian" untuk mengetahui cara mengisi sematan URL Youtube Video</h6>
-			              </div>
+			              </div>';
+
+			              if($row['tipe_iklan']==1){
+			              	echo '
+			              	<div class="form-group col-md-12">
+				                <label class="control-label" for="embed">URL Youtube</label>
+				                <textarea class="form-control" id="embed" name="embed" placeholder="Masukkan URL Youtube Video, Contoh : https://youtu.be/...&#10;Atau anda dapat melihat pada tombol Petunjuk Pengisian" data-parsley-pattern="/https://youtu.be//" required>'.$row['embed_iklan'].'</textarea>
+				                <h6>Tips :</h6><h6>Klik tombol "Petunjuk Pengisian" untuk mengetahui cara mengisi sematan URL Youtube Video</h6>
+				            </div>
+			              	';
+			              } elseif($row['tipe_iklan']==2){
+			              	echo '
+			              	<div class="form-group col-md-12">
+				                <label class="control-label" for="embed">URL Youtube</label>
+				                <textarea class="form-control" id="embed" name="embed" readonly>'.$row['embed_iklan'].'</textarea>
+				                <h6>Tips :</h6><h6>Klik tombol "Petunjuk Pengisian" untuk mengetahui cara mengisi sematan URL Youtube Video</h6>
+				            </div>
+			              	';
+			              }
+
+			              echo '
 			              <div align="center">
 					          <button type="button" class="btn btn-default btn-custom" data-dismiss="modal">Batal</button>
 					          <button type="submit" class="btn btn-warning btn-custom waves-effect"  ><strong>Perbarui!</strong></button>

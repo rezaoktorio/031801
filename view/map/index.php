@@ -1,6 +1,7 @@
 <!DOCTYPE html >
 <html>
   <?php require_once('../../controller/header.php'); ?>
+
   <body>
     <?php require_once('../../controller/navbar.php'); ?>
 
@@ -10,31 +11,33 @@
 						<div class="col-md-12 card-box">
 							<h4 class=" m-t-0 header-title"><b>Iklan Layanan Masyarakat</b></h4>
 							<p class="text-muted m-b-30 font-13">Berikut iklan layanan masyarakat dari Dinas Kependudukan dan Pencatatan Sipil Pemkot Surabaya.</p>
-							
-              <div class="owl-carousel owl-theme" id="owl-multi">
-                <div class="item">
-                  <iframe width="100%" src="https://www.youtube.com/embed/jnXeOJydJH4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="item">
-                  <iframe width="100%" height="" src="https://www.youtube.com/embed/fXBNhQyj_ss" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="item">
-                  <iframe width="100%" height="" src="https://www.youtube.com/embed/VVBN4RsIM0k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="item">
-                  <iframe width="100%" height="" src="https://www.youtube.com/embed/kcX_57ZjIPg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="item">
-                  <iframe width="100%" height="" src="https://www.youtube.com/embed/FDnkiyvsUHA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="item">
-                  <iframe width="100%" height="" src="https://www.youtube.com/embed/JrazX0KGxZM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="item">
-                  <iframe width="100%" height="" src="https://www.youtube.com/embed/C7WxnZk59jw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+							<div  align="center">
+                <div id="gallery" style="display:none;">
+
+                  <?php 
+                   $executeiklan = mysql_query("SELECT id_iklan, nama_iklan, tipe_iklan, embed_iklan, update_at,substring(embed_iklan, 18) as urliklan, update_at, status_iklan FROM iklan WHERE status_iklan='1' order by status_iklan asc, id_iklan desc");
+                    while($rowiklan = mysql_fetch_array($executeiklan)) {
+
+                      if($rowiklan['tipe_iklan']==1){
+                        echo '
+                          <img alt="Youtube Video"
+                          data-type="youtube"
+                          data-videoid="'.$rowiklan['urliklan'].'"
+                          data-description="'.$rowiklan['nama_iklan'].'">
+                        ';
+                      }elseif($rowiklan['tipe_iklan']==2){
+                        $src='../../'.$rowiklan['embed_iklan'];
+                        echo '
+                          <img alt="Preview Image"
+                           data-image="'.$src.'"
+                           data-description="'.$rowiklan['nama_iklan'].'">
+                        ';
+                      }
+
+                    }
+                  ?>                
                 </div>
               </div>
-
 					  </div>
 				  </div>
 				</div>
@@ -172,6 +175,44 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACUzpYrmPJA4xzHUVJsCwSB9y_SmAaQSE&callback=initMap">
     </script>
+
+     <!-- carousel view map -->
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-common-libraries.js'></script> 
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-functions.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-thumbsgeneral.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-thumbsstrip.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-touchthumbs.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-panelsbase.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-strippanel.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-gridpanel.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-thumbsgrid.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-tiles.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-tiledesign.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-avia.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-slider.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-sliderassets.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-touchslider.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-zoomslider.js'></script> 
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-video.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-gallery.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-lightbox.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-carousel.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/js/ug-api.js'></script>
+      <script type='text/javascript' src='../../assets/plugins/unitegallery/themes/default/ug-theme-default.js'></script>
+      <link rel='stylesheet' href='../../assets/plugins/unitegallery/css/unite-gallery.css' type='text/css' />
+      <link rel='stylesheet' href='../../assets/plugins/unitegallery/themes/default/ug-theme-default.css' type='text/css' />
+      <script type="text/javascript">
+        jQuery(document).ready(function(){
+          jQuery("#gallery").unitegallery({
+          slider_control_zoom:false,  
+          slider_enable_zoom_panel: false,  
+          gallery_autoplay:true,
+          gallery_width:1200,   
+          gallery_height:745 
+          });
+        });
+      </script>
+      <!-- carousel view map -->
 
   </body>
 </html>

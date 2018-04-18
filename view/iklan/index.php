@@ -11,7 +11,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 <!DOCTYPE html>
 <html>
 <?php require_once('../../controller/header.php'); ?>
-    <body onload="table_load();insert_display();">
+    <body onload="table_load();">
 
       <?php require_once('../../controller/navbar.php'); ?>
 
@@ -32,50 +32,42 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
         url="../handler/iklan/table.php?table=iklan"
         $("#table_area").load(url);
       }
-      function insert_display(){
-        url="../handler/iklan/insertDisplay.php?display=insertDisplay"
+
+      // bagian youtube
+      function insert_displayYT(){
+        url="../handler/iklan/video/insertDisplayYT.php"
         $("#editing_area").load(url);
       }
 
-      function filter(){
+      function filterYT(){
         embed=$("#embed").val();
         nama=$("#nama").val();
        
-        url="../handler/iklan/filter.php?embed="+embed+"&nama="+nama;
+        url="../handler/iklan/video/filterYT.php?embed="+embed+"&nama="+nama;
         url=url.replace(/ /g,"%20");
         $("#modal_area").load(url);
       }
 
-      function createExecutor(){
+      function createExecutorYT(){
         embed=$("#embed").val();
         nama=$("#nama").val();
        
-        url="../handler/iklan/insert.php?control=CreateCommit&embed="+embed+"&nama="+nama;
+        url="../handler/iklan/video/insertYT.php?control=CreateCommit&embed="+embed+"&nama="+nama;
         url=url.replace(/ /g,"%20");
-        $("#action_result").load(url, function(){
-          url="../handler/iklan/table.php?table=iklan"
-          $("#table_area").load(url);
-          insert_display();
-        });
-      }
-
-      function DeleteShow(id_iklan){
-        url="../handler/iklan/delete.php?control=DeleteShow&id_iklan="+id_iklan;
-        $("#modal_area").load(url);
-      }
-
-      function DeleteExecutor(){
-        id_iklan=$("#id_iklan").val();
-        
-        url="../handler/iklan/delete.php?control=DeleteCommit&id_iklan="+id_iklan;
-
-        url=url.replace(/ /g,"%20");
-
         $("#action_result").load(url, function(){
           url="../handler/iklan/table.php?table=iklan"
           $("#table_area").load(url);
         });
       }
+
+      //bagian gambar
+      function insert_displayGB(){
+        url="../handler/iklan/gambar/insertDisplayGB.php"
+        $("#editing_area").load(url);
+      }
+
+
+
 
       function UpdateShow(id_iklan){
         url="../handler/iklan/update.php?control=UpdateShow&id_iklan="+id_iklan;
@@ -89,6 +81,25 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
         id=$("#id_iklan").val();
         
         url="../handler/iklan/update.php?control=UpdateCommit&id_iklan="+id+"&nama="+nama+"&embed="+embed+"&status="+status;
+
+        url=url.replace(/ /g,"%20");
+
+        $("#action_result").load(url, function(){
+          url="../handler/iklan/table.php?table=iklan"
+          $("#table_area").load(url);
+        });
+      }
+
+
+      function DeleteShow(id_iklan){
+        url="../handler/iklan/delete.php?control=DeleteShow&id_iklan="+id_iklan;
+        $("#modal_area").load(url);
+      }
+
+      function DeleteExecutor(){
+        id_iklan=$("#id_iklan").val();
+        
+        url="../handler/iklan/delete.php?control=DeleteCommit&id_iklan="+id_iklan;
 
         url=url.replace(/ /g,"%20");
 

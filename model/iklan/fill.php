@@ -33,7 +33,26 @@
       </div>
       <div class="panel-body">
         <div class="col-sm-3">
-          <div id="editing_area"></div>
+            <div class="card-box table-responsive">
+            <h5 class="m-t-0 header-title"><b>Tambah Data Iklan Layanan Masyarakat.</b></h5>
+            <button type="button" class="btn btn-warning waves-effect btn-block" onclick="Petunjuk()">Petunjuk Pengisian</button>
+            <hr>
+                <div class="form-group">
+                    <div>
+                        <button type="button" class="btn btn-youtube waves-effect waves-light btn-block" onclick="insert_displayYT()">
+                            <i class="fa fa-youtube m-r-5"></i> Link Youtube
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <button type="button" class="btn btn-dropbox waves-effect waves-light btn-block" onclick="insert_displayGB()">
+                            <i class="fa fa-file-image-o m-r-5"></i> File Gambar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="editing_area"></div>
         </div>
         <div class="col-sm-9">
             <div id="action_result"></div>

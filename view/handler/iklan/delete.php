@@ -39,9 +39,26 @@ $control=$_GET['control'];
 if($control=='DeleteCommit'){
 	$id_iklan=$_GET['id_iklan'];
 
-	// //query for update data in database
-	$query = "DELETE FROM iklan WHERE id_iklan='$id_iklan'" ;
-	 $hasil = mysql_query($query);
+	//cari embed gambar
+	$cari=mysql_query("SELECT embed_iklan, tipe_iklan from iklan WHERE id_iklan='$id_iklan' ");
+	while($datacari=mysql_fetch_array($cari)) {
+		$linkgambar = $datacari['embed_iklan'];
+		
+
+		if($datacari['tipe_iklan']==1){
+			// //query for update data in database
+			$query = "DELETE FROM iklan WHERE id_iklan='$id_iklan'" ;
+			$hasil = mysql_query($query);
+		} elseif($datacari['tipe_iklan']==2){
+			// //query for update data in database
+			unlink('../../'.$linkgambar);
+			$query = "DELETE FROM iklan WHERE id_iklan='$id_iklan'" ;
+			$hasil = mysql_query($query);
+			
+		} 
+	}
+
+	
 	 
 	//  //see the result
 		if (!$hasil){

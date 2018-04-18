@@ -1,13 +1,13 @@
 <?php
-require_once('../../../controller/connection.php');
+require_once('../../../../controller/connection.php');
 
   $control=$_GET['control'];
   if($control=='CreateCommit'){
     $embed=$_GET['embed'];
     $nama=$_GET['nama'];
 
-    $query="INSERT INTO iklan(nama_iklan, embed_iklan, status_iklan, update_at)
-        VALUES('".$nama."', '".$embed."', '0', CURDATE())";
+    $query="INSERT INTO iklan(nama_iklan, embed_iklan, status_iklan, tipe_iklan, update_at)
+        VALUES('".$nama."', '".$embed."', '0', '1', CURDATE())";
   }
 
   $result=mysql_query($query);

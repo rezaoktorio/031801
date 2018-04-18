@@ -1,5 +1,5 @@
 <?php
-require_once('../../../controller/connection.php');
+require_once('../../../../controller/connection.php');
 
     $embed=$_GET['embed'];
     $nama=$_GET['nama'];
@@ -28,7 +28,7 @@ require_once('../../../controller/connection.php');
     
     } else {
         echo  '<script language="javascript">;
-          createExecutor();
+          createExecutorYT();
         </script>';
     }
   

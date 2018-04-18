@@ -275,7 +275,7 @@ new Chartist.Bar('#overlapping-bars2', data2, options2, responsiveOptions2);
 </script>
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(document).ready(function(){
 var data = {
   labels: ['Kristen', 'Islam', 'Katholik',  'Hindu', 'Budha', 'Konghucu'],
@@ -307,7 +307,7 @@ var responsiveOptions = [
 new Chartist.Pie('#pie-chart', data, options, responsiveOptions);
 });
 
-</script>
+</script> -->
 <script type="text/javascript">
 var chart = new Chartist.Line('#svg-animation', {
   labels: ['Jan 2018', 'Feb 2018', 'Mar 2018', 'Apr 2018', 'Mei 2018', 'Jun 2018', 'Jul 2018', 'Agust 2018', 'Sep 2018', 'Nop 2018', 'Des 2018'],
@@ -391,7 +391,7 @@ $('#mainTable').editableTableWidget().numericInputExample().find('td:first').foc
 
 <!-- datepickers -->
 <script src="../../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-
+ 
  <!-- Carousel -->
  <script src="../../assets/plugins/owl.carousel/dist/owl.carousel.min.js"></script>
 

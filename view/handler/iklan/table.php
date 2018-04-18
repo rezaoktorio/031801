@@ -3,7 +3,7 @@
 	$table=$_GET['table'];
 	if($table=='iklan'){
 				require_once('../../../controller/connection.php');
-				$query = "SELECT id_iklan, nama_iklan, embed_iklan, if(status_iklan=1,'Activated','Deactivated') as status, update_at FROM iklan order by status_iklan asc, update_at desc
+				$query = "SELECT id_iklan, nama_iklan, embed_iklan, if(status_iklan=1,'Activated','Deactivated') as status, if(tipe_iklan=1,'Youtube','Gambar') as tipe, update_at FROM iklan order by status_iklan asc, id_iklan desc
 								 "; //the query for get all data in tb_student
 
 				$tableStructure='
@@ -14,9 +14,10 @@
 					<thead>
 						<tr>
 							<th width="5">No.</th>
-                            <th>URL Youtube</th>
+                            <th>URL Iklan</th>
                             <th>Nama</th>
                             <th>Status</th>
+                            <th>Tipe</th>
                             <th width="130">Aksi</th>
 						</tr>
 					</thead>
@@ -25,7 +26,8 @@
 					$result = mysql_query($query);
 
 					while ($data = mysql_fetch_array($result)){ //mysql_fetch_array = get the query data into array
-					if($data['status']=="Activated"){$cetakspan="success";}else{$cetakspan="danger";};
+					if($data['status']=="Activated"){$cetakspan="success";}else{$cetakspan="inverse";};
+                    if($data['tipe']=="Youtube"){$cetaktipespan="danger";}else{$cetaktipespan="default";};
 
                     $tableStructure=$tableStructure.
 					'
@@ -37,6 +39,8 @@
                             <td>'.$data['nama_iklan'].'</td>
 		                    
 		                    <td><span class="label label-table label-'.$cetakspan.'">'.$data['status'].'</span></td>
+                            <td><span class="label label-table label-'.$cetaktipespan.'">'.$data['tipe'].'</span></td>
+
 							<td align="center">
                                 <button type="button" class="btn btn-warning btn-custom btn-mini btn-xs waves-effect" onclick="UpdateShow(\''.$data['id_iklan'].'\');">
                                   Edit
