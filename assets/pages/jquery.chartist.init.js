@@ -207,14 +207,14 @@ new Chartist.Line('#scatter-diagram', data, options, responsiveOptions);
 //Line chart with tooltips
 
 new Chartist.Line('#line-chart-tooltips', {
-  labels: ['1', '2', '3', '4', '5', '6'],
+  labels: ['2019', '2014', '2015', '2016', '2017', '2018'],
   series: [
     {
-      name: 'Fibonacci sequence',
+      name: 'Laki-laki',
       data: [1, 2, 3, 5, 8, 13]
     },
     {
-      name: 'Golden section',
+      name: 'Perempuan',
       data: [1, 1.618, 2.618, 4.236, 6.854, 11.09]
     }
   ]
@@ -691,7 +691,7 @@ chart.on('created', function() {
 //Simple pie chart
 
 var data = {
-  series: [5, 3, 4]
+  series: [8, 3, 4,10]
 };
 
 var sum = function(a, b) { return a + b };
@@ -701,6 +701,19 @@ new Chartist.Pie('#simple-pie', data, {
     return Math.round(value / data.series.reduce(sum) * 100) + '%';
   }
 });
+
+// var data2 = {
+//   series: [8, 3, 4, 5, 6,7,9]
+// };
+//
+// var sum = function(a, b) { return a + b };
+//
+// new Chartist.Pie('#pie-chart', data2, {
+//   labelInterpolationFnc: function(value) {
+//     return Math.round(value / data.series.reduce(sum) * 100) + '%';
+//   }
+// });
+
 
 
 

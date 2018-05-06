@@ -51,14 +51,14 @@ $(document).ready(function(){
         $no = 1;
         while ($data = mysql_fetch_array($query)) {
         ?>
-            <img style="border:solid #797979 2px;" class="img-rounded" src="../../assets/images/camat/<?php echo $data['name'];?>.jpg" width="100%"/>
+            <img style="border:solid #797979 2px;" class="img-rounded" src="../../assets/images/logo/Surabaya.png" width="100%"/>
         <?php
             $no++;
         }
       ?>
     </div>
     <div class="col-sm-9">
-        <div class="btn-group pull-right m-t-15">
+        <!-- <div class="btn-group pull-right m-t-15">
             <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
             <ul class="dropdown-menu" role="menu">
                 <li><a href="#">Action</a></li>
@@ -67,7 +67,7 @@ $(document).ready(function(){
                 <li class="divider"></li>
                 <li><a href="#">Separated link</a></li>
             </ul>
-        </div>
+        </div> -->
         <?php
           $id = $_GET['id'];
           $query = mysql_query("SELECT * FROM `markers` where id = ".$id."");
@@ -88,19 +88,33 @@ $(document).ready(function(){
       <h4 class="text-dark header-title m-t-0">Daftar Kecamatan</h4>
       <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
         <thead>
-          <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 157px;">No.</th>
+          <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">No.</th>
             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 259px;">Kelurahan</th>
             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 117px;">Alamat</th>
             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 60px;">Telepon</th>
+            <th style="width: 60px;">Details Dashboard</th>
           </tr>
         </thead>
         <tbody>
-          <tr role="row" class="odd">
-            <td class="sorting_1">1</td>
-            <td>Nama Kelurahan</td>
-            <td>Alamat Kelurahan</td>
-            <td>031-12345 678</td>
-          </tr>
+
+            <?php
+              $no=1;
+              $id = $_GET['id'];
+              $query = mysql_query("SELECT kl.id_kelurahan as id2, mk.id as id, mk.name as kecamatan, kl.nama_kelurahan as kelurahan, kl.id_kelurahan  , kl.alamat_kelurahan, kl.telepon_kelurahan from kelurahan kl left join markers mk on kl.id_kecamatan = mk.id   where id_kecamatan = ".$id."");
+              while($data = mysql_fetch_array($query))
+              {
+              ?>
+              <tr role="row" class="odd">
+                <td class="sorting_1"><?php echo $no;?></td>
+                <td><?php echo $data['kelurahan'];?></td>
+                <td><?php echo $data['alamat_kelurahan'];?></td>
+                <td><?php echo $data['telepon_kelurahan'];?></td>
+                <td><a type="button" href="../dashboard_2/index.php?id=<?php echo $data['id'];?>&id2=<?php echo $data['id2'];?>" target="_" id="<?php echo $data['kelurahan']; ?>" class="btn btn-default">info</a></td>
+              </tr>
+              <?php
+                  $no++;
+              }
+              ?>
         </tbody>
       </table>
     </div>
@@ -111,19 +125,37 @@ $(document).ready(function(){
     <div class="col-md-6 col-lg-4">
         <div class="widget-bg-color-icon card-box fadeInDown animated">
             <div class="bg-icon bg-icon-info pull-left">
-                <i class="md md-attach-money text-info"></i>
+                <i class="fa fa-venus-mars text-info"></i>
             </div>
             <div class="text-right">
                 <!-- <h3 class="text-dark"><b class="counter">Gatau Rumusnya</b></h3> -->
                 <?php
                   $id = $_GET['id'];
-                  $query = mysql_query("SELECT SUM(usia_0_5_l+usia_18_25_l+usia_6_9_l+usia_26_40_l+usia_10_16_l+usia_41_59_l+usia_17_l+usia_60_l ) AS totalpria, SUM(usia_0_5_p+usia_18_25_p+usia_6_9_p+usia_26_40_p+usia_10_16_p+usia_41_59_p+usia_17_p+usia_60_P) as totalperempuan  FROM usia where id_kelurahan = '".$id."' AND id_usia='".$id."'");
+                  $query = mysql_query("SELECT mk.name as kecamatan,
+                                    SUM(dg.ktp_p) as ktp_p,
+                                    SUM(dg.ktp_l) as ktp_l,
+                                    SUM(dg.ktp_p)+SUM(dg.ktp_l) as total
+                                    FROM kelurahan kl
+                                    JOIN markers mk ON kl.id_kecamatan = mk.id
+                                    JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                    WHERE mk.id='".$id."' AND dg.tglupdate =
+                                    	(
+                                        SELECT MAX(dg.tglupdate)
+                                            FROM kelurahan kl
+                                            JOIN markers mk ON kl.id_kecamatan = mk.id
+                                            JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                            WHERE mk.id = '".$id."'
+                                        )
+                                    GROUP BY mk.id");
                   $no = 1;
                   while ($data = mysql_fetch_array($query)) {
                   ?>
-                      <h3 class="text-dark"><b class="counter"> <?php echo ($data['totalpria']/$data['totalperempuan'])*100;?></b>
-                      <span>%</span>
 
+                      <h3 class="text-dark" style="font-size:20px">Laki-laki&nbsp;<b class="counter"> <?php echo ($data['ktp_l']/$data['total'])*100;?></b>
+                      <span>%</span>
+                      </h3>
+                      <h3 class="text-dark" style="font-size:20px">Perempuan&nbsp;<b class="counter"> <?php echo ($data['ktp_p']/$data['total'])*100;?></b>
+                        <span>%</span>
                       </h3>
                   <?php
                       $no++;
@@ -138,16 +170,30 @@ $(document).ready(function(){
     <div class="col-md-6 col-lg-4">
         <div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-icon-pink pull-left">
-                <i class="md md-add-shopping-cart text-pink"></i>
+                <i class="typcn typcn-credit-card text-pink"></i>
             </div>
             <div class="text-right">
               <?php
                 $id = $_GET['id'];
-                $query = mysql_query("SELECT SUM(ktp_l) AS total_l, SUM(ktp_p) AS total_p FROM `dokumen` where id_kelurahan = '".$id."' ");
+                $query = mysql_query("SELECT mk.name as kecamatan,
+                                    SUM(dg.ktp_p) as ktp_p,
+                                    SUM(dg.ktp_l) as ktp_l,
+                                    SUM(dg.ktp_p)+SUM(dg.ktp_l) as total
+                                    FROM kelurahan kl
+                                    JOIN markers mk ON kl.id_kecamatan = mk.id
+                                    JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                    WHERE mk.id='".$id."'  AND dg.tglupdate =
+                                    (
+                                      SELECT MAX(dg.tglupdate)
+                                          FROM kelurahan kl
+                                          JOIN markers mk ON kl.id_kecamatan = mk.id
+                                          JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                          WHERE mk.id = '".$id."'
+                                      )  GROUP BY mk.id");
                 $no = 1;
                 while ($data = mysql_fetch_array($query)) {
                 ?>
-                    <h3 class="text-dark"><b class="counter"> <?php echo $data['total_l']+$data['total_p'];?></b></h3>
+                    <h3 class="text-dark"><b class="counter"> <?php echo $data['total'];?></b></h3>
                 <?php
                     $no++;
                 }
@@ -161,19 +207,31 @@ $(document).ready(function(){
     <div class="col-md-6 col-lg-4">
         <div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-icon-purple pull-left">
-                <i class="md md-equalizer text-purple"></i>
+                <i class="fa fa-file-text  text-purple"></i>
             </div>
             <div class="text-right">
               <?php
                 $id = $_GET['id'];
-                $query = mysql_query("SELECT SUM(kk) AS total FROM `dokumen` where id_kelurahan = '".$id."'");
+                $query = mysql_query("SELECT mk.name as kecamatan,
+                                    SUM(dg.kk) as total
+                                    FROM kelurahan kl
+                                    JOIN markers mk ON kl.id_kecamatan = mk.id
+                                    JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                    WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                    (
+                                      SELECT MAX(dg.tglupdate)
+                                          FROM kelurahan kl
+                                          JOIN markers mk ON kl.id_kecamatan = mk.id
+                                          JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                          WHERE mk.id = '".$id."'
+                                      )");
                 $no = 1;
                 while ($data = mysql_fetch_array($query)) {
                 ?>
                     <h3 class="text-dark"><b class="counter"> <?php echo $data['total'];?></b></h3>
                 <?php
                     $no++;
-                }
+                 };
               ?>
                 <p class="text-muted">Jumlah Kepemilikan KK</p>
             </div>
@@ -190,51 +248,37 @@ $(document).ready(function(){
 
       <div class="widget-chart text-center">
                 <div id="sparkline3"></div>
-            <ul class="list-inline m-t-15">
-              <li>
-                <h5 class="text-muted m-t-20">Laki-laki</h5>
-                <?php
-                $id = $_GET['id'];
-                $query = mysql_query("SELECT distinct(lahir_l)  FROM dokumen where id_kelurahan = '".$id."'");
-
-                while ($data = mysql_fetch_array($query)) {
-                ?>
+                <ul class="list-inline m-t-15">
+                    <?php
+                    $id= $_GET['id'];
+                    $query = mysql_query("SELECT mk.name as kecamatan, SUM(dg.lahir_p) as lahir_p, SUM(dg.lahir_l) as lahir_l, SUM(dg.lahir_p)+SUM(dg.lahir_l) as total
+                                          FROM kelurahan kl JOIN markers mk ON kl.id_kecamatan = mk.id JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan WHERE mk.id = '".$id."'
+                                          AND dg.tglupdate =
+                                           (
+                                             SELECT MAX(dg.tglupdate)
+                                                 FROM kelurahan kl
+                                                 JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                 JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                                 WHERE mk.id = '".$id."'
+                                             ) GROUP BY mk.id");
+                    while($data = mysql_fetch_array($query))
+                    {
+                    ?>
+                    <li>
+                    <h5 class="text-muted m-t-20">Laki-laki</h5>
                     <h4 class="m-b-0"><?php echo $data['lahir_l'];?></h4>
-
-                <?php
-               }
-              ?>
-
-              </li>
-              <li>
-                <h5 class="text-muted m-t-20">Perempuan</h5>
-                <?php
-                $id = $_GET['id'];
-                $query = mysql_query("SELECT distinct(lahir_p)  FROM dokumen where id_kelurahan = '".$id."'");
-
-                    while ($data = mysql_fetch_array($query)) {
-                ?>
-                <h4 class="m-b-0"><?php echo $data['lahir_p'];?></h4>
-                <?php
-              }
-              ?>
-              </li>
-              <li>
-                <?php
-                $id = $_GET['id'];
-                $query = mysql_query("SELECT distinct(lahir_p), (lahir_l)  FROM dokumen where id_kelurahan = '".$id."'");
-
-                while($data= mysql_fetch_array($query))
-                {
-                ?>
-                <h5 class="text-muted m-t-20">Total</h5>
-                <h4 class="m-b-0"><?php echo $data['lahir_p']+$data['lahir_l'];?></h4>
-                <?php
-              }?>
-
-
-              </li>
-            </ul>
+                    </li>
+                    <li>
+                        <h5 class="text-muted m-t-20">Perempuan</h5>
+                       <h4 class="m-b-0"><?php echo $data['lahir_p']; ?></h4>
+                    </li>
+                    <li>
+                        <h5 class="text-muted m-t-20">Total</h5>
+                        <h4 class="m-b-0"><?php echo $data['total']; ?></h4>
+                    </li>
+                    <?php
+                  }; ?>
+                </ul>
           </div>
     </div>
 
@@ -247,47 +291,35 @@ $(document).ready(function(){
       <div class="widget-chart text-center">
                 <div id="sparkline2"></div>
             <ul class="list-inline m-t-15">
-              <li>
                 <?php
                 $id= $_GET['id'];
-                $query = mysql_query("SELECT distinct(mati_l) FROM dokumen where id_kelurahan = '".$id."'");
-
+                $query = mysql_query("SELECT mk.name as kecamatan,SUM(dg.mati_p) as mati_p, SUM(dg.mati_l) as mati_l, SUM(dg.mati_p)+SUM(dg.mati_l) as total
+                                      FROM kelurahan kl JOIN markers mk ON kl.id_kecamatan = mk.id JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                      WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                      	(
+                                          SELECT MAX(dg.tglupdate)
+                                              FROM kelurahan kl
+                                              JOIN markers mk ON kl.id_kecamatan = mk.id
+                                              JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                              WHERE mk.id = '".$id."'
+                                          ) GROUP BY mk.id");
                 while($data = mysql_fetch_array($query))
                 {
                 ?>
+                <li>
                 <h5 class="text-muted m-t-20">Laki-laki</h5>
                 <h4 class="m-b-0"><?php echo $data['mati_l'];?></h4>
+                </li>
+                <li>
+                    <h5 class="text-muted m-t-20">Perempuan</h5>
+                   <h4 class="m-b-0"><?php echo $data['mati_p']; ?></h4>
+                </li>
+                <li>
+                    <h5 class="text-muted m-t-20">Total</h5>
+                    <h4 class="m-b-0"><?php echo $data['mati_p']+$data['mati_l']; ?></h4>
+                </li>
                 <?php
-              } ?>
-              </li>
-              <li>
-                <?php
-                $id= $_GET['id'];
-                $query = mysql_query("SELECT distinct(mati_p) FROM dokumen where id_kelurahan = '".$id."'");
-
-                while($data = mysql_fetch_array($query))
-                {
-                  ?>
-
-                <h5 class="text-muted m-t-20">Perempuan</h5>
-                <h4 class="m-b-0"><?php echo $data['mati_p']; ?></h4>
-                <?php
-              }?>
-              </li>
-              <li>
-                <?php
-                $id= $_GET['id'];
-                $query = mysql_query("SELECT distinct(mati_p),(mati_l) FROM dokumen where id_kelurahan = '".$id."'");
-
-                while($data = mysql_fetch_array($query))
-                {
-                  ?>
-                <h5 class="text-muted m-t-20">Total</h5>
-                <h4 class="m-b-0"><?php echo $data['mati_p']+$data['mati_l']; ?></h4>
-                <?php
-                }
-               ?>
-              </li>
+              }; ?>
             </ul>
           </div>
     </div>
@@ -296,46 +328,74 @@ $(document).ready(function(){
 
     <div class="col-md-3">
       <div class="card-box">
-        <h4 class="text-dark  header-title m-t-0 m-b-30">Akta Pernikahan</h4>
+        <h4 class="text-dark  header-title m-t-0 m-b-30">Pindah Masuk</h4>
 
         <div class="widget-chart text-center">
                   <div id="sparkline2"></div>
               <ul class="list-inline m-t-15">
                 <li>
+                      <h5 class="text-muted m-t-20">Laki-laki</h5>
                   <?php
                   $id= $_GET['id'];
-                  $query = mysql_query("SELECT distinct(nikah_l) FROM dokumen where id_kelurahan = '".$id."'");
+                  $query = mysql_query("SELECT mk.name as kecamatan, SUM(dg.pindahmasuk_l) as pindahmasuk_l, SUM(dg.pindahmasuk_p) as pindahmasuk_p, SUM(dg.pindahmasuk_l)+SUM(dg.pindahmasuk_p) as total
+                                        FROM kelurahan kl JOIN markers mk ON kl.id_kecamatan = mk.id JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                        WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                        	(
+                                            SELECT MAX(dg.tglupdate)
+                                                FROM kelurahan kl
+                                                JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                                WHERE mk.id = '".$id."'
+                                            ) GROUP BY mk.id");
 
                   while($data  = mysql_fetch_array($query))
                   {
                    ?>
-                  <h5 class="text-muted m-t-20">Laki-laki</h5>
-                  <h4 class="m-b-0"><?php echo $data['nikah_l'];?></h4>
+
+                  <h4 class="m-b-0"><?php echo $data['pindahmasuk_l'];?></h4>
                   <?php
                 } ?>
                 </li>
                 <li>
+                    <h5 class="text-muted m-t-20">Perempuan</h5>
                   <?php
                   $id = $_GET['id'];
-                  $query = mysql_query("SELECT distinct(nikah_p) from dokumen where id_kelurahan = '" .$id."'");
+                  $query = mysql_query("SELECT mk.name as kecamatan, SUM(dg.pindahmasuk_l) as pindahmasuk_l, SUM(dg.pindahmasuk_p) as pindahmasuk_p, SUM(dg.pindahmasuk_l)+SUM(dg.pindahmasuk_p) as total
+                                        FROM kelurahan kl JOIN markers mk ON kl.id_kecamatan = mk.id JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                        WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                        	(
+                                            SELECT MAX(dg.tglupdate)
+                                                FROM kelurahan kl
+                                                JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                                WHERE mk.id = '".$id."'
+                                            ) GROUP BY mk.id");
                   while($data = mysql_fetch_array($query))
                   {
                     ?>
-                    <h5 class="text-muted m-t-20">Perempuan</h5>
-                    <h4 class="m-b-0"><?php echo $data['nikah_p']; ?></h4>
+                    <h4 class="m-b-0"><?php echo $data['pindahmasuk_p']; ?></h4>
                   <?php
                   }
                    ?>
                 </li>
                 <li>
+                    <h5 class="text-muted m-t-20">Total</h5>
                   <?php
                   $id= $_GET['id'];
-                  $query = mysql_query("SELECT distinct(nikah_p),(nikah_l) from dokumen where id_kelurahan= '".$id."'");
+                  $query = mysql_query("SELECT mk.name as kecamatan, SUM(dg.pindahmasuk_l) as pindahmasuk_l, SUM(dg.pindahmasuk_p) as pindahmasuk_p, SUM(dg.pindahmasuk_l)+SUM(dg.pindahmasuk_p) as total
+                                        FROM kelurahan kl JOIN markers mk ON kl.id_kecamatan = mk.id JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                        WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                        	(
+                                            SELECT MAX(dg.tglupdate)
+                                                FROM kelurahan kl
+                                                JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                                WHERE mk.id = '".$id."'
+                                            ) GROUP BY mk.id");
                   while($data = mysql_fetch_array($query))
                   {
                     ?>
-                    <h5 class="text-muted m-t-20">Total</h5>
-                    <h4 class="m-b-0"><?php echo $data['nikah_p']+$data['nikah_l']; ?></h4>
+                    <h4 class="m-b-0"><?php echo $data['total']; ?></h4>
                     <?php
                   }
                   ?>
@@ -347,46 +407,76 @@ $(document).ready(function(){
 
     <div class="col-md-3">
       <div class="card-box">
-        <h4 class="text-dark  header-title m-t-0 m-b-30">Akta Perceraian</h4>
+        <h4 class="text-dark  header-title m-t-0 m-b-30">Pindah Keluar</h4>
 
         <div class="widget-chart text-center">
                   <div id="sparkline2"></div>
               <ul class="list-inline m-t-15">
                 <li>
+                  <h5 class="text-muted m-t-20">Laki-laki</h5>
                   <?php
                   $id= $_GET['id'];
-                  $query = mysql_query("SELECT distinct(cerai_l) FROM dokumen where id_kelurahan = '".$id."'");
+                  $query = mysql_query("SELECT mk.name as kecamatan, SUM(dg.pindahkeluar_l) as pindahkeluar_l, SUM(dg.pindahkeluar_p) as pindahkeluar_p, SUM(dg.pindahkeluar_l)+SUM(dg.pindahkeluar_p) as total
+                                        FROM kelurahan kl JOIN markers mk ON kl.id_kecamatan = mk.id JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                        WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                        	(
+                                            SELECT MAX(dg.tglupdate)
+                                                FROM kelurahan kl
+                                                JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                                WHERE mk.id = '".$id."'
+                                            ) GROUP BY mk.id");
 
                   while($data  = mysql_fetch_array($query))
                   {
                    ?>
-                  <h5 class="text-muted m-t-20">Laki-laki</h5>
-                  <h4 class="m-b-0"><?php echo $data['cerai_l']; ?></h4>
+
+                  <h4 class="m-b-0"><?php echo $data['pindahkeluar_l']; ?></h4>
                   <?php
                 } ?>
                 </li>
                 <li>
+                    <h5 class="text-muted m-t-20">Perempuan</h5>
                   <?php
                   $id= $_GET['id'];
-                  $query = mysql_query("SELECT distinct(cerai_p) FROM dokumen where id_kelurahan = '".$id."'");
+                  $query = mysql_query("SELECT mk.name as kecamatan, SUM(dg.pindahkeluar_l) as pindahkeluar_l, SUM(dg.pindahkeluar_p) as pindahkeluar_p, SUM(dg.pindahkeluar_l)+SUM(dg.pindahkeluar_p) as total
+                                        FROM kelurahan kl JOIN markers mk ON kl.id_kecamatan = mk.id JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                        WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                        	(
+                                            SELECT MAX(dg.tglupdate)
+                                                FROM kelurahan kl
+                                                JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                                WHERE mk.id = '".$id."'
+                                            ) GROUP BY mk.id");
                   while($data = mysql_fetch_array($query))
                   {
                     ?>
-                    <h5 class="text-muted m-t-20">Perempuan</h5>
-                    <h4 class="m-b-0"><?php echo $data['cerai_p']; ?></h4>
+
+                    <h4 class="m-b-0"><?php echo $data['pindahkeluar_p']; ?></h4>
                     <?php
                   }?>
 
                 </li>
                 <li>
+                    <h5 class="text-muted m-t-20">Total</h5>
                   <?php
                   $id= $_GET['id'];
-                  $query = mysql_query("SELECT distinct(cerai_p),(cerai_l) FROM dokumen where id_kelurahan = '".$id."'");
+                  $query = mysql_query("SELECT mk.name as kecamatan, SUM(dg.pindahkeluar_l) as pindahkeluar_l, SUM(dg.pindahkeluar_p) as pindahkeluar_p, SUM(dg.pindahkeluar_l)+SUM(dg.pindahkeluar_p) as total
+                                        FROM kelurahan kl JOIN markers mk ON kl.id_kecamatan = mk.id JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                        WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                        	(
+                                            SELECT MAX(dg.tglupdate)
+                                                FROM kelurahan kl
+                                                JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                                WHERE mk.id = '".$id."'
+                                            ) GROUP BY mk.id");
                   while($data = mysql_fetch_array($query))
                   {
                   ?>
-                  <h5 class="text-muted m-t-20">Total</h5>
-                  <h4 class="m-b-0"><?php echo $data['cerai_p']+$data['cerai_l'];?></h4>
+
+                  <h4 class="m-b-0"><?php echo $data['total'];?></h4>
                   <?php
                 }?>
                 </li>
@@ -397,63 +487,258 @@ $(document).ready(function(){
 </div>
 <!-- end row -->
 
+<div class="row" style="">
+    <div class="col-md-2">
+    <div class="card-box">
+      <h4 class="text-dark header-title m-t-0 m-b-30">Kawin</h4>
+
+      <div class="widget-chart text-center">
+                <div id="sparkline3"></div>
+                <ul class="list-inline m-t-15">
+
+                    <?php
+                    $id= $_GET['id'];
+                    $query = mysql_query("SELECT mk.name as kecamatan, SUM(dg.kawin_p) as kawin_p, SUM(dg.kawin_l) as kawin_l, SUM(dg.kawin_p)+SUM(dg.kawin_l) as total
+                                          FROM kelurahan kl JOIN markers mk ON kl.id_kecamatan = mk.id JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                          WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                          	(
+                                              SELECT MAX(dg.tglupdate)
+                                                  FROM kelurahan kl
+                                                  JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                  JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                                  WHERE mk.id = '".$id."'
+                                              ) GROUP BY mk.id");
+
+                    while($data = mysql_fetch_array($query))
+                    {
+                    ?>
+                    <li style="width:100%">
+                        <h5 class="text-muted m-t-20"  style="display:list-item;float:left;">Laki-laki</h5>
+                          <h4 class="m-b-0"><?php echo $data['kawin_l'];?></h4>
+                    </li>
+                    <li style="width:100%">
+                        <h5 class="text-muted m-t-20"  style="float:left;" >Perempuan</h5>
+                        <h4 class="m-b-0"><?php echo $data['kawin_p'];?></h4>
+                    </li>
+                    <?php
+                  } ?>
+                </ul>
+          </div>
+    </div>
+
+    </div>
+
+    <div class="col-md-2">
+    <div class="card-box">
+      <h4 class="text-dark  header-title m-t-0 m-b-30">Belum Kawin</h4>
+
+      <div class="widget-chart text-center">
+                <div id="sparkline2"></div>
+            <ul class="list-inline m-t-15">
+
+                <?php
+                $id= $_GET['id'];
+                $query = mysql_query("SELECT mk.name as kecamatan, SUM(dg.belumkawin_p) as belumkawin_p, SUM(dg.belumkawin_l) as belumkawin_l,
+                                      SUM(dg.belumkawin_p)+SUM(dg.belumkawin_l) as total FROM kelurahan kl JOIN markers mk ON kl.id_kecamatan = mk.id
+                                      JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                      	(
+                                          SELECT MAX(dg.tglupdate)
+                                              FROM kelurahan kl
+                                              JOIN markers mk ON kl.id_kecamatan = mk.id
+                                              JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                              WHERE mk.id = '".$id."'
+                                          ) GROUP BY mk.id");
+
+                while($data = mysql_fetch_array($query))
+                {
+                ?>
+                <li style="width:100%">
+                    <h5 class="text-muted m-t-20"  style="display:list-item;float:left;">Laki-laki</h5>
+                      <h4 class="m-b-0"><?php echo $data['belumkawin_l'];?></h4>
+                </li>
+                <li style="width:100%">
+                    <h5 class="text-muted m-t-20"  style="float:left;" >Perempuan</h5>
+                    <h4 class="m-b-0"><?php echo $data['belumkawin_p'];?></h4>
+                </li>
+                <?php
+              } ?>
+            </ul>
+          </div>
+    </div>
+
+    </div>
+
+    <div class="col-md-2">
+      <div class="card-box">
+        <h4 class="text-dark  header-title m-t-0 m-b-30">Cerai Mati</h4>
+
+        <div class="widget-chart text-center">
+                  <div id="sparkline2"></div>
+              <ul class="list-inline m-t-15">
+
+                  <?php
+                  $id= $_GET['id'];
+                  $query = mysql_query("SELECT mk.name as kecamatan, SUM(dg.ceraimati_p) as ceraimati_p, SUM(dg.ceraimati_l) as ceraimati_l, SUM(dg.ceraimati_p)+SUM(dg.ceraimati_l) as total FROM kelurahan kl
+                                        JOIN markers mk ON kl.id_kecamatan = mk.id JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                        WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                        	(
+                                            SELECT MAX(dg.tglupdate)
+                                                FROM kelurahan kl
+                                                JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                                WHERE mk.id = '".$id."'
+                                            ) GROUP BY mk.id");
+
+                  while($data  = mysql_fetch_array($query))
+                  {
+                   ?>
+                   <li style="width:100%">
+                         <h5 class="text-muted m-t-20" style="display:list-item;float:left;">Laki-laki</h5>
+                  <h4 class="m-b-0"><?php echo $data['ceraimati_l'];?></h4>
+                </li>
+                  <li style="width:100%">
+                      <h5 class="text-muted m-t-20" style="float:left;">Perempuan</h5>
+                        <h4 class="m-b-0"><?php echo $data['ceraimati_p']; ?></h4>
+                  </li>
+                  <?php
+                } ?>
+
+                </li>
+              </ul>
+            </div>
+      </div>
+    </div>
+
+    <div class="col-md-2" >
+      <div class="card-box">
+        <h4 class="text-dark  header-title m-t-0 m-b-30">Cerai Hidup</h4>
+
+        <div class="widget-chart text-center">
+                  <div id="sparkline2"></div>
+                  <ul class="list-inline m-t-15">
+
+                      <?php
+                      $id= $_GET['id'];
+                      $query = mysql_query("SELECT mk.name as kecamatan, SUM(dg.ceraihidup_p) as ceraihidup_p, SUM(dg.ceraihidup_l) as ceraihidup_l,
+                                            SUM(dg.ceraihidup_p)+SUM(dg.ceraihidup_l) as total FROM kelurahan kl JOIN markers mk ON kl.id_kecamatan = mk.id JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                            WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                            	(
+                                                SELECT MAX(dg.tglupdate)
+                                                    FROM kelurahan kl
+                                                    JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                    JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                                    WHERE mk.id = '".$id."'
+                                                ) GROUP BY mk.id");
+
+                      while($data = mysql_fetch_array($query))
+                      {
+                      ?>
+                      <li style="width:100%">
+                          <h5 class="text-muted m-t-20"  style="display:list-item;float:left;">Laki-laki</h5>
+                            <h4 class="m-b-0"><?php echo $data['ceraihidup_l'];?></h4>
+                      </li>
+                      <li style="width:100%">
+                          <h5 class="text-muted m-t-20"  style="float:left;" >Perempuan</h5>
+                          <h4 class="m-b-0"><?php echo $data['ceraihidup_p'];?></h4>
+                      </li>
+                      <?php
+                    } ?>
+                  </ul>
+            </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card-box">
+        <h4 class="text-dark  header-title m-t-0 m-b-30">Lainnya</h4>
+
+        <div class="widget-chart text-center">
+                  <div id="sparkline2"></div>
+                  <ul class="list-inline m-t-15">
+
+                      <?php
+                      $id= $_GET['id'];
+                      $query = mysql_query("SELECT mk.name as kecamatan, SUM(dg.lainnya_l) as lainnya_l, SUM(dg.lainnya_p) as lainnya_p,
+                                            SUM(dg.lainnya_l)+SUM(dg.lainnya_p) as total FROM kelurahan kl JOIN markers mk ON kl.id_kecamatan = mk.id JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                            WHERE mk.id = '".$id."'  AND dg.tglupdate =
+                                            	(
+                                                SELECT MAX(dg.tglupdate)
+                                                    FROM kelurahan kl
+                                                    JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                    JOIN demografi dg ON dg.id_kelurahan = kl.id_kelurahan
+                                                    WHERE mk.id = '".$id."'
+                                                ) GROUP BY mk.id");
+
+                      while($data = mysql_fetch_array($query))
+                      {
+                      ?>
+                      <li style="width:100%">
+                          <h5 class="text-muted m-t-20"  style="display:list-item;float:left;">Laki-laki</h5>
+                            <h4 class="m-b-0"><?php echo $data['lainnya_l'];?></h4>
+                      </li>
+                      <li style="width:100%">
+                          <h5 class="text-muted m-t-20"  style="float:left;" >Perempuan</h5>
+                          <h4 class="m-b-0"><?php echo $data['lainnya_p'];?></h4>
+                      </li>
+                      <?php
+                    } ?>
+                  </ul>
+            </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card-box">
+        <h4 class="text-dark  header-title m-t-0 m-b-30">Warganegara</h4>
+
+        <div class="widget-chart text-center">
+                  <div id="sparkline2"></div>
+                  <ul class="list-inline m-t-15">
+
+                      <?php
+                      $id= $_GET['id'];
+                      $query = mysql_query("SELECT SUM(kw.wni) as wni, SUM(kw.wna) as wna
+                                          FROM kewarganegaraan kw
+                                          JOIN kelurahan kl ON kw.id_kelurahan = kl.id_kelurahan
+                                          JOIN markers mk ON kl.id_kecamatan = mk.id
+                                          WHERE mk.id = '".$id."' AND tglupdate =
+                                          	(
+                                                  SELECT MAX(kw.tglupdate)
+                                                  FROM kewarganegaraan kw
+                                                  JOIN kelurahan kl ON kw.id_kelurahan = kl.id_kelurahan
+                                                  JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                  WHERE mk.id = '".$id."'
+                                              )
+                                          GROUP BY mk.id");
+
+                      while($data = mysql_fetch_array($query))
+                      {
+                      ?>
+                      <li style="width:100%">
+                          <h5 class="text-muted m-t-20"  style="display:list-item;float:left;">WNI</h5>
+                            <h4 class="m-b-0"><?php echo $data['wni'];?></h4>
+                      </li>
+                      <li style="width:100%">
+                          <h5 class="text-muted m-t-20"  style="float:left;" >WNA</h5>
+                          <h4 class="m-b-0"><?php echo $data['wna'];?></h4>
+                      </li>
+                      <?php
+                    } ?>
+                  </ul>
+            </div>
+      </div>
+    </div>
+</div>
+
 <div class="row">
-    <div class="col-lg-3">
+    <div class="col-sm-12">
         <div class="card-box">
-            <h4 class="text-dark header-title m-t-0 m-b-30">Total WNI</h4>
-            <div class="widget-chart text-center">
-                <input class="knob" data-width="150" data-height="150" data-linecap=round data-fgColor="#fb6d9d" value="80" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".15"/>
-                <h5 class="text-muted m-t-20">Total WNI Perhari Ini</h5>
-                <h2 class="font-600">75323 Jiwa</h2>
-                <ul class="list-inline m-t-15">
-                    <li>
-                        <h5 class="text-muted m-t-20">Th Lalu</h5>
-                        <h4 class="m-b-0">13020</h4>
-                    </li>
-                    <li>
-                        <h5 class="text-muted m-t-20">Naik</h5>
-                        <h4 class="m-b-0">6%</h4>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3">
-        <div class="card-box">
-            <h4 class="text-dark header-title m-t-0 m-b-30">Total WNA</h4>
-
-            <div class="widget-chart text-center">
-                <input class="knob" data-width="150" data-height="150" data-linecap=round data-fgColor="#fb6d9d" value="80" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".15"/>
-                <h5 class="text-muted m-t-20">Total WNA Perhari Ini</h5>
-                <h2 class="font-600">75224 Jiwa</h2>
-                <ul class="list-inline m-t-15">
-                    <li>
-                        <h5 class="text-muted m-t-20">Target</h5>
-                        <h4 class="m-b-0">72079</h4>
-                    </li>
-                    <li>
-                        <h5 class="text-muted m-t-20">Naik</h5>
-                        <h4 class="m-b-0">5%</h4>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-6">
-        <div class="card-box">
-            <h4 class="text-dark header-title m-t-0">Perkembangan Penduduk Berdasarkan Usia</h4>
+            <h4 class="text-dark header-title m-t-0">Perkembangan Penduduk Berdasarkan Jenis Kelamin</h4>
             <div class="text-center">
                 <ul class="list-inline chart-detail-list">
                     <li>
-                        <h5><i class="fa fa-circle m-r-5" style="color: #5fbeaa;"></i>Anak-anak</h5>
+                        <h5><i class="fa fa-circle m-r-5" style="color: #5fbeaa;"></i>Laki-laki</h5>
                     </li>
                     <li>
-                        <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Dewasa</h5>
-                    </li>
-                    <li>
-                        <h5><i class="fa fa-circle m-r-5" style="color: #dcdcdc;"></i>Lansia</h5>
+                        <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Perempuan</h5>
                     </li>
                 </ul>
             </div>
@@ -461,27 +746,42 @@ $(document).ready(function(){
         </div>
     </div>
 </div>
-<!-- end row -->
 
+<!-- end row -->
 <div class="row">
   <div class="col-lg-6">
     <div class="card-box">
       <h4 class="m-t-0 header-title"><b>Jumlah Penduduk Berdasarkan Tahun</b></h4>
-      <p class="text-muted m-b-30 font-13">
-        Example of Horizontal bar chart.
-      </p>
-
-      <div id="line-chart-tooltips" class="ct-chart ct-golden-section"></div>
+      <div class="text-center">
+        <ul class="list-inline chart-detail-list">
+          <li>
+              <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Laki-laki</h5>
+          </li>
+          <li>
+              <h5><i class="fa fa-circle m-r-5" style="color: #fb6d9d;"></i>Perempuan</h5>
+          </li>
+        </ul>
+      </div>
+      <div id="line-chart-tooltip" class="ct-chart ct-golden-section"></div>
     </div>
   </div>
 
   <div class="col-lg-6">
     <div class="card-box">
       <h4 class="m-t-0 header-title"><b>Jumlah Penduduk Berdasarkan Bulan Tahun Ini</b></h4>
-      <p class="text-muted m-b-30 font-13">
-        Example of Horizontal bar chart.
-      </p>
-
+      <div class="text-center">
+        <ul class="list-inline chart-detail-list">
+          <li>
+              <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Laki-laki</h5>
+          </li>
+          <li>
+              <h5><i class="fa fa-circle m-r-5" style="color: #fb6d9d;"></i>Perempuan</h5>
+          </li>
+          <li>
+              <h5><i class="fa fa-circle m-r-5" style="color: #34d3eb;"></i>Total</h5>
+          </li>
+        </ul>
+      </div>
       <div id="svg-animation" class="ct-chart ct-golden-section"></div>
     </div>
   </div>
@@ -489,61 +789,96 @@ $(document).ready(function(){
 <!-- end row -->
 
 <div class="row">
-  <div class="col-sm-12">
-    <div class="card-box">
-    <h4 class="m-t-0 m-b-20 header-title"><b>Berdasarkan Pendidikan 7 Tahun Keatas</b></h4>
-      <div class="line-chart">
-          <svg style="height:400px;width:100%"></svg>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end row -->
-
-
-<div class="row">
     <div class="col-lg-3 col-sm-6">
         <div class="widget-panel widget-style-2 bg-white">
-            <i class="md md-attach-money text-primary"></i>
+            <i class="text-primary"><img src="../../assets/images/logo/sd1.png" style="width:64px"></img></i>
             <?php
             $id=$_GET['id'];
-            $query= mysql_query("SELECT sd_lk, sd_pr from pendidikan where id_kelurahan = '".$id."' and id_pendidikan = '".$id."'");
+            $query= mysql_query("SELECT mk.name as kecamatan,
+                              SUM(pd.sd) as sd,
+                              SUM(pd.smp) as smp,
+                              SUM(pd.sma) as sma,
+                              SUM(pd.perguruantinggi) as pt
+                              FROM pendidikan pd
+                              JOIN kelurahan kl ON pd.id_kelurahan = kl.id_kelurahan
+                              JOIN markers mk ON mk.id = kl.id_kecamatan
+                              WHERE mk.id = '".$id."' AND pd.tglupdate =
+                                  (
+                                      SELECT MAX(pd.tglupdate)
+                                      FROM pendidikan pd
+                                      JOIN kelurahan kl ON pd.id_kelurahan = kl.id_kelurahan
+                                      JOIN markers mk ON mk.id = kl.id_kecamatan
+                                      WHERE mk.id = '".$id."'
+                                  )
+                              GROUP BY mk.id");
             while($data = mysql_fetch_array($query))
             {
             ?>
-            <h2 class="m-0 text-dark counter font-600"><?php echo $data['sd_lk']+$data['sd_pr']; ?></h2>
-            <div class="text-muted m-t-5">SD</div>
+            <h2 class="m-0 text-dark counter font-600"><?php echo $data['sd']; ?></h2>
             <?php
             }
              ?>
+             <div class="text-muted m-t-5">SD</div>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
         <div class="widget-panel widget-style-2 bg-white">
-            <i class="md md-add-shopping-cart text-pink"></i>
+            <i class="text-pink"><img src="../../assets/images/logo/smp1.png" style="width:64px"></img></i>
             <?php
             $id= $_GET['id'];
-            $query = mysql_query("SELECT smp_lk, smp_pr FROM pendidikan where id_kelurahan = '".$id."' and id_pendidikan = '".$id."'");
+            $query = mysql_query("SELECT mk.name as kecamatan,
+                              SUM(pd.sd) as sd,
+                              SUM(pd.smp) as smp,
+                              SUM(pd.sma) as sma,
+                              SUM(pd.perguruantinggi) as pt
+                              FROM pendidikan pd
+                              JOIN kelurahan kl ON pd.id_kelurahan = kl.id_kelurahan
+                              JOIN markers mk ON mk.id = kl.id_kecamatan
+                              WHERE mk.id = '".$id."' AND pd.tglupdate =
+                                  (
+                                      SELECT MAX(pd.tglupdate)
+                                      FROM pendidikan pd
+                                      JOIN kelurahan kl ON pd.id_kelurahan = kl.id_kelurahan
+                                      JOIN markers mk ON mk.id = kl.id_kecamatan
+                                      WHERE mk.id = '".$id."'
+                                  )
+                              GROUP BY mk.id");
             while($data = mysql_fetch_array($query))
             {
             ?>
-            <h2 class="m-0 text-dark counter font-600"><?php echo $data['smp_lk']+$data['smp_pr']; ?></h2>
-            <div class="text-muted m-t-5">SMP</div>
+            <h2 class="m-0 text-dark counter font-600"><?php echo $data['smp'];?></h2>
             <?php
             }
             ?>
+              <div class="text-muted m-t-5">SMP</div>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
         <div class="widget-panel widget-style-2 bg-white">
-            <i class="md md-store-mall-directory text-info"></i>
+            <i class="text-info"><img src="../../assets/images/logo/sma1.png" style="width:64px"></img></i>
             <?php
             $id=$_GET['id'];
-            $query = mysql_query("SELECT sma_lk, sma_pr FROM pendidikan where id_kelurahan= '".$id."' and id_pendidikan = '".$id."'");
+            $query = mysql_query("SELECT mk.name as kecamatan,
+                              SUM(pd.sd) as sd,
+                              SUM(pd.smp) as smp,
+                              SUM(pd.sma) as sma,
+                              SUM(pd.perguruantinggi) as pt
+                              FROM pendidikan pd
+                              JOIN kelurahan kl ON pd.id_kelurahan = kl.id_kelurahan
+                              JOIN markers mk ON mk.id = kl.id_kecamatan
+                              WHERE mk.id = '".$id."' AND pd.tglupdate =
+                                  (
+                                      SELECT MAX(pd.tglupdate)
+                                      FROM pendidikan pd
+                                      JOIN kelurahan kl ON pd.id_kelurahan = kl.id_kelurahan
+                                      JOIN markers mk ON mk.id = kl.id_kecamatan
+                                      WHERE mk.id = '".$id."'
+                                  )
+                              GROUP BY mk.id");
             while($data  = mysql_fetch_array($query))
             {
               ?>
-                <h2 class="m-0 text-dark counter font-600"><?php echo $data['sma_lk']+$data['sma_pr']; ?></h2>
+                <h2 class="m-0 text-dark counter font-600"><?php echo $data['sma']; ?></h2>
               <?php
             }
             ?>
@@ -552,14 +887,30 @@ $(document).ready(function(){
     </div>
     <div class="col-lg-3 col-sm-6">
         <div class="widget-panel widget-style-2 bg-white">
-            <i class="md md-account-child text-custom"></i>
+            <i class="text-custom"><img src="../../assets/images/logo/ptn1.png" style="width:64px"></i>
             <?php
             $id=$_GET['id'];
-            $query = mysql_query("SELECT * FROM pendidikan where id_kelurahan= '".$id."' and id_pendidikan = '".$id."'");
+            $query = mysql_query("SELECT mk.name as kecamatan,
+                              SUM(pd.sd) as sd,
+                              SUM(pd.smp) as smp,
+                              SUM(pd.sma) as sma,
+                              SUM(pd.perguruantinggi) as pt
+                              FROM pendidikan pd
+                              JOIN kelurahan kl ON pd.id_kelurahan = kl.id_kelurahan
+                              JOIN markers mk ON mk.id = kl.id_kecamatan
+                              WHERE mk.id = '".$id."' AND pd.tglupdate =
+                                  (
+                                      SELECT MAX(pd.tglupdate)
+                                      FROM pendidikan pd
+                                      JOIN kelurahan kl ON pd.id_kelurahan = kl.id_kelurahan
+                                      JOIN markers mk ON mk.id = kl.id_kecamatan
+                                      WHERE mk.id = '".$id."'
+                                  )
+                              GROUP BY mk.id");
             while($data = mysql_fetch_array($query))
             {
               ?>
-              <h2 class="m-0 text-dark counter font-600"><?php echo $data['s1_lk' ]+$data['s2_lk']+$data['s3_lk']+$data['s1_pr']+$data['s2_pr']+$data['s3_pr']+$data['d1_d2_lk']+$data['d1_d2_pr'] ?></h2>
+              <h2 class="m-0 text-dark counter font-600"><?php echo $data['pt']; ?></h2>
               <?php
             }
             ?>
@@ -571,7 +922,7 @@ $(document).ready(function(){
 <div class="row">
   <div class="col-sm-12">
     <div class="card-box">
-    <h4 class="m-t-0 m-b-20 header-title"><b>Kelompok Usia Produktif</b></h4>
+    <h4 class="m-t-0 m-b-20 header-title"><b>Jumlah Penduduk Berdasarkan Usia (Dalam Ribu) </b></h4>
       <div class="multi-chart">
           <svg style="height:500px;width:100%"></svg>
       </div>
@@ -580,7 +931,7 @@ $(document).ready(function(){
 </div>
 <!-- end row -->
 
-<div class="row">
+<!-- <div class="row">
     <div class="col-lg-4">
         <div class="card-box">
             <div class="bar-widget">
@@ -649,15 +1000,15 @@ $(document).ready(function(){
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-6 col-sm-6 col-lg-3">
             <div class="card-box widget-box-1 bg-white">
                 <i class="fa fa-info-circle text-muted pull-right inform" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Last 24 Hours"></i>
                 <h4 class="text-dark">Pegawai Negeri Sipil</h4>
-                <h2 class="text-primary text-center">$<span data-plugin="counterup">5623</span></h2>
-                <p class="text-muted"> Dari Tahun Lalu: <span class="pull-right"><i class="fa fa-caret-up text-primary m-r-5"></i>10.25%</span></p>
+                <h2 class="text-primary text-center"><span data-plugin="counterup">5623</span></h2>
+                <p class="text-muted"> Dari Tahun Lalu: <span class="pull-right"><i class="fa fa-caret-up text-primary m-r-5"></i>725</span></p>
             </div>
         </div>
 
@@ -666,7 +1017,7 @@ $(document).ready(function(){
                 <i class="fa fa-info-circle text-muted pull-right inform" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Last 24 Hours"></i>
                 <h4 class="text-dark">Swasta</h4>
                 <h2 class="text-pink text-center"><span data-plugin="counterup">185</span></h2>
-                <p class="text-muted"> Dari Tahun Lalu: <span class="pull-right"><i class="fa fa-caret-down text-danger m-r-5"></i>7.85%</span></p>
+                <p class="text-muted"> Dari Tahun Lalu: <span class="pull-right"><i class="fa fa-caret-down text-danger m-r-5"></i>785</span></p>
             </div>
         </div>
 
@@ -674,8 +1025,8 @@ $(document).ready(function(){
             <div class="card-box widget-box-1 bg-white">
                 <i class="fa fa-info-circle text-muted pull-right inform" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Last 24 Hours"></i>
                 <h4 class="text-dark">Lain-lain</h4>
-                <h2 class="text-success text-center">$<span data-plugin="counterup">9562</span></h2>
-                <p class="text-muted"> Dari Tahun Lalu: <span class="pull-right"><i class="fa fa-caret-up text-primary m-r-5"></i>10.25%</span></p>
+                <h2 class="text-success text-center"><span data-plugin="counterup">9562</span></h2>
+                <p class="text-muted"> Dari Tahun Lalu: <span class="pull-right"><i class="fa fa-caret-up text-primary m-r-5"></i>1025</span></p>
             </div>
         </div>
 
@@ -684,33 +1035,17 @@ $(document).ready(function(){
                 <i class="fa fa-info-circle text-muted pull-right inform" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Last 24 Hours"></i>
                 <h4 class="text-dark">Tidak Bekerja</h4>
                 <h2 class="text-warning text-center"><span data-plugin="counterup">874</span></h2>
-                <p class="text-muted"> Dari Tahun Lalu: <span class="pull-right"><i class="fa fa-caret-down text-danger m-r-5"></i>7.85%</span></p>
+                <p class="text-muted"> Dari Tahun Lalu: <span class="pull-right"><i class="fa fa-caret-down text-danger m-r-5"></i>234</span></p>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <div class="row">
       <div class="col-lg-12">
         <div class="card-box">
-          <h4 class="m-t-0 header-title"><b>Jenis Pekerjaan</b></h4>
-          <p class="text-muted m-b-30 font-13">
-            Example of Horizontal bar chart.
-          </p>
-          <div id="overlapping-bars" class="ct-chart ct-golden-section"></div>
-        </div>
-      </div>
-
-
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card-box">
-          <h4 class="m-t-0 header-title"><b>Jenis Pekerjaan</b></h4>
-          <p class="text-muted m-b-30 font-13">
-            Example of Horizontal bar chart.
-          </p>
-          <div id="overlapping-bars2" class="ct-chart ct-golden-section"></div>
+          <h4 class="m-t-0 header-title"><b>Jenis Pekerjaan (Dalam Ribuan)</b></h4>
+            <div id="stacked-bar-chart" class="ct-chart ct-golden-section"></div>
         </div>
       </div>
     </div>
@@ -718,24 +1053,57 @@ $(document).ready(function(){
 
 
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <div class="card-box">
-          <h4 class="m-t-0 header-title"><b>Penyandang Cacat</b></h4>
-          <p class="text-muted m-b-30 font-13">
-            Example of Horizontal bar chart.
-          </p>
-          <div id="pie-chart" class="ct-chart ct-golden-section"></div>
-        </div>
-      </div>
+          <h4 class="m-t-0 header-title"><b>PEMELUK AGAMA</b></h4>
 
-      <div class="col-lg-6">
-        <div class="card-box">
-          <h4 class="m-t-0 header-title"><b>Golongan Darah</b></h4>
-          <p class="text-muted m-b-30 font-13">
-            Example of Label placement chart.
-          </p>
+          <div id="pie-chart" class="ct-chart ct-golden-section simple-pie-chart-chartist"></div>
+          <div class="text-center">
+              <ul class="list-inline chart-detail-list" style="overflow-y:auto !important;width:380px!important;display:block!important;padding:8px;text-align:left;">
+                <table>
+                  <tr>
+                    <td>
+                      <?php
+                      $id = $_GET['id'];
+                      $query = mysql_query("SELECT SUM(ag.islam_l) + SUM(ag.islam_p) as islam,
+                                          SUM(ag.katolik_l) + SUM(ag.katolik_p) as katolik,
+                                          SUM(ag.kristen_l) + SUM(ag.kristen_p) as kristen,
+                                          SUM(ag.hindu_l) + SUM(ag.hindu_p) as hindu,
+                                          SUM(ag.konghucu_l) + SUM(ag.konghucu_p) as konghucu,
+                                          SUM(ag.budha_l) + SUM(ag.budha_p) as budha,
+                                          SUM(ag.kepercayaan_l) + SUM(ag.kepercayaan_p) as kepercayaan
+                                          FROM agama ag
+                                          JOIN kelurahan kl ON ag.id_kelurahan = kl.id_kelurahan
+                                          JOIN markers mk ON kl.id_kecamatan = mk.id
+                                          WHERE mk.id = '".$id."' AND ag.tglupdate =
+                                          	(
+                                              	SELECT MAX(ag.tglupdate)
+                                                  FROM agama ag
+                                                  JOIN kelurahan kl ON ag.id_kelurahan = kl.id_kelurahan
+                                                  JOIN markers mk ON kl.id_kecamatan = mk.id
+                                                  WHERE mk.id = '".$id."'
 
-          <div id="simple-pie" class="ct-chart ct-golden-section simple-pie-chart-chartist"></div>
+                                              )
+                                          GROUP BY mk.id");
+                      while($data = mysql_fetch_array($query))
+                      {
+                        $semuadata = $data['islam']+$data['katolik']+$data['kristen']+$data['hindu']+$data['budha']+$data['konghucu']+$data['kepercayaan'];
+                         ?>
+                         <li><h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Islam - <?php echo $data['islam']." jiwa / ".round($data['islam']/$semuadata*100, 3)?>%</h5></li>
+                         <li><h5><i class="fa fa-circle m-r-5" style="color: #fb6d9d;"></i>Katholik - <?php echo $data['katolik']." jiwa / ".round($data['katolik']/$semuadata*100, 3)?>%</h5></li>
+                           <li><h5><i class="fa fa-circle m-r-5" style="color: #34d3eb;"></i>Kristen - <?php echo $data['kristen']." jiwa / ".round($data['kristen']/$semuadata*100, 3)?>%</h5></li>
+                           <li><h5><i class="fa fa-circle m-r-5" style="color: #5fbeaa;"></i>Hindu - <?php echo $data['hindu']." jiwa / ".round($data['hindu']/$semuadata*100, 3)?>%</h5></li>
+                             <li><h5><i class="fa fa-circle m-r-5" style="color: #453d3f;"></i>Budha - <?php echo $data['budha']." jiwa / ".round($data['budha']/$semuadata*100, 3)?>%</h5></li>
+                             <li><h5><i class="fa fa-circle m-r-5" style="color: #59922b;"></i>Konghucu - <?php echo $data['konghucu']." jiwa / ".round($data['konghucu']/$semuadata*100, 3)?>%</h5></li>
+                               <li><h5><i class="fa fa-circle m-r-5" style="color: #0544d3;"></i>Kepercayaan - <?php echo $data['kepercayaan']." jiwa / ".round($data['kepercayaan']/$semuadata*100, 3)?>%</h5></li>
+                         <?php
+                      };
+                      ?>
+                    </td>
+                  </tr>
+                </table>
+              </ul>
+          </div>
         </div>
       </div>
     </div>

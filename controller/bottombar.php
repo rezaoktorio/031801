@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-6">
-                © 2018. webplussolution.
+                © 2018. Webgis Kependudukan Kota Surabaya.
             </div>
             <div class="col-xs-6">
                 <ul class="pull-right list-inline m-b-0">
