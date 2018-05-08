@@ -149,13 +149,13 @@ $(document).ready(function(){
                                     GROUP BY mk.id");
                   $no = 1;
                   while ($data = mysql_fetch_array($query)) {
+                    $rasiol = ($data['ktp_l']/$data['ktp_p']*100);
+                    $rasiop = ($data['ktp_p']/$data['ktp_l']*100);
                   ?>
-
-                      <h3 class="text-dark" style="font-size:20px">Laki-laki&nbsp;<b class="counter"> <?php echo ($data['ktp_l']/$data['total'])*100;?></b>
-                      <span>%</span>
-                      </h3>
-                      <h3 class="text-dark" style="font-size:20px">Perempuan&nbsp;<b class="counter"> <?php echo ($data['ktp_p']/$data['total'])*100;?></b>
-                        <span>%</span>
+                      <h3 class="text-dark" style="font-size:20px">
+                        <b> <?php echo round($rasiol,0)?> <span class="fa fa-male"></span>
+                          &nbsp;:&nbsp;
+                        <span class="fa fa-female"></span> <?php echo round($rasiop,0)?> </b>
                       </h3>
                   <?php
                       $no++;
@@ -244,7 +244,7 @@ $(document).ready(function(){
 
     <div class="col-md-3">
     <div class="card-box">
-      <h4 class="text-dark header-title m-t-0 m-b-30">Akta Kelahiran</h4>
+      <h4 class="text-dark header-title m-t-0 m-b-30">Kepemilikan<br>Akta Kelahiran</h4>
 
       <div class="widget-chart text-center">
                 <div id="sparkline3"></div>
@@ -286,7 +286,7 @@ $(document).ready(function(){
 
     <div class="col-md-3">
     <div class="card-box">
-      <h4 class="text-dark  header-title m-t-0 m-b-30">Akta Kematian</h4>
+      <h4 class="text-dark  header-title m-t-0 m-b-30">Kepemilikan<br>Akta Kematian</h4>
 
       <div class="widget-chart text-center">
                 <div id="sparkline2"></div>
@@ -328,7 +328,7 @@ $(document).ready(function(){
 
     <div class="col-md-3">
       <div class="card-box">
-        <h4 class="text-dark  header-title m-t-0 m-b-30">Pindah Masuk</h4>
+        <h4 class="text-dark  header-title m-t-0 m-b-30">Pindah<br>Masuk</h4>
 
         <div class="widget-chart text-center">
                   <div id="sparkline2"></div>
@@ -407,7 +407,7 @@ $(document).ready(function(){
 
     <div class="col-md-3">
       <div class="card-box">
-        <h4 class="text-dark  header-title m-t-0 m-b-30">Pindah Keluar</h4>
+        <h4 class="text-dark  header-title m-t-0 m-b-30">Pindah<br>Keluar</h4>
 
         <div class="widget-chart text-center">
                   <div id="sparkline2"></div>
@@ -695,7 +695,7 @@ $(document).ready(function(){
 
                       <?php
                       $id= $_GET['id'];
-                      $query = mysql_query("SELECT SUM(kw.wni) as wni, SUM(kw.wna) as wna
+                      $query = mysql_query("SELECT SUM(kw.wni_l) as wni_l, SUM(kw.wna_l) as wna_l, SUM(kw.wni_p) as wni_p, SUM(kw.wna_p) as wna_p
                                           FROM kewarganegaraan kw
                                           JOIN kelurahan kl ON kw.id_kelurahan = kl.id_kelurahan
                                           JOIN markers mk ON kl.id_kecamatan = mk.id
@@ -714,11 +714,11 @@ $(document).ready(function(){
                       ?>
                       <li style="width:100%">
                           <h5 class="text-muted m-t-20"  style="display:list-item;float:left;">WNI</h5>
-                            <h4 class="m-b-0"><?php echo $data['wni'];?></h4>
+                            <h4 class="m-b-0"><span class="fa fa-male"></span>&nbsp;<?php echo $data['wni_l'];?><br><span class="fa fa-female"></span>&nbsp;<?php echo $data['wni_p'];?></h4>
                       </li>
                       <li style="width:100%">
                           <h5 class="text-muted m-t-20"  style="float:left;" >WNA</h5>
-                          <h4 class="m-b-0"><?php echo $data['wna'];?></h4>
+                          <h4 class="m-b-0"><span class="fa fa-male"></span>&nbsp;<?php echo $data['wna_l'];?>&nbsp;<span class="fa fa-female"></span>&nbsp;<?php echo $data['wna_p'];?></h4>
                       </li>
                       <?php
                     } ?>
@@ -734,12 +734,12 @@ $(document).ready(function(){
             <h4 class="text-dark header-title m-t-0">Perkembangan Penduduk Berdasarkan Jenis Kelamin</h4>
             <div class="text-center">
                 <ul class="list-inline chart-detail-list">
-                    <li>
-                        <h5><i class="fa fa-circle m-r-5" style="color: #5fbeaa;"></i>Laki-laki</h5>
-                    </li>
-                    <li>
-                        <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Perempuan</h5>
-                    </li>
+                  <li>
+                      <h5><i class="fa fa-circle m-r-5" style="color: #5d9cec;"></i>Laki-laki</h5>
+                  </li>
+                  <li>
+                      <h5><i class="fa fa-circle m-r-5" style="color: #fb6d9d;"></i>Perempuan</h5>
+                  </li>
                 </ul>
             </div>
             <div id="morris-bar-stacked" style="height: 303px;"></div>

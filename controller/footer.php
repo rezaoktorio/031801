@@ -411,7 +411,7 @@ var long_short_data = [
 },
 {
     'key': 'Perempuan',
-    'color': "#34d3eb",
+    'color': "#fb6d9d",
     'values': [
       <?php
       $id = $_GET['id'];
@@ -538,7 +538,7 @@ var long_short_data = [
 },
 {
     'key': 'Perempuan',
-    'color': "#34d3eb",
+    'color': "#fb6d9d",
     'values': [
       <?php
       $id = $_GET['id'];
@@ -839,7 +839,7 @@ Dashboard1.prototype.init = function() {
         // { y: '2007', a: 100,b: 90 },
         // { y: '2008', a: 100, b: 90 }
     ];
-    this.createStackedChart('morris-bar-stacked', $stckedData, 'y', ['a', 'b'], ['Laki-laki', 'Perempuan'], ['#5fbeaa', '#5d9cec']);
+    this.createStackedChart('morris-bar-stacked', $stckedData, 'y', ['a', 'b'], ['Laki-laki', 'Perempuan'], ['#fb6d9d', '#5d9cec']);
 
     //creating area chart
     var $areaDotData = [
@@ -929,7 +929,7 @@ Dashboard1.prototype.init = function() {
         // { y: '2007', a: 100,b: 90 },
         // { y: '2008', a: 100, b: 90 }
     ];
-    this.createStackedChart('morris-bar-stacked2', $stckedData, 'y', ['a', 'b'], ['Laki-laki', 'Perempuan'], ['#5fbeaa', '#5d9cec']);
+    this.createStackedChart('morris-bar-stacked2', $stckedData, 'y', ['a', 'b'], ['Laki-laki', 'Perempuan'], ['#fb6d9d', '#5d9cec']);
 
     //creating area chart
     var $areaDotData = [
