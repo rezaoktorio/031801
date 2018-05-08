@@ -50,7 +50,6 @@
 <script src="../../assets/plugins/custombox/js/legacy.min.js"></script>
 
 <!--C3 Chart-->
-<script src="../../assets/plugins/d3/d3.min.js" type="text/javascript"></script>
 <script src="../../assets/plugins/c3/c3.min.js" type="text/javascript"></script>
 <script src="../../assets/pages/jquery.c3-chart.init.js"></script>
 
