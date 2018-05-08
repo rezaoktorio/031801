@@ -49,6 +49,11 @@
 <script src="../../assets/plugins/custombox/js/custombox.min.js"></script>
 <script src="../../assets/plugins/custombox/js/legacy.min.js"></script>
 
+<!--C3 Chart-->
+<script src="../../assets/plugins/d3/d3.min.js" type="text/javascript"></script>
+<script src="../../assets/plugins/c3/c3.min.js" type="text/javascript"></script>
+<script src="../../assets/pages/jquery.c3-chart.init.js"></script>
+
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $('.counter').counterUp({
@@ -592,94 +597,109 @@ nv.addGraph(function() {
 </script>
 
 <!-- PEMELUK AGAMA -->
-<script type="text/javascript">
-var data2 = {
-  series: [
-    <?php
-    $id = $_GET['id'];
-    $query = mysql_query("SELECT SUM(ag.islam_l) + SUM(ag.islam_p) as islam,
-                        SUM(ag.katolik_l) + SUM(ag.katolik_p) as katolik,
-                        SUM(ag.kristen_l) + SUM(ag.kristen_p) as kristen,
-                        SUM(ag.hindu_l) + SUM(ag.hindu_p) as hindu,
-                        SUM(ag.konghucu_l) + SUM(ag.konghucu_p) as konghucu,
-                        SUM(ag.budha_l) + SUM(ag.budha_p) as budha,
-                        SUM(ag.kepercayaan_l) + SUM(ag.kepercayaan_p) as kepercayaan
-                        FROM agama ag
-                        JOIN kelurahan kl ON ag.id_kelurahan = kl.id_kelurahan
-                        JOIN markers mk ON kl.id_kecamatan = mk.id
-                        WHERE mk.id = '".$id."' AND ag.tglupdate =
-                        	(
-                            	SELECT MAX(ag.tglupdate)
-                                FROM agama ag
-                                JOIN kelurahan kl ON ag.id_kelurahan = kl.id_kelurahan
-                                JOIN markers mk ON kl.id_kecamatan = mk.id
-                                WHERE mk.id = '".$id."'
+<script>
+c3.generate({
+     bindto: '#pie-chart',
+    data: {
+        columns: [
+          <?php
+          $id = $_GET['id'];
+          $id2 = $_GET['id2'];
+          $query = mysql_query("SELECT SUM(ag.islam_l) + SUM(ag.islam_p) as islam,
+                              SUM(ag.katolik_l) + SUM(ag.katolik_p) as katolik,
+                              SUM(ag.kristen_l) + SUM(ag.kristen_p) as kristen,
+                              SUM(ag.hindu_l) + SUM(ag.hindu_p) as hindu,
+                              SUM(ag.konghucu_l) + SUM(ag.konghucu_p) as konghucu,
+                              SUM(ag.budha_l) + SUM(ag.budha_p) as budha,
+                              SUM(ag.kepercayaan_l) + SUM(ag.kepercayaan_p) as kepercayaan
+                              FROM agama ag
+                              JOIN kelurahan kl ON ag.id_kelurahan = kl.id_kelurahan
+                              JOIN markers mk ON kl.id_kecamatan = mk.id
+                              WHERE mk.id = '".$id."' AND ag.tglupdate =
+                              	(
+                                  	SELECT MAX(ag.tglupdate)
+                                      FROM agama ag
+                                      JOIN kelurahan kl ON ag.id_kelurahan = kl.id_kelurahan
+                                      JOIN markers mk ON kl.id_kecamatan = mk.id
+                                      WHERE mk.id = '".$id."'
 
-                            )
-                        GROUP BY mk.id");
-                          while($data = mysql_fetch_array($query))
-                          {
-                            $semuadata = $data['islam']+$data['katolik']+$data['kristen']+$data['hindu']+$data['budha']+$data['konghucu']+$data['kepercayaan'];
-                             echo $data['islam']/$semuadata .',';
-                             echo $data['katolik']/$semuadata.',';
-                             echo $data['kristen']/$semuadata.',';
-                             echo $data['hindu']/$semuadata.',';
-                             echo $data['budha']/$semuadata.',';
-                             echo $data['konghucu']/$semuadata.',';
-                             echo $data['kepercayaan']/$semuadata;
-                          };
-    ?>
-  ]
-};
-
-var sum = function(a, b) { return a + b };
-new Chartist.Pie('#pie-chart', data2, {
-  labelInterpolationFnc: function(value) {
-    var total= value / data2.series.reduce(sum) * 100
-
-    return total.toFixed(1) + '%';
-  }
+                                  )
+                              GROUP BY mk.id");
+                                while($data = mysql_fetch_array($query))
+                                {
+                                  $semuadata = $data['islam']+$data['katolik']+$data['kristen']+$data['hindu']+$data['budha']+$data['konghucu']+$data['kepercayaan'];
+                                   echo "['Islam ',".$data['islam']/$semuadata.'],';
+                                   echo "['Katolik ',".$data['katolik']/$semuadata.'],';
+                                   echo "['Kristen ',".$data['kristen']/$semuadata.'],';
+                                   echo "['Hindu ',".$data['hindu']/$semuadata.'],';
+                                   echo "['Budha ',".$data['budha']/$semuadata.'],';
+                                   echo "['Konghucu ',".$data['konghucu']/$semuadata.'],';
+                                   echo "['Kepercayaan ',".$data['kepercayaan']/$semuadata.']';
+                                };
+          ?>
+            //
+            // ['Lulu', 46],
+            // ['Olaf', 24],
+            // ['Item 3', 30],
+        ],
+        type : 'pie'
+    },
+    color: {
+      pattern: ["#5d9cec", "#fb6d9d", "#34d3eb", "#5fbeaa", "#453d3f", "#59922b", "#0544d3"]
+    },
+    pie: {
+    label: {
+      show: false
+    }
+}
 });
 </script>
 
 <!-- PEMELUK AGAMA - KELURAHAN -->
-<script type="text/javascript">
-var data2 = {
-  series: [
-    <?php
-    $id = $_GET['id'];
-    $id2 = $_GET['id2'];
-    $query = mysql_query("SELECT SUM(ag.islam_l) + SUM(ag.islam_p) as islam,
-                        SUM(ag.katolik_l) + SUM(ag.katolik_p) as katolik,
-                        SUM(ag.kristen_l) + SUM(ag.kristen_p) as kristen,
-                        SUM(ag.hindu_l) + SUM(ag.hindu_p) as hindu,
-                        SUM(ag.konghucu_l) + SUM(ag.konghucu_p) as konghucu,
-                        SUM(ag.budha_l) + SUM(ag.budha_p) as budha,
-                        SUM(ag.kepercayaan_l) + SUM(ag.kepercayaan_p) as kepercayaan
-                        FROM agama ag
-                        WHERE id_kelurahan = '".$id2."' AND tglupdate = (SELECT MAX(tglupdate) FROM agama WHERE id_kelurahan = '".$id2."')");
-                          while($data = mysql_fetch_array($query))
-                          {
-                            $semuadata = $data['islam']+$data['katolik']+$data['kristen']+$data['hindu']+$data['budha']+$data['konghucu']+$data['kepercayaan'];
-                             echo $data['islam']/$semuadata .',';
-                             echo $data['katolik']/$semuadata.',';
-                             echo $data['kristen']/$semuadata.',';
-                             echo $data['hindu']/$semuadata.',';
-                             echo $data['budha']/$semuadata.',';
-                             echo $data['konghucu']/$semuadata.',';
-                             echo $data['kepercayaan']/$semuadata;
-                          };
-    ?>
-  ]
-};
-
-var sum = function(a, b) { return a + b };
-new Chartist.Pie('#pie-chart2', data2, {
-  labelInterpolationFnc: function(value) {
-    var total= value / data2.series.reduce(sum) * 100
-
-    return total.toFixed(1) + '%';
-  }
+<script>
+c3.generate({
+     bindto: '#pie-chart2',
+    data: {
+        columns: [
+          <?php
+          $id = $_GET['id'];
+          $id2 = $_GET['id2'];
+          $query = mysql_query("SELECT SUM(ag.islam_l) + SUM(ag.islam_p) as islam,
+                              SUM(ag.katolik_l) + SUM(ag.katolik_p) as katolik,
+                              SUM(ag.kristen_l) + SUM(ag.kristen_p) as kristen,
+                              SUM(ag.hindu_l) + SUM(ag.hindu_p) as hindu,
+                              SUM(ag.konghucu_l) + SUM(ag.konghucu_p) as konghucu,
+                              SUM(ag.budha_l) + SUM(ag.budha_p) as budha,
+                              SUM(ag.kepercayaan_l) + SUM(ag.kepercayaan_p) as kepercayaan
+                              FROM agama ag
+                              WHERE id_kelurahan = '".$id2."' AND tglupdate = (SELECT MAX(tglupdate) FROM agama WHERE id_kelurahan = '".$id2."')");
+                                while($data = mysql_fetch_array($query))
+                                {
+                                  $semuadata = $data['islam']+$data['katolik']+$data['kristen']+$data['hindu']+$data['budha']+$data['konghucu']+$data['kepercayaan'];
+                                   echo "['Islam ',".$data['islam']/$semuadata.'],';
+                                   echo "['Katolik ',".$data['katolik']/$semuadata.'],';
+                                   echo "['Kristen ',".$data['kristen']/$semuadata.'],';
+                                   echo "['Hindu ',".$data['hindu']/$semuadata.'],';
+                                   echo "['Budha ',".$data['budha']/$semuadata.'],';
+                                   echo "['Konghucu ',".$data['konghucu']/$semuadata.'],';
+                                   echo "['Kepercayaan ',".$data['kepercayaan']/$semuadata.']';
+                                };
+          ?>
+            //
+            // ['Lulu', 46],
+            // ['Olaf', 24],
+            // ['Item 3', 30],
+        ],
+        type : 'pie'
+    },
+    color: {
+      pattern: ["#5d9cec", "#fb6d9d", "#34d3eb", "#5fbeaa", "#453d3f", "#59922b", "#0544d3"]
+    },
+    pie: {
+    label: {
+      show: false
+    }
+}
 });
 </script>
 
@@ -839,7 +859,7 @@ Dashboard1.prototype.init = function() {
         // { y: '2007', a: 100,b: 90 },
         // { y: '2008', a: 100, b: 90 }
     ];
-    this.createStackedChart('morris-bar-stacked', $stckedData, 'y', ['a', 'b'], ['Laki-laki', 'Perempuan'], ['#fb6d9d', '#5d9cec']);
+    this.createStackedChart('morris-bar-stacked', $stckedData, 'y', ['a', 'b'], ['Laki-laki', 'Perempuan'], ['#5d9cec', '#fb6d9d']);
 
     //creating area chart
     var $areaDotData = [
@@ -929,7 +949,7 @@ Dashboard1.prototype.init = function() {
         // { y: '2007', a: 100,b: 90 },
         // { y: '2008', a: 100, b: 90 }
     ];
-    this.createStackedChart('morris-bar-stacked2', $stckedData, 'y', ['a', 'b'], ['Laki-laki', 'Perempuan'], ['#fb6d9d', '#5d9cec']);
+    this.createStackedChart('morris-bar-stacked2', $stckedData, 'y', ['a', 'b'], ['Laki-laki', 'Perempuan'], ['#5d9cec', '#fb6d9d']);
 
     //creating area chart
     var $areaDotData = [
